@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    <body>
+    <div class="contentWrapper">
+        <div class="actions">
+            <button class="action" id="newEvent">new event</button>
+            <button class="action" id="newGoal">new goal</button>
+            <button class="action" id="stats" onclick="location.href='./stats.html'">stats</button>
+            <button class="action" id="settings" onclick="location.href='./settings.html'">settings</button>
+        </div>
+
+        <div class="eventForm" id="eventForm">
+            <input type="text" placeholder="event name" id="eventName"/>
+            <input type="date" id="eventDay"/>
+            <input type="time" id="eventTime"/>
+            <select name="type" id="eventType">
+                <option value="apo">appointment</option>
+                <option value="task">task</option>
+                <option value="stream">stream</option>
+              </select>
+            <button type="submit" id="addEvent" href="./">+</button>
+        </div>
+
+        <div class="upcomingEvents" id="upcomingEvents"></div>
+        <button id="delEvents" class="deleteBtn">delete all events</button>
+        
+
+        <div class="calendarWrap">
+            <div class="calendar">
+                <div class="head">
+                    <button id="prevMonth" class="prevMonth">prev.</button>
+                    <div id="monthYear" class="monthYear"></div>
+                    <button id="nextMonth" class="nextMonth">next</button>
+                </div>
+                <div class="days">
+                    <div class="day">mon.</div>
+                    <div class="day">tue.</div>
+                    <div class="day">wed.</div>
+                    <div class="day">thu.</div>
+                    <div class="day">fri.</div>
+                    <div class="day">sat.</div>
+                    <div class="day">sun.</div>
+                </div>
+                <div class="dates" id="dates"></div>
+                <button class="reset" id="reset">back to today</button>
+            </div>
+        </div>
+        <div class="pageWrapper">
+            <div id="dayPage" class="dayPage">
+                <class id="pageDate" class="pageDate">abc</class>
+                <class id="dayEventsContainer" class="dayEventsContainer"></class>
+            </div>
+        </div>
+    </div>
+        <script type="module" src="./js/main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,266 @@
+*{margin: 0; padding: 0; box-sizing: border-box; font-family: 'calibri', sans-serif;}
+
+body{background: #DADADA;}
+
+button{cursor: pointer;}
+
+.actions{
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-around; 
+    align-items: start; 
+    justify-content:left;
+}
+
+.action{
+    display: flex;
+    padding: 10px;
+    margin:5px; 
+    background-color: white;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.1);
+    border: none;
+    border-radius: 10px;
+   
+}
+
+.eventForm{
+    display: flex;
+    flex-direction: row;
+    min-height: auto;
+    margin:auto;
+    align-content: space-around;
+    justify-content: center;
+    visibility: hidden;
+    transform: translate(0px, -600px);
+    transition: all 1s;
+    background-color: white;
+    border-radius: 10px;
+    flex-wrap: wrap;
+}
+.eventForm.visible{visibility: visible; transform:translate(0px); transition: all 1s;}
+
+.eventForm input, .eventForm select, .eventForm button{
+    display: grid;
+    justify-content: space-around;
+    margin:10px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.1);
+}
+
+
+.eventForm button{
+
+    background-color: yellowgreen;
+    color:white;
+    border-radius: 50px;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    line-height: 14px;
+}
+
+.deleteBtn{
+    display: flex;
+    background-color: lightcoral; 
+    transition: all 0.6s;
+    border: none; 
+    padding:5px; 
+    color:white; 
+    border-radius: 5px; 
+    margin-top: 10px;
+} 
+.deleteBtn:hover{
+
+    background-color: rgb(209, 104, 104); 
+    transition: all 0.6s;
+}
+
+.okBtn{  display: flex;
+    background-color: rgb(126, 202, 136); 
+    transition: all 0.6s;
+    border: none; 
+    padding:5px; 
+    color:white; 
+    border-radius: 5px; 
+    margin-top: 10px;}
+
+.okBtn:hover{
+
+        background-color: rgb(102, 165, 110);  
+        transition: all 0.6s;
+    }
+
+.deleteBtn.visble{opacity: 100%;}
+.deleteBtn.hidden{opacity: 0%;}
+
+.upcomingEvents{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px 10px;
+    padding:10px;
+    margin-top:-15px;
+    opacity: 100%;
+}
+
+.upcomingEvents.visible{opacity: 100%; transition: 0.5s;}
+.upcomingEvents.hidden{opacity: 0%;}
+
+.upcomingEvents .event{
+    display:flex;
+    justify-content: space-between;
+}
+
+.upcomingEvents span{
+    display:inline-flex;
+    align-items: center;
+}
+
+.upcomingEvents button {
+    display: inline-block;
+    align-items: center;
+    margin-left:10px;
+}
+.calendarWrap{min-height: 60vh; display: flex; align-items: center; justify-content: center;}
+
+.calendar{
+    display:flex; 
+    flex-direction: column;
+    width:380px; 
+    height: auto;
+    background: #FFF;  
+    padding:30px; 
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: lowercase;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    margin-bottom: 15px;
+}
+.head button{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border:none; 
+    cursor:pointer;
+    background-color: white; 
+    font-weight: bold;
+    padding: 5px;
+}
+.head button:hover{color:yellowgreen;}
+
+.days{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+}
+
+.day{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding:10px;
+    margin:auto;
+    width: 40px;
+    height : 40px;
+    cursor:default;
+}
+
+
+.dates{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    margin-bottom: 5px;
+}
+.dates .day:hover{color:yellowgreen}
+
+.dates .day.hasEvent{font-weight: bolder;}
+.active{
+    background-color:yellowgreen; 
+    border-radius: 100%; 
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.1);
+    color:white; 
+    font-weight: bold;
+    cursor:pointer;
+    transition: all 0.3s;
+}
+.active:hover{color:white!important; box-shadow: 0px 0px 5px rgba(0,0,0,0.5); transition: all 0.3s;}
+.inactive{color:darkgrey!important;}
+
+.reset{
+    display: flex; 
+    flex-direction:column; 
+    align-self: flex-end;
+    border:none;
+    background-color: white;
+    cursor:pointer;
+}
+
+.contentWrapper{
+    display: block;
+    height: 100vh;
+    max-width: 80%;
+    margin:0 auto;
+}
+
+.event.apo{
+    color:coral;
+}
+
+.event.task{
+    color:yellowgreen;
+}
+
+.event.stream{
+    color:purple;
+}
+
+.pageWrapper{min-height: 20vh; display: flex; align-items: center; justify-content: center;}
+.dayPage{
+    display:flex; 
+    flex-direction: column;
+    height: auto;
+    background: #FFF;  
+    padding:30px; 
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    min-height: 200px;
+    width: 380px;
+}
+
+.dayPage .pageDate{
+    display: block;
+    width: 100%;
+    font-family: sans-serif;
+    color:yellowgreen;
+    border-bottom: 1px solid #DADADA;
+    font-weight: lighter!important;
+}
+.dayPage .dayEventsContainer{display:block; width: 100%; font-size: 13px;}
+.dayPage .dayEventsContainer .event{line-height: 26px; border-bottom: 1px solid #DADADA;}
+
+.numberWrapper{
+    display:flex;
+    align-self: center;
+    margin-top:30px;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+    padding: 30px;
+}
+
+.numberWrapper h1{
+    color:yellowgreen; 
+    font-family: sans-serif; 
+    margin-bottom: 10px; 
+    font-weight: lighter!important;
+}
