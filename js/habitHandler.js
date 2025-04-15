@@ -4,20 +4,29 @@ const habitsContainerElement = document.getElementById("habitsContainer");
 
 export function displayHabits(){
     const habit = {
-        id : Date.now(),
+        id : "habit-000",
         name : "shower", 
-        lastCompleted : "2025-03-12",
-        completedOn : ""
+        createdAt : new Date(),
+        frequency : 1, 
+        lastDone : "2025-04-13",
+        log : ["2024-04-12", "2025-04-13"], 
+        streak : {
+            current : 2, 
+            longest : 2
+        }, 
+        archived : false
     }
-    localStorage.removeItem("habits");
-    addHabits(habit);
-    let habitsHTML = "";
     const habits = getHabits();
+    let habitsHTML = "";
     for(let i = 0; i<habits.length;i++){
-        habitsHTML+= `<div class = "habit" data-id="${habits[i].id}"><input type="checkbox"> ${habits[i].name}</div>`;
+        habitsHTML+= `<div class = "habit" data-id="${habits[i].id}"><input type="checkbox"> ${habits[i].name} (last done : ${habits[i].lastDone})</div>`;
     }
     
     habitsContainerElement.innerHTML=habitsHTML;
 }
 
+habitsContainerElement.addEventListener('click', btn => {
+    if(btn.target.checked){btn.target.parentNode.classList.add("done");}
+    else{btn.target.parentNode.classList.remove("done");}
+});
 displayHabits();
