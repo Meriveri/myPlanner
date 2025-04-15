@@ -22,11 +22,10 @@ export function getHabitByID(id){
 
 export function updateHabit(id){
     const habit = getHabitByID(id);
-    console.log(habit[0]);
     habit[0].lastDone = dateToYMD(new Date());
     let streak = habit[0].log.length+1;
     habit[0].streak.current = streak;
     if(streak >= habit[0].streak.longest){habit[0].streak.longest=streak;}
     habit[0].log.push(dateToYMD(new Date()));
-    console.log(habit[0]);
+    localStorage.setItem("habits", JSON.stringify(habit));
 }
