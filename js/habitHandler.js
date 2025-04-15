@@ -1,4 +1,4 @@
-import { addHabits, getHabits } from "./habitService.js";
+import { addHabits, getHabits, updateHabit } from "./habitService.js";
 
 const habitsContainerElement = document.getElementById("habitsContainer");
 
@@ -26,7 +26,8 @@ export function displayHabits(){
 }
 
 habitsContainerElement.addEventListener('click', btn => {
-    if(btn.target.checked){btn.target.parentNode.classList.add("done");}
-    else{btn.target.parentNode.classList.remove("done");}
+    const habitID = btn.target.parentNode.dataset.id;
+    if(btn.target.checked){btn.target.parentNode.classList.add("done"); updateHabit(habitID); }
+    else{btn.target.parentNode.classList.remove("done"); }
 });
 displayHabits();
