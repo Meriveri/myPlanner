@@ -2,24 +2,45 @@ import { addHabits, getHabits, updateHabit } from "./habitService.js";
 
 const habitsContainerElement = document.getElementById("habitsContainer");
 
-export function displayHabits(){
+const habitNameElement = document.getElementById("habitName");
+const habitFrequencyElement = document.getElementById("habitFrequency");
+const addHabitBtn = document.getElementById("addHabit");
+
+addHabitBtn.addEventListener("click", ()=>{createHabit();});
+
+
+export function createHabit(){
+    const habitID = "habit-"+getHabits().length+1;
+    let habitName = habitNameElement.value;
+    let habitFreq = habitFrequencyElement.value;
+    let habitStreak = {current: 0, lontest:0};
+    let habitArchived = false;
+    const habits = getHabits;
     const habit = {
-        id : "habit-000",
-        name : "shower", 
+        id : habitID,
+        name : habitName, 
         createdAt : new Date(),
-        frequency : 1, 
-        lastDone : "2025-04-13",
-        log : ["2024-04-12", "2025-04-13"], 
-        streak : {
-            current : 2, 
-            longest : 2
-        }, 
+        frequency : habitFreq, 
+        lastDone : "",
+        log : [], 
+        streak : {current : 0, longest : 0}, 
         archived : false
     }
+    addHabits(habit);
+    displayHabits();
+
+}
+
+export function logEmpty(habit){
+    return habit.lastDone == "" ? "never" : habit[i].lastDone;
+}
+
+export function displayHabits(){
     const habits = getHabits();
     let habitsHTML = "";
     for(let i = 0; i<habits.length;i++){
-        habitsHTML+= `<div class = "habit" data-id="${habits[i].id}"><input type="checkbox"> ${habits[i].name} (last done : ${habits[i].lastDone})</div>`;
+        let lastDoneContent = logEmpty(habits[i]);
+        habitsHTML+= `<div class = "habit" data-id="${habits[i].id}"><input type="checkbox"> ${habits[i].name} (last done : ${lastDoneContent})</div>`;
     }
     
     habitsContainerElement.innerHTML=habitsHTML;
