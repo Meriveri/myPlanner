@@ -4,7 +4,7 @@ export function getHabits() {
     return JSON.parse(localStorage.getItem("habits")) || [];
 }
 
-export function addHabits(habit) {
+export function addHabit(habit) {
     const habits = getHabits();
     habits.push(habit);
     localStorage.setItem("habits", JSON.stringify(habits));
@@ -21,11 +21,29 @@ export function getHabitByID(id){
 }
 
 export function updateHabit(id){
-    const habit = getHabitByID(id);
-    habit[0].lastDone = dateToYMD(new Date());
-    let streak = habit[0].log.length+1;
-    habit[0].streak.current = streak;
-    if(streak >= habit[0].streak.longest){habit[0].streak.longest=streak;}
-    habit[0].log.push(dateToYMD(new Date()));
+    console.log(id);
+    const habit = getHabitByID(id)[0];
+    habit.lastDone = dateToYMD(new Date());
+    let streak = habit.streak.current;
+    let logs = habit.log;
+    logs.push(dateToYMD(new Date()));
+    
+    let prevLog = new Date(logs[logs.length-2]);
+    let lastLog = new Date(logs[logs.length-1]);
+    const timeDiff = lastLog - prevLog; 
+    const daysDiff = timeDiff/ (1000 * 60 * 60 * 24);
+
+    if (logs.length >= 2){
+        if(daysDiff == 1){streak +=1;}
+        else{streak=1;}
+        
+    }
+    else{
+        streak=1;
+    }
+
+    if(streak >= habit.streak.longest){
+        habit.streak.longest=streak;
+    }
     localStorage.setItem("habits", JSON.stringify(habit));
 }

@@ -1,4 +1,4 @@
-import { addHabits, getHabitByID, getHabits, updateHabit } from "./habitService.js";
+import { addHabit, getHabitByID, getHabits, updateHabit } from "./habitService.js";
 import { dateToYMD } from "./utils.js";
 
 const habitsContainerElement = document.getElementById("habitsContainer");
@@ -11,23 +11,21 @@ addHabitBtn.addEventListener("click", ()=>{createHabit();});
 
 
 export function createHabit(){
-    const habitID = "habit-"+getHabits().length+1;
+    const habits = getHabits();
+    const habitID = "habit-"+habits.length;
     let habitName = habitNameElement.value;
     let habitFreq = habitFrequencyElement.value;
-    let habitStreak = {current: 0, lontest:0};
-    let habitArchived = false;
-    const habits = getHabits;
     const habit = {
         id : habitID,
         name : habitName, 
-        createdAt : new Date(),
+        createdAt : dateToYMD(new Date()),
         frequency : habitFreq, 
         lastDone : "",
         log : [], 
         streak : {current : 0, longest : 0}, 
         archived : false
     }
-    addHabits(habit);
+    addHabit(habit);
     displayHabits();
 
 }
