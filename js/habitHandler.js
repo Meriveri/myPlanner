@@ -1,5 +1,5 @@
 import { addHabit, getHabitByID, getHabits, updateHabit, uncheckHabit } from "./habitService.js";
-import { dateToYMD } from "./utils.js";
+import { addXDaysToDate, dateToYMD } from "./utils.js";
 
 const habitsContainerElement = document.getElementById("habitsContainer");
 
@@ -34,13 +34,21 @@ export function logEmpty(habit){
     return habit.lastDone == "" ? "never" : habit.lastDone;
 }
 
+export function nextDueDate(date, days){
+    console.log(date === "2025-04-23");
+    if(date != ""){date = new Date(date);}
+    else{date = new Date();}
+    return addXDaysToDate(date, days);
+}
+
 export function displayHabits(){
     const habits = getHabits();
     let habitsHTML = "";
     for(let i = 0; i<habits.length;i++){
         let lastDoneContent = logEmpty(habits[i]);
+        let nextDue = nextDueDate(habits[i].lastDone, habits[i].frequency);
         let isChecked = isHabitCompletedToday(habits[i].id) ? "checked" : "";
-        habitsHTML+= `<div class = "habit" data-id="${habits[i].id}"><input type="checkbox" ${isChecked}> ${habits[i].name} (last done : ${lastDoneContent})</div>`;
+        habitsHTML+= `<div class = "habit" data-id="${habits[i].id}"><input type="checkbox" ${isChecked}> ${habits[i].name} (last done : ${lastDoneContent}, next due : ${nextDue})</div>`;
     }
     
     habitsContainerElement.innerHTML=habitsHTML;
@@ -66,5 +74,7 @@ habitsContainerElement.addEventListener('change', btn => {
     }
     
 });
+
+
 
 displayHabits();

@@ -15,3 +15,18 @@ export function getArrayOfWeek(date){
     }
    
    return arrayOfWeekDays; }
+
+export function getDayDifference(day1, day2){
+    const timeDiff = day2-day1;
+    return timeDiff/ (1000 * 60 * 60 * 24);
+
+}
+
+export function addXDaysToDate(date, days){
+    const newDate = new Date(date);
+    console.log(date);
+    days = parseInt(days);
+    newDate.setDate(date.getDate() + days);
+    
+    return (dateToYMD(newDate));
+}
