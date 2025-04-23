@@ -48,5 +48,11 @@ export function updateHabit(id){
 }
 
 export function uncheckHabit(id){
+    const habits = getHabits();
+    const habit = habits.find(h => h.id === id);
+    habit.log.pop();
+    if(habit.log.length>=1){habit.lastDone = habit.log[habit.log.length-1]; }
+    else{habit.lastDone = "";}
     
+    localStorage.setItem("habits", JSON.stringify(habits));   
 }

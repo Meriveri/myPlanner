@@ -59,7 +59,11 @@ habitsContainerElement.addEventListener('change', btn => {
         updateHabit(habitID); 
         displayHabits();
     }
-    else{btn.target.parentNode.classList.remove("done"); uncheckHabit(habitID);}
+    else{
+        btn.target.parentNode.classList.remove("done"); 
+        uncheckHabit(habitID); 
+        displayHabits();
+    }
     
 });
 
