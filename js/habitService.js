@@ -33,7 +33,7 @@ export function updateHabit(id){
 
 
     if (logs.length > 1){
-        if(daysDiff == parseInt(habit.frequency)){streak =streak+1;}
+        if(daysDiff <= parseInt(habit.frequency)){streak =streak+1;}
         else{streak=1;}
         
     }
@@ -45,7 +45,6 @@ export function updateHabit(id){
     if(habit.streak.current > habit.streak.longest){
         habit.streak.longest=habit.streak.current;
     }
-    console.log(habit.streak);
     localStorage.setItem("habits", JSON.stringify(habits));
 }
 
@@ -53,7 +52,7 @@ export function uncheckHabit(id){
     const habits = getHabits();
     const habit = habits.find(h => h.id === id);
     habit.log.pop();
-    if(habit.log.length>=1){habit.lastDone = habit.log[habit.log.length];}
+    if(habit.log.length>=1){habit.lastDone = habit.log[habit.log.length-1];}
     else{habit.lastDone = "";}
 
     habit.streak.current-=1;

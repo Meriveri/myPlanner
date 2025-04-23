@@ -77,3 +77,14 @@ habitsContainerElement.addEventListener('change', btn => {
 
 
 displayHabits();
+/*const habit = {
+    id : "habit-0",
+    name : "cheat", 
+    createdAt : dateToYMD(new Date("2025-04-20")),
+    frequency : 2, 
+    lastDone : "2025-04-22",
+    log : ["2025-04-20", "2025-04-22"], 
+    streak : {current : 1, longest : 1}, 
+    archived : false
+}
+addHabit(habit);*/
