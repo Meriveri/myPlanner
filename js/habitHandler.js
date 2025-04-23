@@ -1,4 +1,4 @@
-import { addHabit, getHabitByID, getHabits, updateHabit } from "./habitService.js";
+import { addHabit, getHabitByID, getHabits, updateHabit, uncheckHabit } from "./habitService.js";
 import { dateToYMD } from "./utils.js";
 
 const habitsContainerElement = document.getElementById("habitsContainer");
@@ -41,11 +41,7 @@ export function displayHabits(){
         let lastDoneContent = logEmpty(habits[i]);
         let isChecked = isHabitCompletedToday(habits[i].id) ? "checked" : "";
         habitsHTML+= `<div class = "habit" data-id="${habits[i].id}"><input type="checkbox" ${isChecked}> ${habits[i].name} (last done : ${lastDoneContent})</div>`;
-        if(isHabitCompletedToday(habits[i].id)){
-            
-        }
     }
-    
     
     habitsContainerElement.innerHTML=habitsHTML;
 }
@@ -56,14 +52,15 @@ export function isHabitCompletedToday(habitID){
 
 }
 
-habitsContainerElement.addEventListener('click', btn => {
+habitsContainerElement.addEventListener('change', btn => {
     const habitID = btn.target.parentNode.dataset.id;
-    if(btn.target.checked){
+    if(btn.target.checked){     
         btn.target.parentNode.classList.add("done"); 
         updateHabit(habitID); 
         displayHabits();
     }
-    else{btn.target.parentNode.classList.remove("done"); }
+    else{btn.target.parentNode.classList.remove("done"); uncheckHabit(habitID);}
+    
 });
 
 displayHabits();

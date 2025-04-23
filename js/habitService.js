@@ -1,3 +1,4 @@
+import { displayHabits, isHabitCompletedToday } from "./habitHandler.js";
 import { dateToYMD } from "./utils.js";
 
 export function getHabits() {
@@ -10,9 +11,6 @@ export function addHabit(habit) {
     localStorage.setItem("habits", JSON.stringify(habits));
 }
 
-export function deleteAllHabits(){
-    
-}
 
 export function getHabitByID(id){
     const habits = getHabits();
@@ -22,8 +20,7 @@ export function getHabitByID(id){
 
 export function updateHabit(id){
     const habits = getHabits();
-    const habit = getHabitByID(id)[0];
-    console.log(habit);
+    const habit = habits.find(h => h.id === id);
     habit.lastDone = dateToYMD(new Date());
     let streak = habit.streak.current;
     let logs = habit.log;
@@ -33,8 +30,6 @@ export function updateHabit(id){
     let lastLog = new Date(logs[logs.length-1]);
     const timeDiff = lastLog - prevLog; 
     const daysDiff = timeDiff/ (1000 * 60 * 60 * 24);
-
-    if(logs.length == 0){streak=1;}
 
     if (logs.length >= 2){
         if(daysDiff == 1){streak +=1;}
@@ -50,4 +45,8 @@ export function updateHabit(id){
         habit.streak.longest=streak;
     }
     localStorage.setItem("habits", JSON.stringify(habits));
+}
+
+export function uncheckHabit(id){
+    
 }
