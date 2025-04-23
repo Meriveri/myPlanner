@@ -24,7 +24,6 @@ export function getDayDifference(day1, day2){
 
 export function addXDaysToDate(date, days){
     const newDate = new Date(date);
-    console.log(date);
     days = parseInt(days);
     newDate.setDate(date.getDate() + days);
     

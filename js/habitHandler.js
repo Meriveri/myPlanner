@@ -35,7 +35,6 @@ export function logEmpty(habit){
 }
 
 export function nextDueDate(date, days){
-    console.log(date === "2025-04-23");
     if(date != ""){date = new Date(date);}
     else{date = new Date();}
     return addXDaysToDate(date, days);
@@ -45,10 +44,10 @@ export function displayHabits(){
     const habits = getHabits();
     let habitsHTML = "";
     for(let i = 0; i<habits.length;i++){
-        let lastDoneContent = logEmpty(habits[i]);
+        let lastDoneDate = logEmpty(habits[i]);
         let nextDue = nextDueDate(habits[i].lastDone, habits[i].frequency);
         let isChecked = isHabitCompletedToday(habits[i].id) ? "checked" : "";
-        habitsHTML+= `<div class = "habit" data-id="${habits[i].id}"><input type="checkbox" ${isChecked}> ${habits[i].name} (last done : ${lastDoneContent}, next due : ${nextDue})</div>`;
+        habitsHTML+= `<div class = "habit" data-id="${habits[i].id}"><input type="checkbox" ${isChecked}> <span style="font-weight:bold;"> ${habits[i].name} </span><br/><span style="font-size:14px;">last done : ${lastDoneDate} next due : ${nextDue}</div></span>`;
     }
     
     habitsContainerElement.innerHTML=habitsHTML;
