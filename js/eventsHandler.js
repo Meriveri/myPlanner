@@ -2,6 +2,7 @@ import { deleteEventById, getEvents, addEvent, getCompletedEvents, addCompletedE
 import './main.js';
 import { renderPage } from './dayDisplay.js'
 import { putDaysWithEventsInBold } from './main.js';
+import { dateToYMD, getDayDifference } from './utils.js';
 
 const newEventBtn = document.getElementById("newEvent");
 const formElement = document.getElementById("eventForm");
@@ -11,13 +12,24 @@ const delEventsBtn = document.getElementById("delEvents");
 
 const upcomingEventsElement = document.getElementById("upcomingEvents");
 
+export function isEventLate(event){
+    console.log(event.date);
+    let eventDate = new Date(event.date);
+    let today = new Date();
+    if(getDayDifference(eventDate, today)>0){return `<span class="borderBubble">late</span>`}
+    return "";
+}
+
 export function showEvents() {
     upcomingEventsElement.innerHTML = "";
     let events = getEvents();
     
     for(let i = 0; i < events.length;i++){
         upcomingEventsElement.innerHTML += `<div class="event ${events[i].type}"><span class="eventItem"><button class="eventComplete" data-id="${events[i].id}">✔</button></span>
-        <div class="eventInfos"><div class="eventTitle">${events[i].name}</div><br/><div class="eventDate">${events[i].date} ${events[i].time}</div></div>
+        <div class="eventInfos">
+            <div class="eventTitle">${events[i].name} ${isEventLate(events[i])}</div><br/>
+            <div class="eventDate">${events[i].date} ${events[i].time}</div>
+        </div>
         <button class="eventDelete" data-id="${events[i].id}">✘</button></div>`;
     } 
 

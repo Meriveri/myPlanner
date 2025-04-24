@@ -126,8 +126,8 @@ habitsContainerElement.addEventListener('change', btn => {
 
 displayHabits();
 /*const habit = {
-    id : "habit-3",
-    name : "cheat", 
+    id : "habit-0",
+    name : "overdue", 
     createdAt : dateToYMD(new Date("2025-04-20")),
     frequency : 1, 
     lastDone : "2025-04-22",
