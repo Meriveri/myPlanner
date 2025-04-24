@@ -29,3 +29,9 @@ export function addXDaysToDate(date, days){
     
     return (dateToYMD(newDate));
 }
+
+export function nextDueDate(date, days){
+    if(date != ""){date = new Date(date);}
+    else{date = new Date();}
+    return addXDaysToDate(date, days);
+}

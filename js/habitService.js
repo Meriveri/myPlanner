@@ -1,5 +1,5 @@
 import { displayHabits, isHabitCompletedToday } from "./habitHandler.js";
-import { addXDaysToDate, dateToYMD, getDayDifference } from "./utils.js";
+import { addXDaysToDate, dateToYMD, getDayDifference, nextDueDate } from "./utils.js";
 
 export function getHabits() {
     return JSON.parse(localStorage.getItem("habits")) || [];
@@ -30,6 +30,8 @@ export function updateHabit(id){
     let prevLog = new Date(logs[logs.length-2]);
     let lastLog = new Date(logs[logs.length-1]);
     const daysDiff = getDayDifference(prevLog, lastLog);
+
+    habit.nextDue = nextDueDate(habit.lastDone, habit.frequency);
 
 
     if (logs.length > 1){

@@ -10,6 +10,8 @@ const addHabitBtn = document.getElementById("addHabit");
 const newHabitBtn = document.getElementById("newHabit");
 const formElement = document.getElementById("habitForm");
 
+const habitsFilterElement = document.getElementById("habitsFilter");
+
 newHabitBtn.addEventListener('click', () => {
     formElement.classList.toggle("visible");  
 });
@@ -28,6 +30,7 @@ export function createHabit(){
         createdAt : dateToYMD(new Date()),
         frequency : habitFreq, 
         lastDone : "",
+        nextDue : dateToYMD(new Date()),
         log : [], 
         streak : {current : 0, longest : 0}, 
         archived : false
@@ -66,13 +69,25 @@ export function isUrgent(habit){
     return "";
 }
 
+habitsFilterElement.addEventListener('change', () =>{
+    displayHabits();
+});
+
 export function displayHabits(){
-    const habits = getHabits();
+    let habits = getHabits();
+    
+    const hideNotDueIsActive = habitsFilterElement.checked;
+
+    if(hideNotDueIsActive){
+        const today = dateToYMD(new Date());
+        habits = habits.filter(h => new Date(h.nextDue) <= new Date(today));
+    }
+
     let habitsHTML = "";
     for(let i = 0; i<habits.length;i++){
         let lastDoneDate = logEmpty(habits[i]);
 
-        let nextDue = nextDueDate(habits[i].lastDone, habits[i].frequency);
+        let nextDue = habits[i].nextDue;
         nextDue = isTodayOrDate(nextDue); 
         if(habits[i].log.length==0){nextDue = `<span class="borderBubble">today</span>`;}
 
@@ -116,6 +131,7 @@ displayHabits();
     createdAt : dateToYMD(new Date("2025-04-20")),
     frequency : 1, 
     lastDone : "2025-04-22",
+    nextDue : "2025-04-23",
     log : ["2025-04-20", "2025-04-22"], 
     streak : {current : 2, longest : 2}, 
     archived : false
