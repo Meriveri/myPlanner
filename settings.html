@@ -2,20 +2,29 @@
     <head>
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="style.css"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Micro+5&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div class="contentWrapper">
-            <h1>Events</h1>
-            <div class="type" >
-                <label style="flex-grow: 1">event type</label> 
-                <input type="text" style="flex-grow: 7"/>
-                <button type="submit" style="flex-grow: 1">+</button>
+        <div class="sidebar">
+            <a href="./index.html"><div class="logo head">myPlanner</div></a>
+            <div class="actions">
             </div>
-            <div class="type">
-                <label style="flex-grow: 1">goal type</label> 
-                <input type="text" style="flex-grow: 8"/>
-                <button type="submit" style="flex-grow: 1">+</button> 
-            </div>         
+        </div>
+        <div class="contentWrapper">
+                <div class="settingsWrapper">
+                    <div class="settingsTabs">
+                        <button class="tab" id="generalSettings">general</button>
+                        <button class="tab" id="eventsSettings">events</button>
+                        <button class="tab" id="habitsSettings">habits</button>
+                    </div>
+                    <div class="settingsContainer" id="settingsContainer">
+                        <div class="settingsHabits" id="settingsHabits">
+                            
+                        </div>
+                    </div>
+                </div>
         </div>
     </body>
 </html>
