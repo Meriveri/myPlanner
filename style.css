@@ -4,23 +4,44 @@ body{background: #DADADA;}
 
 button{cursor: pointer;}
 
-.actions{
-    display: flex; 
-    flex-direction: row; 
-    justify-content: space-around; 
-    align-items: start; 
-    justify-content:left;
+.deleteBtn{
+    display: flex;
+    background-color: lightcoral; 
+    transition: all 0.6s;
+    border: none; 
+    padding:5px; 
+    color:white; 
+    border-radius: 5px;
+} 
+.deleteBtn:hover{
+
+    background-color: rgb(209, 104, 104); 
+    transition: all 0.6s;
 }
 
-.action{
-    display: flex;
-    padding: 10px;
-    margin:5px; 
-    background-color: white;
-    box-shadow: 0px 0px 2px rgba(0,0,0,0.1);
-    border: none;
-    border-radius: 10px;
-   
+.okBtn{  display: flex;
+    background-color: yellowgreen; 
+    transition: all 0.6s;
+    border: none; 
+    padding:5px; 
+    color:white; 
+    border-radius: 5px; 
+    margin-top: 10px;}
+
+.okBtn:hover{
+
+        background-color: rgb(102, 165, 110);  
+        transition: all 0.6s;
+    }
+
+.deleteBtn.visble{opacity: 100%;}
+.deleteBtn.hidden{opacity: 0%;}
+
+.forms{
+    display: block;
+    position: fixed;
+    z-index: 0;
+    top:85px;
 }
 
 .habitForm{
@@ -30,12 +51,16 @@ button{cursor: pointer;}
     margin:auto;
     align-content: space-around;
     justify-content: center;
+    visibility: hidden;
+    transform: translate(-100%, 0%);
     transition: all 1s;
     background-color: white;
     border-radius: 10px;
     flex-wrap: wrap;
-    
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
 }
+
+.habitForm.visible{visibility: visible; transform:translate(140px, 0px); transition: all 1s;}
 
 .habitForm input{
     display: grid;
@@ -59,15 +84,16 @@ button{cursor: pointer;}
     align-content: space-around;
     justify-content: center;
     visibility: hidden;
-    transform: translate(0px, -600px);
+    transform: translate(-100%, 0%);
     transition: all 1s;
     background-color: white;
     border-radius: 10px;
     flex-wrap: wrap;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
 }
-.eventForm.visible{visibility: visible; transform:translate(0px); transition: all 1s;}
+.eventForm.visible{visibility: visible; transform:translate(140px, 0px); transition: all 1s;}
 
-.eventForm input, .eventForm select, .eventForm button{
+.eventForm input, .eventForm select, .eventForm button, .habitForm button{
     display: grid;
     justify-content: space-around;
     margin:10px;
@@ -79,7 +105,9 @@ button{cursor: pointer;}
 
 
 .eventForm button, .habitForm button{
-
+    display: flex;
+    align-content: center;
+    justify-content: center;
     background-color: yellowgreen;
     border: none;
     color:white;
@@ -90,48 +118,99 @@ button{cursor: pointer;}
     line-height: 14px;
 }
 
-.deleteBtn{
-    display: flex;
-    background-color: lightcoral; 
-    transition: all 0.6s;
-    border: none; 
-    padding:5px; 
-    color:white; 
-    border-radius: 5px; 
-    margin-top: 10px;
-} 
-.deleteBtn:hover{
 
-    background-color: rgb(209, 104, 104); 
-    transition: all 0.6s;
+.sidebar{
+    display: block;
+    position:fixed;
+    flex-direction: column;
+    background-color:white;
+    height: 100%;
+    z-index: 100;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+    min-width: 150px;
+
 }
 
-.okBtn{  display: flex;
-    background-color: rgb(126, 202, 136); 
-    transition: all 0.6s;
-    border: none; 
-    padding:5px; 
-    color:white; 
-    border-radius: 5px; 
-    margin-top: 10px;}
+.sidebar .logo{
+    display: block;
+    color:yellowgreen;
+    font-size: 36px;
+    text-align: center;
+    padding:20% 0%;
+}
+.actions{
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-around; 
+    vertical-align: start;
+    align-items: start; 
+    justify-content:left;
+}
 
-.okBtn:hover{
+.action{
+    display: flex;
+    padding: 10px;
+    margin:5px; 
+    background-color: white;
+    border: none;
+    transition: ease-out 0.2s;
+}
 
-        background-color: rgb(102, 165, 110);  
-        transition: all 0.6s;
-    }
+.action:hover{
+    transform: translateX(25px);
+    transition: ease-in 0.2s;
+    color:yellowgreen;
+}
 
-.deleteBtn.visble{opacity: 100%;}
-.deleteBtn.hidden{opacity: 0%;}
+.contentWrapper{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    padding: 0 5%;
+    justify-self: end;
+    vertical-align: start;
+    padding-top:100px;
+    height: 100%;
+}
 
-.upcomingEvents{
+.leftMenus{
+    display: flex;
+    width: 30%;
+    min-width: 300px;
+    align-self: baseline;
+    flex-direction: column;
+}
+
+.centerMenus{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 40%;
+    min-width: 350px;
+    align-self: baseline;
+    justify-self: center;
+
+}
+
+.rightMenus{
+    display: flex;
+    width: 30%;
+    min-width: 300px;
+    align-self: baseline;
+    flex-direction: column;
+}
+
+
+
+.eventsWrapper{
+    display: flex;
+    align-self: baseline;
+    flex-direction: column;
     background-color: white;
-    border-radius: 10px 10px;
-    padding:10px;
-    margin-top:-15px;
+    border-radius: 20px;
+    padding:20px;
     opacity: 100%;
+    width: 100%;
 }
 
 .upcomingEvents.visible{opacity: 100%; transition: 0.5s;}
@@ -140,6 +219,10 @@ button{cursor: pointer;}
 .upcomingEvents .event{
     display:flex;
     justify-content: space-between;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color:white;
+    width: 100%;
 }
 
 .upcomingEvents span{
@@ -150,30 +233,91 @@ button{cursor: pointer;}
 .upcomingEvents button {
     display: inline-block;
     align-items: center;
-    margin-left:10px;
+    border: none;
 }
-.calendarWrap{min-height: 60vh; display: flex; align-items: center; justify-content: center;}
+
+.eventInfos{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-size:15px;
+    line-height: 10px;
+    padding:10px;
+    width: 100%;
+}
+
+.eventInfos .eventTitle{
+    font-weight: bold;
+}
+
+.eventInfos .eventDate{
+    font-size: 10px;
+}
+
+.eventComplete{
+    background-color:transparent;
+    color:white;
+    padding: 10px;
+    border-right: 1px solid white!important;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.eventDelete{
+    background-color: #F08080;
+    border-radius: 10px;
+    color:white;
+    padding: 0px 10px;
+}
+
+.eventDelete:hover{
+    background-color:rgb(228, 121, 83);
+}
+
+
+
+
+
+.calendarWrap{
+    display: flex;  
+    align-items: center; 
+    justify-self: center;  
+    justify-content: center; 
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+}
 
 .calendar{
     display:flex; 
     flex-direction: column;
-    width:380px; 
+    justify-self: center;
     height: auto;
     background: #FFF;  
-    padding:30px; 
-    border-radius: 30px;
+    padding:10%; 
+    border-radius: 10%;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    justify-self: center;
+    max-width: 350px;
 }
-.head {
+
+.calendar .head, .habitsWrapper .head, .eventsWrapper .head {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    text-transform: lowercase;
-    font-weight: bold;
     border-bottom: 1px solid black;
     margin-bottom: 15px;
 }
-.head button{
+
+.monthYear{text-transform: lowercase;}
+
+.head, .monthYear {
+    font-family: "Micro 5", sans-serif!important;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.calendar .head button{
     display:flex;
     align-items: center;
     justify-content: center;
@@ -181,37 +325,34 @@ button{cursor: pointer;}
     cursor:pointer;
     background-color: white; 
     font-weight: bold;
-    padding: 5px;
 }
-.head button:hover{color:yellowgreen;}
+.calendar .head button:hover{color:yellowgreen;}
 
-.days{
+.calendar .days{
     display: grid;
     grid-template-columns: repeat(7,1fr);
 }
 
-.day{
+.calendar .day{
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding:10px;
+    padding:7px;
     margin:auto;
-    width: 40px;
-    height : 40px;
     cursor:default;
 }
 
 
-.dates{
+.calendar .dates{
     display: grid;
     grid-template-columns: repeat(7,1fr);
     margin-bottom: 5px;
 }
-.dates .day:hover{color:yellowgreen}
+.calendar .dates .day:hover{color:yellowgreen}
 
-.dates .day.hasEvent{font-weight: bolder;}
-.active{
+.calendar .dates .day.hasEvent{font-weight: bolder;}
+.calendar .active{
     background-color:yellowgreen; 
     border-radius: 100%; 
     box-shadow: 0px 0px 2px rgba(0,0,0,0.1);
@@ -220,8 +361,60 @@ button{cursor: pointer;}
     cursor:pointer;
     transition: all 0.3s;
 }
-.active:hover{color:white!important; box-shadow: 0px 0px 5px rgba(0,0,0,0.5); transition: all 0.3s;}
-.inactive{color:darkgrey!important;}
+.calendar .active:hover{color:white!important; box-shadow: 0px 0px 5px rgba(0,0,0,0.5); transition: all 0.3s;}
+.calendar .inactive{color:darkgrey!important;}
+
+.pageWrapper{
+    display: flex; 
+    align-items: center; 
+    justify-self: center;  
+    justify-content: center; 
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.dayPage{
+    display:flex; 
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    height: auto;
+    background: #FFF;  
+    padding:30px; 
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    justify-self: center;
+    width: 80%;
+
+}
+
+.dayPage .pageDate{
+    display: flex;
+    align-items: stretch;
+    color: yellowgreen;
+    text-transform: lowercase;
+    font-weight: bold;
+    border-bottom: 1px solid yellowgreen;
+    margin-bottom: 15px;
+}
+.dayPage .dayEventsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    text-align: center;
+    margin:auto;
+    width: 100%;
+}
+.dayPage .dayEventsContainer .event{
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    justify-content: space-between;
+    align-items: baseline;
+    line-height: 26px; 
+    border-bottom: 1px solid #DADADA;
+}
 
 .reset{
     display: flex; 
@@ -232,48 +425,31 @@ button{cursor: pointer;}
     cursor:pointer;
 }
 
-.contentWrapper{
-    display: block;
-    height: 100vh;
-    max-width: 80%;
-    margin:0 auto;
+
+.dayPage .event.apo{
+    color:#F8875C;
 }
 
-.event.apo{
-    color:coral;
-}
-
-.event.task{
+.dayPage .event.task{
     color:yellowgreen;
 }
 
-.event.stream{
+.dayPage .event.stream{
     color:purple;
 }
 
-.pageWrapper{min-height: 20vh; display: flex; align-items: center; justify-content: center;}
-.dayPage{
-    display:flex; 
-    flex-direction: column;
-    height: auto;
-    background: #FFF;  
-    padding:30px; 
-    border-radius: 30px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    min-height: 200px;
-    width: 380px;
+
+.upcomingEvents .event.apo{
+    background-color:#F8875C;
 }
 
-.dayPage .pageDate{
-    display: block;
-    width: 100%;
-    font-family: sans-serif;
-    color:yellowgreen;
-    border-bottom: 1px solid #DADADA;
-    font-weight: lighter!important;
+.upcomingEvents .event.task{
+    background-color:yellowgreen;
 }
-.dayPage .dayEventsContainer{display:block; width: 100%; font-size: 13px;}
-.dayPage .dayEventsContainer .event{line-height: 26px; border-bottom: 1px solid #DADADA;}
+
+.upcomingEvents .event.stream{
+    background-color:purple;
+}
 
 .numberWrapper{
     display:flex;
@@ -294,8 +470,26 @@ button{cursor: pointer;}
     font-weight: lighter!important;
 }
 
-.habitsContainer .habit{display: grid; grid-template-columns: 2em auto; line-height: 15px; margin-top:15px;}
-.habitsContainer .habit.done{color:#797777; text-decoration: line-through;}
-.habitsContainer input[type="checkbox"]{display:grid; place-content: center; cursor: pointer; appearance: none; width: 15px; height: 15px; border: 1px solid white; box-shadow: none; background-color: white; border-radius: 5px;}
-.habitsContainer input[type="checkbox"]::before{content:""; transform: scale(0); width: 15px; height: 15px; background-color: yellowgreen; border-radius: 5px; transition: 0.2s;}
-.habitsContainer input[type="checkbox"]:checked::before {transform: scale(1);}
+.habitsWrapper{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 20px;
+    padding:20px;
+    opacity: 100%;
+}
+
+.habitsWrapper .habit{
+    display: grid; 
+    grid-template-columns: 2em auto; 
+    line-height: 15px; 
+    margin-top:10px;
+    background-color: rgb(182, 203, 241);
+    padding: 15px;
+    border-radius: 15px;
+    color:white;
+}
+.habitsWrapper .habit.done{color:#797777; text-decoration: line-through;}
+.habitsWrapper input[type="checkbox"]{display:grid; place-content: center; cursor: pointer; appearance: none; width: 15px; height: 15px; border: 1px solid white; box-shadow: none; background-color: white; border-radius: 5px;}
+.habitsWrapper input[type="checkbox"]::before{content:""; transform: scale(0); width: 15px; height: 15px; background-color: yellowgreen; border-radius: 5px; transition: 0.2s;}
+.habitsWrapper input[type="checkbox"]:checked::before {transform: scale(1);}

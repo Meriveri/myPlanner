@@ -1,4 +1,3 @@
-
 import { deleteEventById, getEvents, addEvent, getCompletedEvents, addCompletedEvent } from './eventService.js';  
 import './main.js';
 import { renderPage } from './dayDisplay.js'
@@ -17,9 +16,9 @@ export function showEvents() {
     let events = getEvents();
     
     for(let i = 0; i < events.length;i++){
-        upcomingEventsElement.innerHTML += `<div class="event ${events[i].type}"><span class="eventItem">${events[i].name} (${events[i].date} ${events[i].time})</span>
-        <button class="eventDelete deleteBtn" data-id="${events[i].id}">✘</button>
-        <button class="eventComplete okBtn" data-id="${events[i].id}">✔</button></div>`;
+        upcomingEventsElement.innerHTML += `<div class="event ${events[i].type}"><span class="eventItem"><button class="eventComplete" data-id="${events[i].id}">✔</button></span>
+        <div class="eventInfos"><div class="eventTitle">${events[i].name}</div><br/><div class="eventDate">${events[i].date} ${events[i].time}</div></div>
+        <button class="eventDelete" data-id="${events[i].id}">✘</button></div>`;
     } 
 
 

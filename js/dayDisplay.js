@@ -30,7 +30,7 @@ const displayEvents = (events) =>{
     if(events.length==0){eventsHTML=`<div class="event">pas d'évènement aujourd'hui.</div>`;}
     else{
         for(let i=0; i<events.length;i++){
-            eventsHTML+=`<div class="event ${events[i].type}">${events[i].time} ${events[i].name} <button class="completeEvent okBtn" data-id="${events[i].id}">ok</button></div>`;
+            eventsHTML+=`<div class="event ${events[i].type}">${events[i].time} ${events[i].name} <button class="completeEvent okBtn" data-id="${events[i].id}">✔</button></div>`;
         }
     }
     dayEventsContainerElement.innerHTML = eventsHTML;

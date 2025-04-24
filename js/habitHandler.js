@@ -7,6 +7,13 @@ const habitNameElement = document.getElementById("habitName");
 const habitFrequencyElement = document.getElementById("habitFrequency");
 const addHabitBtn = document.getElementById("addHabit");
 
+const newHabitBtn = document.getElementById("newHabit");
+const formElement = document.getElementById("habitForm");
+
+newHabitBtn.addEventListener('click', () => {
+    formElement.classList.toggle("visible");  
+});
+
 addHabitBtn.addEventListener("click", ()=>{createHabit();});
 
 
