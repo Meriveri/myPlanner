@@ -74,7 +74,7 @@ export function displayHabits(){
 
         let nextDue = nextDueDate(habits[i].lastDone, habits[i].frequency);
         nextDue = isTodayOrDate(nextDue); 
-        if(habits[i].log.length==0){nextDue = "today"};
+        if(habits[i].log.length==0){nextDue = `<span class="borderBubble">today</span>`;}
 
         let isChecked = isHabitCompletedToday(habits[i].id) ? "checked" : "";
         habitsHTML+= `<div class = "habit ${isUrgent(habits[i])}" data-id="${habits[i].id}">
