@@ -1,5 +1,5 @@
 import { addHabit, getHabitByID, getHabits, updateHabit, uncheckHabit } from "./habitService.js";
-import { addXDaysToDate, dateToYMD } from "./utils.js";
+import { addXDaysToDate, dateToYMD, getDayDifference } from "./utils.js";
 
 const habitsContainerElement = document.getElementById("habitsContainer");
 
@@ -47,14 +47,40 @@ export function nextDueDate(date, days){
     return addXDaysToDate(date, days);
 }
 
+export function isTodayOrDate(date){
+    if(date == dateToYMD(new Date())){return `<span class="borderBubble">today</span>`;}
+    
+    return date;
+}
+
+export function isUrgent(habit){
+    const frequency = habit.frequency;
+    let logs = habit.log;
+    let lastLog = new Date(logs[logs.length-1]);
+    const today = new Date();
+
+    const diff = Math.trunc(getDayDifference(lastLog, today));
+    
+    if(diff > 0){return "late";}
+    if(!Number.isInteger(diff)){return "today";}
+    return "";
+}
+
 export function displayHabits(){
     const habits = getHabits();
     let habitsHTML = "";
     for(let i = 0; i<habits.length;i++){
         let lastDoneDate = logEmpty(habits[i]);
+
         let nextDue = nextDueDate(habits[i].lastDone, habits[i].frequency);
+        nextDue = isTodayOrDate(nextDue); 
+        if(habits[i].log.length==0){nextDue = "today"};
+
         let isChecked = isHabitCompletedToday(habits[i].id) ? "checked" : "";
-        habitsHTML+= `<div class = "habit" data-id="${habits[i].id}"><input type="checkbox" ${isChecked}> <span style="font-weight:bold;"> ${habits[i].name} </span><br/><span style="font-size:14px;">last done : ${lastDoneDate} next due : ${nextDue}</div></span>`;
+        habitsHTML+= `<div class = "habit ${isUrgent(habits[i])}" data-id="${habits[i].id}">
+        <input type="checkbox" ${isChecked}> 
+        <span style="font-weight:bold;"> ${habits[i].name} </span><br/>
+        <span style="font-size:14px;">last done : ${lastDoneDate} next due : ${nextDue}</span></div>`;
     }
     
     habitsContainerElement.innerHTML=habitsHTML;
@@ -85,13 +111,13 @@ habitsContainerElement.addEventListener('change', btn => {
 
 displayHabits();
 /*const habit = {
-    id : "habit-0",
+    id : "habit-3",
     name : "cheat", 
     createdAt : dateToYMD(new Date("2025-04-20")),
-    frequency : 2, 
+    frequency : 1, 
     lastDone : "2025-04-22",
     log : ["2025-04-20", "2025-04-22"], 
-    streak : {current : 1, longest : 1}, 
+    streak : {current : 2, longest : 2}, 
     archived : false
 }
 addHabit(habit);*/
