@@ -75,6 +75,15 @@ export function isDueColor(habit) {
     return "";
 }
 
+export function isHabitLate(habit){
+    let habitDueDate = new Date(habit.nextDue);
+    let today = new Date();
+    let diff = Math.trunc(getDayDifference(habitDueDate, today));
+    if(diff > 0){return `<span class="borderBubble">late</span>`}
+    return "";
+}
+
+
 habitsFilterElement.addEventListener('change', () =>{
     displayHabits();
 });
@@ -91,6 +100,7 @@ export function displayHabits(){
     let habitsHTML = "";
     for(let i = 0; i<habits.length;i++){
         let lastDoneDate = logEmpty(habits[i]);
+        let isLate = isHabitLate(habits[i]);
 
         let nextDue = habits[i].nextDue;
         nextDue = isTodayOrDate(nextDue); 
@@ -99,7 +109,7 @@ export function displayHabits(){
         let isChecked = isHabitCompletedToday(habits[i].id) ? "checked" : "";
         habitsHTML+= `<div class = "habit ${isDueColor(habits[i])}" data-id="${habits[i].id}">
         <input type="checkbox" ${isChecked}> 
-        <span style="font-weight:bold;"> ${habits[i].name} </span><br/>
+        <span style="font-weight:bold;"> ${habits[i].name} ${isLate}</span> <br/>
         <span style="font-size:14px;">last done : ${lastDoneDate} next due : ${nextDue}</span></div>`;
     }
     
@@ -131,14 +141,27 @@ habitsContainerElement.addEventListener('change', btn => {
 
 displayHabits();
 /*const habit = {
-    id : "habit-4",
-    name : "test not due today", 
+    id : "habit-0",
+    name : "overdue", 
     createdAt : dateToYMD(new Date("2025-04-20")),
-    frequency : 7, 
+    frequency : 1, 
     lastDone : "2025-04-22",
-    nextDue : "2025-04-29",
-    log : ["2025-04-20", "2025-04-22"], 
-    streak : {current : 0, longest : 0}, 
+    nextDue : "2025-04-23",
+    log : ["2025-04-21", "2025-04-22"], 
+    streak : {current : 2, longest : 2}, 
     archived : false
 }
-addHabit(habit);*/
+
+/*const habit = {
+    id : "habit-1",
+    name : "not due today", 
+    createdAt : dateToYMD(new Date("2025-04-20")),
+    frequency : 60, 
+    lastDone : "2025-04-01",
+    nextDue : "2025-05-30",
+    log : ["2025-04-01"], 
+    streak : {current : 1, longest : 1}, 
+    archived : false
+}*/
+//addHabit(habit);
+
