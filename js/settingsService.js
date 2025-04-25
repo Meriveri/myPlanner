@@ -36,3 +36,16 @@ export function editHabitFrequency(id, frequency){
     localStorage.setItem("habits", JSON.stringify(habits));
 
 }
+
+export function archiveHabit(id){
+    let habits = getHabits();
+    let habit = habits.filter(h=> h.id == id);
+    habit = habit[0];
+    console.log(habit.archived);
+    if(habit.archived){habit.archived = false; }
+    else{habit.archived = true;}
+
+    localStorage.setItem("habits", JSON.stringify(habits));
+    
+
+}

@@ -21,7 +21,7 @@ input.invalidField{border: 1px solid red;}
     transition: all 0.6s;
 }
 
-.okBtn{  display: flex;
+.okBtn, .switchtoactiveBtn{  display: flex;
     background-color: yellowgreen; 
     transition: all 0.6s;
     border: none; 
@@ -41,6 +41,17 @@ input.invalidField{border: 1px solid red;}
 
 .editBtn{display: flex;
     background-color: gold; 
+    transition: all 0.6s;
+    border: none; 
+    padding:5px; 
+    color:white; 
+    border-radius: 5px; 
+    margin-top: 10px;
+
+}
+
+.switchtoinactiveBtn{display: flex;
+    background-color: lightgray; 
     transition: all 0.6s;
     border: none; 
     padding:5px; 
