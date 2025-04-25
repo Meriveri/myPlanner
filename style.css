@@ -4,6 +4,8 @@ body{background: #DADADA;}
 
 button{cursor: pointer;}
 
+input.invalidField{border: 1px solid red;}
+
 .deleteBtn{
     display: flex;
     background-color: lightcoral; 
@@ -37,6 +39,18 @@ button{cursor: pointer;}
 .deleteBtn.visble{opacity: 100%;}
 .deleteBtn.hidden{opacity: 0%;}
 
+.editBtn{display: flex;
+    background-color: gold; 
+    transition: all 0.6s;
+    border: none; 
+    padding:5px; 
+    color:white; 
+    border-radius: 5px; 
+    margin-top: 10px;
+
+}
+
+/*index*/
 .forms{
     display: block;
     position: fixed;
@@ -133,6 +147,7 @@ button{cursor: pointer;}
 
 .sidebar .logo{
     display: block;
+    font-family: "Micro 5", serif;
     color:yellowgreen;
     font-size: 36px;
     text-align: center;
@@ -542,6 +557,8 @@ button{cursor: pointer;}
     padding:0px 5px;
 }
 
+/*settings page*/
+
 .settingsWrapper{
     display: flex;
     flex-direction: column;
@@ -559,18 +576,25 @@ button{cursor: pointer;}
 
 .settingsTabs .tab{
     flex-direction: row;
-    border-radius: 10px;
-    border: 1px solid #DADADA;
+    margin-left:5px;
+    border-radius: 10px 10px 0px 0px;
+    border-top: 1px solid #DADADA;
+    border-right: 1px solid #DADADA;
+    border-left: 1px solid #DADADA;
+    border-bottom: none;
     padding: 10px;
     margin-right: 5px;
     background-color: white;
     transition: all 0.6s;
+    font-family: "Micro 5", serif;
+    font-size: 16px;
     
 }
 
 .settingsTabs .tab:hover{
     background-color:yellowgreen;
     border: 1px solid yellowgreen;
+    border-bottom:none;
     transition: all 0.6s;
 }
 
@@ -580,4 +604,43 @@ button{cursor: pointer;}
     flex-direction: column;
 }
 
-input.invalidField{border: 1px solid red;}
+.settingsHabits .habit{
+    display: flex;
+    flex-direction: column;
+    color:black;
+    border:1px solid #DADADA;
+    border-radius: 5px;
+    padding:10px;
+    margin-bottom: 10px;
+    transition: all 0.7s;
+}
+
+.settingsHabits .habit:hover{
+    background-color: rgba(99,99,99,0.1);
+    transition: all 0.7s;
+}
+
+.settingsHabits .habit .habitTitle{
+    display: flex;
+    flex-direction: row;
+    align-items:baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid #dadada;
+    width: 100%;
+}
+
+.settingsContainer .habit .habitTitle .buttons{
+    display: flex;
+    flex-direction: row;
+}
+
+.settingsContainer .habit .habitTitle .buttons button{
+    height: 30px;
+    align-self: baseline;
+    margin-left: 5px;
+}
+
+.settingsContainer .habit .habitFrequency{
+    font-size:12px;
+    padding-top:5px
+}

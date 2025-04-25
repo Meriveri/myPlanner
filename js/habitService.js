@@ -1,4 +1,3 @@
-import { displayHabits, isHabitCompletedToday } from "./habitHandler.js";
 import { addXDaysToDate, dateToYMD, getDayDifference, nextDueDate } from "./utils.js";
 
 export function getHabits() {
