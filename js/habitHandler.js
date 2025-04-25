@@ -35,7 +35,17 @@ export function createHabit(){
         streak : {current : 0, longest : 0}, 
         archived : false
     }
-    addHabit(habit);
+    if(habit.name != "" && habit.frequency > 0){
+        habitNameElement.classList.remove("invalidField"); 
+        habitFrequencyElement.classList.remove("invalidField");  
+        addHabit(habit);
+    }
+    else{
+        habitNameElement.classList.remove("invalidField"); 
+        habitFrequencyElement.classList.remove("invalidField");  
+        if(habit.name == "" ){habitNameElement.classList.add("invalidField");} 
+        if(habit.frequency <= 0){habitFrequencyElement.classList.add("invalidField");}
+    }
     displayHabits();
 
 }

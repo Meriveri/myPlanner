@@ -579,3 +579,5 @@ button{cursor: pointer;}
     width: 100%;
     flex-direction: column;
 }
+
+input.invalidField{border: 1px solid red;}
