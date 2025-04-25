@@ -567,6 +567,7 @@ input.invalidField{border: 1px solid red;}
     height: 500px;
     background-color: white;
     border-radius: 30px;
+    overflow: auto;
 }
 
 .settingsTabs{
@@ -636,7 +637,7 @@ input.invalidField{border: 1px solid red;}
     flex-direction: row;
 }
 
-.settingsContainer .habit .habitTitle .buttons button{
+.settingsContainer .habit button{
     height: 30px;
     align-self: baseline;
     margin-left: 5px;
@@ -645,4 +646,23 @@ input.invalidField{border: 1px solid red;}
 .settingsContainer .habit .habitFrequency{
     font-size:12px;
     padding-top:5px
+}
+
+.settingsContainer .habit .habitEditPanel{
+    display: none;
+}
+
+.settingsContainer .habit .habitEditPanel.visible{
+    display: flex;
+    
+}
+
+.settingsContainer input{
+    display: grid;
+    justify-content: space-around;
+    margin:10px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.1);
 }
