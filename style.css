@@ -571,7 +571,9 @@ input.invalidField{border: 1px solid red;}
 
 .settingsTabs{
     display: flex;
-    width: 100%;
+    width: 99%;
+    border-bottom: 1px solid #DADADA;
+    align-self: center;
 }
 
 .settingsTabs .tab{

@@ -151,8 +151,10 @@ displayHabits();
     streak : {current : 2, longest : 2}, 
     archived : false
 }
+addHabit(habit);
+    */
 
-/*const habit = {
+/*const habit2 = {
     id : "habit-1",
     name : "not due today", 
     createdAt : dateToYMD(new Date("2025-04-20")),
@@ -162,6 +164,8 @@ displayHabits();
     log : ["2025-04-01"], 
     streak : {current : 1, longest : 1}, 
     archived : false
-}*/
-//addHabit(habit);
+}
+addHabit(habit2);
+    */
+
 
