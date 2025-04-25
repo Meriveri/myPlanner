@@ -57,6 +57,11 @@ export function uncheckHabit(id){
     if(habit.log.length>=1){habit.lastDone = habit.log[habit.log.length-1];}
     else{habit.lastDone = "";}
 
+    
+    if(habit.lastDone != ""){habit.nextDue = nextDueDate(habit.lastDone, habit.frequency);}
+    else{habit.nextDue = dateToYMD(new Date());}
+    
+    console.log(habit);
     habit.streak.current-=1;
 
     localStorage.setItem("habits", JSON.stringify(habits));   
