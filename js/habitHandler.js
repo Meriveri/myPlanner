@@ -90,6 +90,7 @@ habitsFilterElement.addEventListener('change', () =>{
 
 export function displayHabits(){
     let habits = getHabits();
+    habits = habits.filter(h => h.archived == false);
     
     const hideNotDueIsActive = habitsFilterElement.checked;
 

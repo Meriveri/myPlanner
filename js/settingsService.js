@@ -46,6 +46,4 @@ export function archiveHabit(id){
     else{habit.archived = true;}
 
     localStorage.setItem("habits", JSON.stringify(habits));
-    
-
 }
