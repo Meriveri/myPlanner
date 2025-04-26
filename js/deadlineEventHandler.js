@@ -1,4 +1,4 @@
-import {getDLEvents, addDLEvent, addTaskToDLEvent} from './deadlineEventService.js'
+import {getDLEvents, addDLEvent, addTaskToDLEvent, updateTask} from './deadlineEventService.js'
 import { dateToYMD } from './utils.js';
 
 const DLEventsContainerElement = document.getElementById("DLEventsContainer");
@@ -15,6 +15,31 @@ DLEventsContainerElement.addEventListener('click', (btn) =>{
         addTaskToDLEvent(id, taskName);
         displayDLEvents();
     }
+
+});
+
+DLEventsContainerElement.addEventListener('change', (box) => {
+    if (box.target.matches('input[type="checkbox"]')) {
+        const eventElement = box.target.closest('.DLevent');
+        const eventId = eventElement.dataset.id;
+        
+        const checklistDiv = box.target.closest('.checklist');
+        const checkboxes = checklistDiv.querySelectorAll('input[type="checkbox"]');
+        
+        const index = Array.from(checkboxes).indexOf(box.target);
+
+        console.log("eventId:", eventId, "checkboxIndex:", index, "checked:", box.target.checked);
+
+        updateTask(eventId, index, box.target.checked);
+    }
+});
+
+DLEventsContainerElement.addEventListener('mouseover', (i)=>{
+    if(i.target.classList.contains("taskInput")){i.target.placeholder="";}
+});
+
+DLEventsContainerElement.addEventListener('mouseout', (i)=>{
+    if(i.target.classList.contains("taskInput")){i.target.placeholder="new task name";}
 });
 
 newDLEventBtn.addEventListener('click', ()=>{
@@ -35,7 +60,7 @@ export function displayDLEvents(){
         const completedChecklistCount = checklist.filter(item => item.checked).length;
         const totalChecklistCount = checklist.length;
 
-        const checklistHTML = checklist.map(item => `<div><input type="checkbox" ${item.checked}/>${item.title} ${item.completedOn}</div>`).join("");
+        const checklistHTML = checklist.map(item => `<div class="task"><input type="checkbox" ${item.checked}/>${item.title} ${item.completedOn}</div>`).join("");
 
         
     

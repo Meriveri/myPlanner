@@ -648,13 +648,14 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
     margin-bottom: 5px;
 }
 
+
+
 .dlEvent .checklist .completeEvent{
     background-color: yellowgreen;
     color:white;
 }
-
-.dlEvent input.taskInput, .dlEvent input.taskInput:focus{background-color: transparent; color:white; border: none; box-shadow: none; outline: none;}
-
+.dlEvent input.taskInput, .dlEvent input.taskInput:focus{background-color: transparent; color:white; border: none; box-shadow: none; outline: none; margin-bottom:5px;}
+.dlEvent input.taskInput::placeholder{color:white;}
 /*settings page*/
 
 .settingsWrapper{
