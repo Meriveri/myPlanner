@@ -335,7 +335,7 @@ input.invalidField{border: 1px solid red;}
     max-width: 350px;
 }
 
-.calendar .head, .habitsWrapper .head, .eventsWrapper .head {
+.calendar .head, .habitsWrapper .head, .eventsWrapper .head, .DLEventsWrapper .head {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -504,13 +504,14 @@ input.invalidField{border: 1px solid red;}
     font-weight: lighter!important;
 }
 
-.habitsWrapper{
+.habitsWrapper, .DLEventsWrapper{
     display: flex;
     flex-direction: column;
     background-color: white;
     border-radius: 20px;
     padding:20px;
     opacity: 100%;
+    margin-top: 15px;
 }
 
 .habitsWrapper .habit{
@@ -532,7 +533,7 @@ input.invalidField{border: 1px solid red;}
     text-decoration: line-through;
 }
 
-.habitsWrapper input[type="checkbox"]{
+input[type="checkbox"]{
     display:grid; 
     place-content: center; 
     cursor: pointer; 
@@ -544,7 +545,7 @@ input.invalidField{border: 1px solid red;}
     background-color: white; 
     border-radius: 5px;
 }
-.habitsWrapper input[type="checkbox"]::before{
+input[type="checkbox"]::before{
     content:""; 
     transform: scale(0); 
     width: 15px; 
@@ -553,7 +554,7 @@ input.invalidField{border: 1px solid red;}
     border-radius: 5px; 
     transition: 0.2s;
 }
-.habitsWrapper input[type="checkbox"]:checked::before {transform: scale(1);}
+input[type="checkbox"]:checked::before {transform: scale(1);}
 
 .habitsWrapper .habitsFilter{
     display: flex;
@@ -566,6 +567,87 @@ input.invalidField{border: 1px solid red;}
 
 .habitsWrapper .habitsFilter .filterName{
     padding:0px 5px;
+}
+
+/*DLEvents*/
+.DLEvent{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgb(182, 203, 241);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.DLEvent .DLEventHead{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-radius: 10px;
+    color: white;
+    width: 100%;
+}
+
+.DLEvent .infos{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+ .DLEvent .DLEventTitle{
+    font-weight: bold;
+    font-size: 15px;
+    margin-right: 5px;
+}
+
+.DLEvent .tasksCompleted{
+    font-size:10px;
+}
+
+.DLEventHead button{
+    border:none;
+    background-color: transparent;
+    color:white;
+    box-shadow: none;
+}
+
+.dlEvent .deadline{color:white; line-height: 14px; font-size:14px;}
+.dlEvent .checklist{
+    display:flex;
+    flex-direction: column;
+    padding:5px;
+    margin-left:2%;
+    width: 98%;
+    color:white;
+    font-size: 14px;
+}
+
+.dlEvent .checklist div{
+    display: flex;
+    flex-direction: row;
+    margin-bottom:5px;
+}
+
+.dlEvent .checklist input[type=checkbox]{
+    margin-right: 5px;
+}
+
+.dlEvent .checklist button{
+    border:none;
+    box-shadow: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.dlEvent .checklist .newTask{
+    background-color:white;
+    margin-bottom: 5px;
+}
+
+.dlEvent .checklist .completeEvent{
+    background-color: yellowgreen;
+    color:white;
 }
 
 /*settings page*/

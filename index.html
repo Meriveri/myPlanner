@@ -12,6 +12,7 @@
         <div class="actions">
             <button class="action" id="newEvent">new event</button>
             <button class="action" id="newHabit">new habit</button>
+            <button class="action" id="newDLEvent">new deadline</button>
             <button class="action" id="stats" onclick="location.href='./stats.html'">stats</button>
             <button class="action" id="settings" onclick="location.href='./settings.html'">settings</button>
         </div>
@@ -81,7 +82,14 @@
             <div class="eventsWrapper">
                 <div class="head">myEvents</div>
                 <div class="upcomingEvents" id="upcomingEvents"></div>
-                <button id="delEvents" class="deleteBtn">delete all events</button>
+                <button id="delEvents" class="deleteBtn">panic button</button>
+            </div>
+            <div class="DLEventsWrapper" id="DLEventsWrapper">
+                <div class="head">myDeadlines</div>
+                <div class="DLEventsContainer" id="DLEventsContainer">
+                    
+                </div>
+                <button id="delDLEvents" class="deleteBtn">delete all events</button>
             </div>
         </div>
 
