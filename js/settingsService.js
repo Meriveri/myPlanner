@@ -8,7 +8,6 @@ export function deleteHabit(id, index){
     let habit = habits.filter(h => h.id == id);
     habit = habit[0];
     //const index = habit.id.split("-")[1];
-    console.log(habits, index);
     
     habits.splice(index, 1);
 

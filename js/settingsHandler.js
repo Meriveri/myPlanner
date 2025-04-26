@@ -13,6 +13,7 @@ export function showHabitEditPanel(id){
 
 export function displayHabitsToEdit(){
     const habits = getHabits();
+    console.log(habits);
     
     
     let elementHTML = "";

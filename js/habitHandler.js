@@ -21,7 +21,13 @@ addHabitBtn.addEventListener("click", ()=>{createHabit();});
 
 export function createHabit(){
     const habits = getHabits();
-    const habitID = "habit-"+habits.length;
+    let habitID = "habit-0";
+    
+    if(habits.length>1){
+        const prevID = habits[habits.length-1].id;
+        const newIDIndex = parseInt(prevID.split("-")[1])+1;
+        habitID = "habit-"+newIDIndex;
+    }
     let habitName = habitNameElement.value;
     let habitFreq = habitFrequencyElement.value;
     const habit = {
