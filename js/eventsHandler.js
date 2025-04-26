@@ -112,9 +112,10 @@ const setDefaultEventNameValues = () =>{
 }
 
 delEventsBtn.addEventListener('click', () =>{
-    localStorage.removeItem("calendarEvents");
-    localStorage.removeItem("completedEvents");
-    localStorage.removeItem("habits");
+    //localStorage.removeItem("calendarEvents");
+    //localStorage.removeItem("completedEvents");
+    //localStorage.removeItem("habits");
+    localStorage.removeItem("DLEvents");
     putDaysWithEventsInBold();
     showEvents();
     upcomingEventsElement.classList.add("hidden");

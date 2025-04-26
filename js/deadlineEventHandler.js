@@ -31,6 +31,7 @@ DLEventsContainerElement.addEventListener('change', (box) => {
         console.log("eventId:", eventId, "checkboxIndex:", index, "checked:", box.target.checked);
 
         updateTask(eventId, index, box.target.checked);
+        displayDLEvents();
     }
 });
 
@@ -109,6 +110,7 @@ export function createDLEvent(){
     };
 
     addDLEvent(event);
+    displayDLEvents();
 }
 
 
