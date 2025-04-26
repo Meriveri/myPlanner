@@ -13,7 +13,6 @@ const delEventsBtn = document.getElementById("delEvents");
 const upcomingEventsElement = document.getElementById("upcomingEvents");
 
 export function isEventLate(event){
-    console.log(event.date);
     let eventDate = new Date(event.date);
     let today = new Date();
     if(getDayDifference(eventDate, today)>0){return `<span class="borderBubble">late</span>`}

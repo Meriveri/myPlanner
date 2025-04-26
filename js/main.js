@@ -6,6 +6,7 @@ import './eventsHandler.js';
 import './dayDisplay.js';
 import { dateToYMD } from './utils.js';
 import { displayHabits } from './habitHandler.js';
+import { displayDLEvents } from './deadlineEventHandler.js';
 
 
 const monthYearElement = document.getElementById("monthYear");
