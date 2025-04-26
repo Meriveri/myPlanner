@@ -30,7 +30,7 @@ export function updateHabit(id){
     let lastLog = new Date(logs[logs.length-1]);
     const daysDiff = getDayDifference(prevLog, lastLog);
 
-    habit.nextDue = nextDueDate(habit.lastDone, habit.frequency);
+    habit.nextDue = nextDueDate(habit.lastDone, habit.frequency.value);
 
 
     if (logs.length > 1){
@@ -57,11 +57,9 @@ export function uncheckHabit(id){
     else{habit.lastDone = "";}
 
     
-    if(habit.lastDone != ""){habit.nextDue = nextDueDate(habit.lastDone, habit.frequency);}
+    if(habit.lastDone != ""){habit.nextDue = nextDueDate(habit.lastDone, habit.frequency.value);}
     else{habit.nextDue = dateToYMD(new Date());}
-    
-    console.log(habit);
     habit.streak.current-=1;
 
-    localStorage.setItem("habits", JSON.stringify(habits));   
+    localStorage.setItem("habits", JSON.stringify(habits)); 
 }
