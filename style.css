@@ -68,7 +68,8 @@ input.invalidField{border: 1px solid red;}
     z-index: 0;
     top:85px;
     position:absolute;
-    z-index: 10;
+    z-index: 1;
+    transform: translate(-100%, 0px);
 }
 
 .habitForm{
@@ -79,7 +80,7 @@ input.invalidField{border: 1px solid red;}
     align-content: space-around;
     justify-content: center;
     visibility: hidden;
-    transform: translate(-100%, 0%);
+    transform: translate(0%, 0%);
     transition: all 1s;
     background-color: white;
     border-radius: 10px;
@@ -87,7 +88,7 @@ input.invalidField{border: 1px solid red;}
     box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
 }
 
-.habitForm.visible{visibility: visible; transform:translate(140px, 0px); transition: all 1s;}
+.habitForm.visible{visibility: visible; transform:translate(110%, 0px); transition: all 1s;}
 
 .habitForm input, .DLEventForm input{
     display: grid;
@@ -111,14 +112,14 @@ input.invalidField{border: 1px solid red;}
     align-content: space-around;
     justify-content: center;
     visibility: hidden;
-    transform: translate(-100%, 0%);
+    transform: translate(0%, 0%);
     transition: all 1s;
     background-color: white;
     border-radius: 10px;
     flex-wrap: wrap;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
 }
-.eventForm.visible, .DLEventForm.visible{visibility: visible; transform:translate(140px, 0px); transition: all 1s;}
+.eventForm.visible, .DLEventForm.visible{visibility: visible; transform:translate(110%, 0px); transition: all 1s;}
 
 .eventForm input, .eventForm select, .eventForm button, .habitForm button, .DLEventForm button{
     display: grid;
