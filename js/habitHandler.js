@@ -34,14 +34,14 @@ export function createHabit(){
         id : habitID,
         name : habitName, 
         createdAt : dateToYMD(new Date()),
-        frequency : habitFreq, 
+        frequency : {type:"everyXDays", value:habitFreq}, 
         lastDone : "",
         nextDue : dateToYMD(new Date()),
         log : [], 
         streak : {current : 0, longest : 0}, 
         archived : false
     }
-    if(habit.name != "" && habit.frequency > 0){
+    if(habit.name != "" && habit.frequency.value > 0){
         habitNameElement.classList.remove("invalidField"); 
         habitFrequencyElement.classList.remove("invalidField");  
         addHabit(habit);
@@ -50,7 +50,7 @@ export function createHabit(){
         habitNameElement.classList.remove("invalidField"); 
         habitFrequencyElement.classList.remove("invalidField");  
         if(habit.name == "" ){habitNameElement.classList.add("invalidField");} 
-        if(habit.frequency <= 0){habitFrequencyElement.classList.add("invalidField");}
+        if(habit.frequency.value <= 0){habitFrequencyElement.classList.add("invalidField");}
     }
     displayHabits();
 
@@ -151,7 +151,7 @@ displayHabits();
     id : "habit-0",
     name : "overdue", 
     createdAt : dateToYMD(new Date("2025-04-20")),
-    frequency : 1, 
+    frequency : {type: "everyXDays", value : 1}, 
     lastDone : "2025-04-22",
     nextDue : "2025-04-23",
     log : ["2025-04-21", "2025-04-22"], 
@@ -165,7 +165,7 @@ addHabit(habit);
     id : "habit-1",
     name : "not due today", 
     createdAt : dateToYMD(new Date("2025-04-20")),
-    frequency : 60, 
+    frequency : {type: "everyXDays", value : 60}, 
     lastDone : "2025-04-01",
     nextDue : "2025-05-30",
     log : ["2025-04-01"], 

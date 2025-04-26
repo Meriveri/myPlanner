@@ -13,7 +13,6 @@ export function showHabitEditPanel(id){
 
 export function displayHabitsToEdit(){
     const habits = getHabits();
-    console.log(habits);
     
     
     let elementHTML = "";
@@ -26,7 +25,7 @@ export function displayHabitsToEdit(){
                 <div class="habitName">${habits[i].name}</div>
                 <div class="buttons"><button class="archiveHabit switchto${isActive}Btn">${invertOfArchiveStatus}</button><button class="editHabit editBtn">edit.</button><button class="deleteHabit deleteBtn">x</button></div>
             </div>
-            <div class="habitFrequency">every ${habits[i].frequency} day(s) | ${isActive}</div>
+            <div class="habitFrequency">every ${habits[i].frequency.value} day(s) | ${isActive}</div>
             <div class="habitEditPanel">
                             <input class="nameInput" placeholder="new habit name"/>
                             <input class="frequencyInput" type="number" placeholder="every x days"/><button class="okBtn updateHabit">ok</button>
