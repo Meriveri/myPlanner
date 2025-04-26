@@ -61,7 +61,6 @@ export function logEmpty(habit){
 }
 
 export function nextDueDate(date, days){
-    console.log(date)
     if(date != ""){date = new Date(date);}
     else{date = new Date();}
     return addXDaysToDate(date, days);

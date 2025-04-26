@@ -67,6 +67,8 @@ input.invalidField{border: 1px solid red;}
     position: fixed;
     z-index: 0;
     top:85px;
+    position:absolute;
+    z-index: 10;
 }
 
 .habitForm{
@@ -553,6 +555,7 @@ input[type="checkbox"]::before{
     background-color: yellowgreen; 
     border-radius: 5px; 
     transition: 0.2s;
+    
 }
 input[type="checkbox"]:checked::before {transform: scale(1);}
 

@@ -4,6 +4,13 @@ import { dateToYMD } from './utils.js';
 const DLEventsContainerElement = document.getElementById("DLEventsContainer");
 const addDLEventBtn = document.getElementById("addDLEvent"); 
 
+const newDLEventBtn = document.getElementById("newDLEvent");
+const formElement = document.getElementById("DLEventForm");
+
+newDLEventBtn.addEventListener('click', ()=>{
+    formElement.classList.toggle("visible");  
+})
+
 export function displayDLEvents(){
     let DLEvents = getDLEvents();
     DLEvents = DLEvents.filter(e => e.archived == false || DLEvents.filter(e => e.completed == false));
