@@ -23,7 +23,7 @@ export function createHabit(){
     const habits = getHabits();
     let habitID = "habit-0";
     
-    if(habits.length>1){
+    if(habits.length>=1){
         const prevID = habits[habits.length-1].id;
         const newIDIndex = parseInt(prevID.split("-")[1])+1;
         habitID = "habit-"+newIDIndex;
