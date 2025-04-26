@@ -1,4 +1,4 @@
-import {getDLEvents, addDLEvent, deleteAllDLEvents} from './deadlineEventService.js'
+import {getDLEvents, addDLEvent, addTaskToDLEvent} from './deadlineEventService.js'
 import { dateToYMD } from './utils.js';
 
 const DLEventsContainerElement = document.getElementById("DLEventsContainer");
@@ -7,13 +7,26 @@ const addDLEventBtn = document.getElementById("addDLEvent");
 const newDLEventBtn = document.getElementById("newDLEvent");
 const formElement = document.getElementById("DLEventForm");
 
+DLEventsContainerElement.addEventListener('click', (btn) =>{
+    if(btn.target.classList.contains("newTask")){
+        const id = btn.target.parentElement.parentElement.dataset.id;
+        const taskName = btn.target.closest(".checklist").querySelector(".taskInput").value;
+        console.log(taskName)
+        addTaskToDLEvent(id, taskName);
+        displayDLEvents();
+    }
+});
+
 newDLEventBtn.addEventListener('click', ()=>{
     formElement.classList.toggle("visible");  
 })
 
+
+
 export function displayDLEvents(){
     let DLEvents = getDLEvents();
-    DLEvents = DLEvents.filter(e => e.archived == false || DLEvents.filter(e => e.completed == false));
+    DLEvents = DLEvents.filter(e => !e.archived && !e.completed);
+    DLEventsContainerElement.innerHTML = "";
 
     for (let i = 0; i < DLEvents.length; i++) {
         const event = DLEvents[i];
@@ -27,7 +40,7 @@ export function displayDLEvents(){
         
     
         DLEventsContainerElement.innerHTML += `
-            <div class="DLevent" id=${event.id}>
+            <div class="DLevent" data-id=${event.id}>
                 <div class="DLEventHead">
                     <div class="infos">
                         <div class="DLEventTitle">${event.title}</div>
@@ -38,6 +51,7 @@ export function displayDLEvents(){
                 <div class="deadline">by ${event.dueDate}</div>
                 <div class="checklist visible">
                     ${checklistHTML}
+                    <input class="taskInput" placeholder="new task name"/>
                     <button class="newTask">add task</button>
                     <button class="completeEvent">mark as complete</button>
                 </div>
@@ -70,7 +84,6 @@ export function createDLEvent(){
     };
 
     addDLEvent(event);
-    displayDLEvents()
 }
 
 
