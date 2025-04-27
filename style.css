@@ -574,7 +574,7 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
 }
 
 /*DLEvents*/
-.DLEvent{
+.DLEventsWrapper .DLEvent{
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -667,7 +667,6 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
     height: 500px;
     background-color: white;
     border-radius: 30px;
-    overflow: auto;
 }
 
 .settingsTabs{
@@ -705,9 +704,10 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
     display:flex;
     width: 100%;
     flex-direction: column;
+    overflow: auto;
 }
 
-.settingsHabits .habit{
+.settingsHabits .habit, .settingsDLEvents .DLEvent{
     display: flex;
     flex-direction: column;
     color:black;
@@ -718,12 +718,12 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
     transition: all 0.7s;
 }
 
-.settingsHabits .habit:hover{
+.settingsHabits .habit:hover, .settingsDLEvents .DLEvent:hover{
     background-color: rgba(99,99,99,0.1);
     transition: all 0.7s;
 }
 
-.settingsHabits .habit .habitTitle{
+.settingsHabits .habit .habitTitle, .settingsDLEvents .DLEvent .DLEventTitle{
     display: flex;
     flex-direction: row;
     align-items:baseline;
@@ -732,27 +732,27 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
     width: 100%;
 }
 
-.settingsContainer .habit .habitTitle .buttons{
+.settingsContainer .habit .habitTitle .buttons, .settingsDLEvents .DLEvent .DLEventTitle .buttons{
     display: flex;
     flex-direction: row;
 }
 
-.settingsContainer .habit button{
+.settingsContainer .habit button, .settingsDLEvents .DLEvent button{
     height: 30px;
     align-self: baseline;
     margin-left: 5px;
 }
 
-.settingsContainer .habit .habitFrequency{
+.settingsContainer .habit .habitFrequency, .settingsDLEvents .DLEvent .DLEventDueDate{
     font-size:12px;
     padding-top:5px
 }
 
-.settingsContainer .habit .habitEditPanel{
+.settingsContainer .habit .habitEditPanel, .settingsDLEvents .DLEvent .DLEventEditPanel{
     display: none;
 }
 
-.settingsContainer .habit .habitEditPanel.visible{
+.settingsContainer .habit .habitEditPanel.visible, .settingsDLEvents .DLEvent .DLEventEditPanel .visible{
     display: flex;
     
 }

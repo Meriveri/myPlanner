@@ -1,7 +1,10 @@
 import { getHabits } from "./habitService.js";
+import { getDLEvents } from "./deadlineEventService.js"
+
 import { deleteHabit, editHabitName, editHabitFrequency, archiveHabit } from "./settingsService.js";
 
 const settingsHabitsElement = document.getElementById("settingsHabits");
+const settingsDLEventsElement = document.getElementById("settingsDLEvents");
 
 export function showHabitEditPanel(id){
     const editPanels = document.getElementsByClassName("habitEditPanel")
@@ -76,4 +79,27 @@ settingsHabitsElement.addEventListener('click', (btn) =>{
     }
 })
 
+export function displayDLEventsToEdit(){
+    const DLEvents = getDLEvents();
+
+    let DLEventsHTML = "";
+    for(let i = 0; i<DLEvents.length;i++){
+        const event = DLEvents[i];
+        DLEventsHTML+=`<div class="DLEvent" data-id="${event.id}">
+            <div class="DLEventTitle">
+                <div class="DLEventName">${event.title}</div>
+                <div class="buttons"><button class="editDLEvent editBtn">edit.</button><button class="deletDLEvent deleteBtn">x</button></div>
+            </div>
+            <div class="DLEventDueDate">due ${event.dueDate}</div>
+            <div class="DLEventEditPanel">
+                            <input class="nameInput" placeholder="deadline new name"/>
+                            <input class="frequencyInput" type="date" /><button class="okBtn updatDLEvent">ok</button>
+            </div>
+        </div>`;
+    }
+    settingsDLEventsElement.innerHTML+=DLEventsHTML;
+}
+
+
 displayHabitsToEdit();
+displayDLEventsToEdit();

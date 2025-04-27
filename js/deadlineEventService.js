@@ -1,4 +1,3 @@
-import { displayDLEvents } from "./deadlineEventHandler.js";
 import { dateToYMD } from "./utils.js";
 
 export function getDLEvents(){

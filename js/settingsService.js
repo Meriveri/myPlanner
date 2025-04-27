@@ -46,3 +46,9 @@ export function archiveHabit(id){
 
     localStorage.setItem("habits", JSON.stringify(habits));
 }
+
+
+export function deleteDLEvent(id){
+
+
+}
