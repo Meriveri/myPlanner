@@ -1,4 +1,4 @@
-import {getDLEvents, addDLEvent, addTaskToDLEvent, updateTask} from './deadlineEventService.js'
+import {getDLEvents, addDLEvent, addTaskToDLEvent, updateTask, completeDLEvent} from './deadlineEventService.js'
 import { dateToYMD } from './utils.js';
 
 const DLEventsContainerElement = document.getElementById("DLEventsContainer");
@@ -11,8 +11,16 @@ DLEventsContainerElement.addEventListener('click', (btn) =>{
     if(btn.target.classList.contains("newTask")){
         const id = btn.target.parentElement.parentElement.dataset.id;
         const taskName = btn.target.closest(".checklist").querySelector(".taskInput").value;
-        console.log(taskName)
         addTaskToDLEvent(id, taskName);
+        displayDLEvents();
+    }
+
+});
+
+DLEventsContainerElement.addEventListener('click', (btn) =>{
+    if(btn.target.classList.contains("completeEvent")){
+        const id = btn.target.parentElement.parentElement.dataset.id;
+        completeDLEvent(id);
         displayDLEvents();
     }
 
@@ -114,18 +122,4 @@ export function createDLEvent(){
 }
 
 
-/*let DLEvents = getDLEvents();
-const e ={
-    id : "DL-"+DLEvents.length, 
-    title : "renew myNumber card",
-    createdAt : "2025-04-26",
-    dueDate : "2025-06-09", 
-    checklist : [{title : "apply online", checked : "", completedOn : ""}, {title : "get documents", checked : "", completedOn : ""}, {title : "go to appointment", checked : "", completedOn : ""}],
-    completed : false, 
-    archived : false
-};*/
-
-
-//addDLEvent(e);
 displayDLEvents();
-//deleteAllDLEvents();

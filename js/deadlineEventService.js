@@ -17,6 +17,20 @@ export function deleteAllDLEvents(){
     localStorage.removeItem("DLEvents");
 }
 
+export function completeDLEvent(id){
+    const events = getDLEvents();
+    const event = events.filter(e => e.id == id)[0];
+
+    const index = events.indexOf(event);
+
+    localStorage.setItem("completedDLEvents", JSON.stringify(events));
+
+    events.splice(index, 1);
+    localStorage.setItem("DLEvents", JSON.stringify(events));
+
+    console.log(events);
+}
+
 export function addTaskToDLEvent(id, name){
     const events = getDLEvents();
     const event = events.filter(e => e.id == id)[0];

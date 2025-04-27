@@ -15,7 +15,7 @@ const upcomingEventsElement = document.getElementById("upcomingEvents");
 export function isEventLate(event){
     let eventDate = new Date(event.date);
     let today = new Date();
-    if(getDayDifference(eventDate, today)>0){return `<span class="borderBubble">late</span>`}
+    if(Math.trunc(getDayDifference(eventDate, today))>0){return `<span class="borderBubble">late</span>`}
     return "";
 }
 
