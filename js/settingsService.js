@@ -1,3 +1,4 @@
+import { getDLEvents } from "./deadlineEventService.js";
 import { getHabits } from "./habitService.js";
 
 
@@ -5,9 +6,7 @@ import { getHabits } from "./habitService.js";
 
 export function deleteHabit(id, index){
     let habits = getHabits();
-    let habit = habits.filter(h => h.id == id);
-    habit = habit[0];
-    //const index = habit.id.split("-")[1];
+    let habit = habits.filter(h => h.id == id)[0];
     
     habits.splice(index, 1);
 
@@ -48,7 +47,13 @@ export function archiveHabit(id){
 }
 
 
-export function deleteDLEvent(id){
 
+export function deleteDLEvent(id, index){
+    let DLEvents = getDLEvents();
+    let DLEvent = DLEvents.filter(e => e.id == id)[0];
+    
+    DLEvents.splice(index, 1);
+
+    localStorage.setItem("DLEvents", JSON.stringify(DLEvents));
 
 }

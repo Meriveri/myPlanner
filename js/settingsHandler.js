@@ -1,7 +1,7 @@
 import { getHabits } from "./habitService.js";
 import { getDLEvents } from "./deadlineEventService.js"
 
-import { deleteHabit, editHabitName, editHabitFrequency, archiveHabit } from "./settingsService.js";
+import { deleteHabit, editHabitName, editHabitFrequency, archiveHabit, deleteDLEvent } from "./settingsService.js";
 
 const settingsHabitsElement = document.getElementById("settingsHabits");
 const settingsDLEventsElement = document.getElementById("settingsDLEvents");
@@ -88,7 +88,7 @@ export function displayDLEventsToEdit(){
         DLEventsHTML+=`<div class="DLEvent" data-id="${event.id}">
             <div class="DLEventTitle">
                 <div class="DLEventName">${event.title}</div>
-                <div class="buttons"><button class="editDLEvent editBtn">edit.</button><button class="deletDLEvent deleteBtn">x</button></div>
+                <div class="buttons"><button class="editDLEvent editBtn">edit.</button><button class="deleteDLEvent deleteBtn">x</button></div>
             </div>
             <div class="DLEventDueDate">due ${event.dueDate}</div>
             <div class="DLEventEditPanel">
@@ -100,6 +100,17 @@ export function displayDLEventsToEdit(){
     settingsDLEventsElement.innerHTML+=DLEventsHTML;
 }
 
+settingsDLEventsElement.addEventListener('click', (btn)=>{
+    if(btn.target.classList.contains("deleteDLEvent")){
+        const id = btn.target.parentElement.parentElement.parentElement.dataset.id;
+        const clickedDLEvent = btn.target.closest(".DLEvent");
+        const allDLEvents = Array.from(settingsDLEventsElement.querySelectorAll(".DLEvent"));
+        const index = allDLEvents.indexOf(clickedDLEvent);
+        
+        deleteDLEvent(id, index);
+        displayDLEventsToEdit();
+    }
+})
 
 displayHabitsToEdit();
 displayDLEventsToEdit();
