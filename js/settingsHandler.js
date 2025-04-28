@@ -88,6 +88,13 @@ export function displayDLEventsToEdit(){
     let DLEventsHTML = "";
     for(let i = 0; i<DLEvents.length;i++){
         const event = DLEvents[i];
+        let checklistHTML = "";
+        for(let i = 0; i<event.checklist.length;i++){
+            checklistHTML += `<div class="task">
+                    <input type="text" placeholder="${event.checklist[i].title}" class="taskTitle"/>
+                    <button class="okBtn editChecklist">ok</button>
+                </div>`;
+        }
         DLEventsHTML+=`<div class="DLEvent" data-id="${event.id}">
             <div class="DLEventTitle">
                 <div class="DLEventName">${event.title}</div>
@@ -95,8 +102,11 @@ export function displayDLEventsToEdit(){
             </div>
             <div class="DLEventDueDate">due ${event.dueDate}</div>
             <div class="DLEventEditPanel">
+                         <div class="DLInfos">   
                             <input class="titleInput" placeholder="deadline new name"/>
                             <input class="dueDateInput" type="date" /><button class="okBtn updateDLEvent">ok</button>
+                        </div>
+                        <div class="DLEventChecklistInfos">${checklistHTML}</div>
             </div>
         </div>`;
     }
@@ -129,7 +139,7 @@ settingsDLEventsElement.addEventListener('click', (btn)=>{
 
 settingsDLEventsElement.addEventListener('click', (btn)=>  {
     if(btn.target.classList.contains("updateDLEvent")){
-    const id = btn.target.parentElement.parentElement.dataset.id;
+    const id = btn.target.parentElement.parentElement.parentElement.dataset.id;
     const clickeDLEvent = btn.target.closest(".DLEvent");
     const allDLEvents = Array.from(settingsDLEventsElement.querySelectorAll(".DLEvent"));
     const indexOfDLEvent = allDLEvents.indexOf(clickeDLEvent);

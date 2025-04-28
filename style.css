@@ -766,6 +766,23 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
     
 }
 
+.settingsContainer .DLEventEditPanel{
+    flex-direction: column;
+}
+.settingsContainer .DLEvent .DLInfos{
+    display: flex;
+    flex-direction: row;
+}
+
+.settingsContainer .DLEvent .DLEventChecklistInfos{
+    padding-left:10px;
+    border-left:1px solid yellowgreen;
+}
+
+.settingsContainer .DLEventEditPanel .DLEventChecklistInfos .task{
+    display: flex;
+    flex-direction: row;
+}
 .settingsContainer input{
     display: grid;
     justify-content: space-around;
