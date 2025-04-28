@@ -599,7 +599,7 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
     align-items: center;
 }
 
- .DLEvent .DLEventTitle{
+ .DLEventsWrapper .DLEvent .DLEventTitle{
     font-weight: bold;
     font-size: 15px;
     margin-right: 5px;

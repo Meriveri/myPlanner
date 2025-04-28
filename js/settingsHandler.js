@@ -6,14 +6,53 @@ import { dateToYMD } from "./utils.js";
 
 const settingsHabitsElement = document.getElementById("settingsHabits");
 const settingsDLEventsElement = document.getElementById("settingsDLEvents");
+const generalTabBtn = document.getElementById("generalSettings");
+const eventsTabBtn = document.getElementById("eventsSettings");
+const habitsTabBtn = document.getElementById("habitsSettings");
+const DLEventsTabBtn = document.getElementById("DLEventsSettings");
 
-export function showHabitEditPanel(id){
-    const editPanels = document.getElementsByClassName("habitEditPanel")
-    if(!editPanels[id].classList.contains("visible")){editPanels[id].classList.add("visible");}
-    else{editPanels[id].classList.remove("visible");}
+habitsTabBtn.addEventListener('click', () =>{
+    settingsDLEventsElement.innerHTML=""; 
 
-}
+    habitsTabBtn.style.backgroundColor="yellowGreen";
 
+    generalTabBtn.style.backgroundColor="white";
+    DLEventsTabBtn.style.backgroundColor="white";  
+    displayHabitsToEdit();
+});
+
+DLEventsTabBtn.addEventListener('click', () =>{
+    settingsHabitsElement.innerHTML="";
+
+    DLEventsTabBtn.style.backgroundColor="yellowGreen";
+
+    generalTabBtn.style.backgroundColor="white";
+    eventsTabBtn.style.backgroundColor="white";
+    habitsTabBtn.style.backgroundColor="white";
+    displayDLEventsToEdit();
+});
+
+generalTabBtn.addEventListener('click', () =>{
+    settingsHabitsElement.innerHTML="";
+    settingsDLEventsElement.innerHTML=""; 
+
+    generalTabBtn.style.backgroundColor="yellowGreen";
+
+    eventsTabBtn.style.backgroundColor="white";
+    habitsTabBtn.style.backgroundColor="white";
+    DLEventsTabBtn.style.backgroundColor="white";
+});
+
+eventsTabBtn.addEventListener('click', () =>{
+    settingsHabitsElement.innerHTML="";
+    settingsDLEventsElement.innerHTML=""; 
+
+    eventsTabBtn.style.backgroundColor="yellowGreen";
+    
+    generalTabBtn.style.backgroundColor="white";
+    habitsTabBtn.style.backgroundColor="white";
+    DLEventsTabBtn.style.backgroundColor="white";
+});
 
 export function displayHabitsToEdit(){
     const habits = getHabits();
@@ -198,5 +237,5 @@ export function showDLEventEditPanel(id){
 
 }
 
-displayHabitsToEdit();
-displayDLEventsToEdit();
+//displayHabitsToEdit();
+//displayDLEventsToEdit();
