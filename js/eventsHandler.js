@@ -57,28 +57,34 @@ newEventBtn.addEventListener('click', () => {
 
 export function createEvent() {
     let eventID = Date.now();
-    let eventName = setDefaultEventNameValues();
-    let eventDay = setDefaultEventDayValues();
+    let eventName = document.getElementById("eventName").value; 
+    let eventDay = dateToYMD(document.getElementById("eventDay").value);
     let eventTimeElement = document.getElementById("eventTime");
     let eventTime = eventTimeElement.value;
     let eventTypeElement = document.getElementById("eventType");
     let eventType = eventTypeElement.value;
 
-    const eventInfo = {
+    console.log(eventDay);
+
+    if(eventName != "" && eventDay != "Invalid Date"){
+        const eventInfo = {
         id: eventID,
         name: eventName,
         date: eventDay,
         time: eventTime,
         type: eventType, 
         completedTime: ""
-    };
-    
+        };
     addEvent(eventInfo);
+    }
+    else{
+        document.getElementById("eventDay").classList.remove("invalidField"); 
+        document.getElementById("eventName").classList.remove("invalidField");
+        if(eventName == ""){ document.getElementById("eventName").classList.add("invalidField");}
+        if(eventDay == "Invalid Date"){document.getElementById("eventDay").classList.add("invalidField");}
+    }
     
     showEvents();
-    upcomingEventsElement.classList.add("visible");
-    delEventsBtn.classList.add("visible");
-    delEventsBtn.classList.remove("hidden");
 
 
 }
@@ -90,35 +96,13 @@ addEventBtn.addEventListener('click', () =>{
     renderPage(new Date(events[events.length-1].date), events.filter(event => event.date == events[events.length-1].date));
 })
 
-const setDefaultEventDayValues = () =>{
-    let date = document.getElementById("eventDay").value;
-    let today = new Date(); 
-    let currentYear = today.getFullYear();
-    let currentMonth = today.getMonth()+1;
-    let currentDay = today.getDate();
-    
-    if (currentMonth < 10) { currentMonth = '0' + currentMonth; }
-    if (currentDay < 10) { currentDay = '0' + currentDay; }
-    
-    let thisDate = `${currentYear}-${currentMonth}-${currentDay}`;
-    if(date == ""){date= thisDate; return thisDate;}
-    else{return date;}
-        
-} 
-const setDefaultEventNameValues = () =>{
-    let name = document.getElementById("eventName").value; 
-    if(name == "" ){name = "untitled event "; return name;}
-    else{return name;}
-}
-
 delEventsBtn.addEventListener('click', () =>{
     //localStorage.removeItem("calendarEvents");
     //localStorage.removeItem("completedEvents");
     //localStorage.removeItem("habits");
-    localStorage.removeItem("DLEvents");
+    //localStorage.removeItem("DLEvents");
     putDaysWithEventsInBold();
     showEvents();
-    upcomingEventsElement.classList.add("hidden");
 });
 
 upcomingEventsElement.addEventListener('click', (btn)=>{
