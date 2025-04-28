@@ -1,7 +1,7 @@
 import { getHabits } from "./habitService.js";
 import { getDLEvents } from "./deadlineEventService.js"
 
-import { deleteHabit, editHabitName, editHabitFrequency, archiveHabit, deleteDLEvent, editDLEventTitle, editDLEventDueDate } from "./settingsService.js";
+import { deleteHabit, editHabitName, editHabitFrequency, archiveHabit, deleteDLEvent, editDLEventTitle, editDLEventDueDate, editDLEventChecklist, deleteDLEventChecklist} from "./settingsService.js";
 import { dateToYMD } from "./utils.js";
 
 const settingsHabitsElement = document.getElementById("settingsHabits");
@@ -90,9 +90,13 @@ export function displayDLEventsToEdit(){
         const event = DLEvents[i];
         let checklistHTML = "";
         for(let i = 0; i<event.checklist.length;i++){
-            checklistHTML += `<div class="task">
-                    <input type="text" placeholder="${event.checklist[i].title}" class="taskTitle"/>
-                    <button class="okBtn editChecklist">ok</button>
+            checklistHTML += `
+                <div class="task" data-index="${i}">
+                    <input type="text" placeholder="${event.checklist[i].title}"  class="taskTitleInput"/>
+                    <div class="buttons">
+                        <button class="okBtn editChecklist" type="submit">ok</button>
+                        <button class="deleteBtn deleteChecklist">x</button>
+                    </div>
                 </div>`;
         }
         DLEventsHTML+=`<div class="DLEvent" data-id="${event.id}">
@@ -127,6 +131,7 @@ settingsDLEventsElement.addEventListener('click', (btn)=>{
     
 });
 
+//get appropriate DLEvent to show its settings
 settingsDLEventsElement.addEventListener('click', (btn)=>{
     if(btn.target.classList.contains("editDLEvent")){
         const clickedDLEvent = btn.target.closest(".DLEvent");
@@ -137,6 +142,7 @@ settingsDLEventsElement.addEventListener('click', (btn)=>{
     
 });
 
+//deadline change title and due date
 settingsDLEventsElement.addEventListener('click', (btn)=>  {
     if(btn.target.classList.contains("updateDLEvent")){
     const id = btn.target.parentElement.parentElement.parentElement.dataset.id;
@@ -154,6 +160,26 @@ settingsDLEventsElement.addEventListener('click', (btn)=>  {
     }
 });
 
+settingsDLEventsElement.addEventListener('click', (btn) =>{
+        const DLEventID = btn.target.closest(".DLEvent").dataset.id;
+        
+
+
+    if(btn.target.classList.contains("editChecklist")){
+        const clickedTaskInEvent = btn.target.closest("div").parentElement;
+        const indexOfTask = clickedTaskInEvent.dataset.index;
+        
+        const name =clickedTaskInEvent.querySelector(".taskTitleInput").value;
+        console.log("name "+name, "eventid "+DLEventID, "index of tast"+indexOfTask)
+        editDLEventChecklist(DLEventID, indexOfTask, name);
+        displayDLEventsToEdit();
+    }
+
+    if(btn.target.classList.contains("deleteChecklist")){
+        //deleteDLEventChecklist(DLEventID, indexOfTask);
+    }
+
+});
 
 
 export function showDLEventEditPanel(id){

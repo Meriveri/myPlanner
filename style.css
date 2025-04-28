@@ -7,21 +7,21 @@ button{cursor: pointer;}
 input.invalidField{border: 1px solid red!important;}
 
 .deleteBtn{
-    display: flex;
     background-color: lightcoral; 
     transition: all 0.6s;
     border: none; 
     padding:5px; 
     color:white; 
-    border-radius: 5px;
-} 
+    border-radius: 5px; 
+    margin-top: 10px;}
+
 .deleteBtn:hover{
 
     background-color: rgb(209, 104, 104); 
     transition: all 0.6s;
 }
 
-.okBtn, .switchtoactiveBtn{  display: flex;
+.okBtn, .switchtoactiveBtn{
     background-color: yellowgreen; 
     transition: all 0.6s;
     border: none; 
@@ -39,7 +39,7 @@ input.invalidField{border: 1px solid red!important;}
 .deleteBtn.visble{opacity: 100%;}
 .deleteBtn.hidden{opacity: 0%;}
 
-.editBtn{display: flex;
+.editBtn{
     background-color: gold; 
     transition: all 0.6s;
     border: none; 
@@ -782,6 +782,12 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
 .settingsContainer .DLEventEditPanel .DLEventChecklistInfos .task{
     display: flex;
     flex-direction: row;
+}
+
+.settingsContainer .DLEventEditPanel .DLEventChecklistInfos .buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
 }
 .settingsContainer input{
     display: grid;

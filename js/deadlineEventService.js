@@ -58,3 +58,5 @@ export function updateTask(id, index, status){
         localStorage.setItem("DLEvents", JSON.stringify(events));
     }
 }
+
+

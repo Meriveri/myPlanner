@@ -78,3 +78,20 @@ export function editDLEventDueDate(id, dueDate){
 
 
 }
+
+export function editDLEventChecklist(DLEventId, indexOfTask, newTitle){
+    const DLEvents = getDLEvents();
+    const DLEvent = DLEvents.filter(e => e.id == DLEventId)[0];
+    console.log(newTitle);
+
+    DLEvent.checklist[indexOfTask].title = newTitle;
+
+    localStorage.setItem("DLEvents", JSON.stringify(DLEvents));
+
+}
+
+export function deleteDLEventChecklist(index){
+    const DLEvents = getDLEvents();
+
+    localStorage.setItem("DLEvents", JSON.stringify(DLEvents));
+}
