@@ -170,13 +170,22 @@ settingsDLEventsElement.addEventListener('click', (btn) =>{
         const indexOfTask = clickedTaskInEvent.dataset.index;
         
         const name =clickedTaskInEvent.querySelector(".taskTitleInput").value;
-        console.log("name "+name, "eventid "+DLEventID, "index of tast"+indexOfTask)
-        editDLEventChecklist(DLEventID, indexOfTask, name);
-        displayDLEventsToEdit();
+
+        if(name!=""){editDLEventChecklist(DLEventID, indexOfTask, name); displayDLEventsToEdit();}
+        else{
+            clickedTaskInEvent.querySelector(".taskTitleInput").classList.remove("invalidField");
+            clickedTaskInEvent.querySelector(".taskTitleInput").classList.add("invalidField");
+        }
+        
+        
     }
 
     if(btn.target.classList.contains("deleteChecklist")){
-        //deleteDLEventChecklist(DLEventID, indexOfTask);
+        const clickedTaskInEvent = btn.target.closest("div").parentElement;
+        const indexOfTask = clickedTaskInEvent.dataset.index;
+
+        deleteDLEventChecklist(DLEventID, indexOfTask);
+        displayDLEventsToEdit();
     }
 
 });
