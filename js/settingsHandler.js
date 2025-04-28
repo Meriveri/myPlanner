@@ -11,6 +11,13 @@ const eventsTabBtn = document.getElementById("eventsSettings");
 const habitsTabBtn = document.getElementById("habitsSettings");
 const DLEventsTabBtn = document.getElementById("DLEventsSettings");
 
+export function showHabitEditPanel(id){
+    const editPanels = document.getElementsByClassName("habitEditPanel")
+    if(!editPanels[id].classList.contains("visible")){editPanels[id].classList.add("visible");}
+    else{editPanels[id].classList.remove("visible");}
+
+}
+
 habitsTabBtn.addEventListener('click', () =>{
     settingsDLEventsElement.innerHTML=""; 
 
@@ -74,8 +81,8 @@ export function displayHabitsToEdit(){
                             <input class="frequencyInput" type="number" placeholder="every x days"/><button class="okBtn updateHabit">ok</button>
             </div>
         </div>`;
-        
     }
+    
     settingsHabitsElement.innerHTML = elementHTML;
 }
 

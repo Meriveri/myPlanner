@@ -29,7 +29,7 @@ export function editHabitFrequency(id, frequency){
     let habit = habits.filter(h => h.id == id);
     habit = habit[0];
 
-    habit.frequency.value = frequency.value;
+    habit.frequency.value = frequency;
 
     localStorage.setItem("habits", JSON.stringify(habits));
 

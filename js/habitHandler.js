@@ -34,7 +34,7 @@ export function createHabit(){
         id : habitID,
         name : habitName, 
         createdAt : dateToYMD(new Date()),
-        frequency : {type:"everyXDays", value:habitFreq}, 
+        frequency : {type:"everyXDays", value: habitFreq}, 
         lastDone : "",
         nextDue : dateToYMD(new Date()),
         log : [], 
