@@ -57,6 +57,16 @@ newDLEventBtn.addEventListener('click', ()=>{
     formElement.classList.toggle("visible");  
 })
 
+DLEventsContainerElement.addEventListener('click', (btn) => {
+    if(btn.target.classList.contains("dropdown")){
+        const DLEvent = btn.target.closest(".DLEvent");
+        const checklist = DLEvent.querySelector(".checklist");
+        checklist.classList.toggle("visible");
+        if(checklist.classList.contains("visible")){btn.target.style.transform="rotate(0deg)"}
+        else{btn.target.style.transform="rotate(180deg)";}
+            
+    }
+});
 
 
 export function displayDLEvents(){
@@ -82,7 +92,7 @@ export function displayDLEvents(){
                         <div class="DLEventTitle">${event.title}</div>
                         <div class="tasksCompleted">${completedChecklistCount}/${totalChecklistCount}</div>
                     </div>
-                    <div class="buttons"><button>▼</button></div>
+                    <div class="buttons"><button class="dropdown">▲</button></div>
                 </div>
                 <div class="deadline">by ${event.dueDate}</div>
                 <div class="checklist visible">

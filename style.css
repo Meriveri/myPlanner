@@ -618,13 +618,22 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
 
 .dlEvent .deadline{color:white; line-height: 14px; font-size:14px;}
 .dlEvent .checklist{
-    display:flex;
+    display: flex;
     flex-direction: column;
     padding:5px;
     margin-left:2%;
     width: 98%;
     color:white;
     font-size: 14px;
+    max-height: 0px;
+    transition: all 0.5s;
+    overflow: hidden;
+}
+
+.dlEvent .checklist.visible{
+    display: flex;
+    max-height: 600;
+    transition: all 0.2s;
 }
 
 .dlEvent .checklist div{
