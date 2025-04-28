@@ -1,7 +1,8 @@
 import { getHabits } from "./habitService.js";
 import { getDLEvents } from "./deadlineEventService.js"
 
-import { deleteHabit, editHabitName, editHabitFrequency, archiveHabit, deleteDLEvent } from "./settingsService.js";
+import { deleteHabit, editHabitName, editHabitFrequency, archiveHabit, deleteDLEvent, editDLEventTitle, editDLEventDueDate } from "./settingsService.js";
+import { dateToYMD } from "./utils.js";
 
 const settingsHabitsElement = document.getElementById("settingsHabits");
 const settingsDLEventsElement = document.getElementById("settingsDLEvents");
@@ -79,6 +80,8 @@ settingsHabitsElement.addEventListener('click', (btn) =>{
     }
 })
 
+
+//display DLEvent
 export function displayDLEventsToEdit(){
     const DLEvents = getDLEvents();
 
@@ -92,14 +95,15 @@ export function displayDLEventsToEdit(){
             </div>
             <div class="DLEventDueDate">due ${event.dueDate}</div>
             <div class="DLEventEditPanel">
-                            <input class="nameInput" placeholder="deadline new name"/>
-                            <input class="frequencyInput" type="date" /><button class="okBtn updatDLEvent">ok</button>
+                            <input class="titleInput" placeholder="deadline new name"/>
+                            <input class="dueDateInput" type="date" /><button class="okBtn updateDLEvent">ok</button>
             </div>
         </div>`;
     }
-    settingsDLEventsElement.innerHTML+=DLEventsHTML;
+    settingsDLEventsElement.innerHTML=DLEventsHTML;
 }
 
+//delete DLEvent
 settingsDLEventsElement.addEventListener('click', (btn)=>{
     if(btn.target.classList.contains("deleteDLEvent")){
         const id = btn.target.parentElement.parentElement.parentElement.dataset.id;
@@ -110,7 +114,44 @@ settingsDLEventsElement.addEventListener('click', (btn)=>{
         deleteDLEvent(id, index);
         displayDLEventsToEdit();
     }
-})
+    
+});
+
+settingsDLEventsElement.addEventListener('click', (btn)=>{
+    if(btn.target.classList.contains("editDLEvent")){
+        const clickedDLEvent = btn.target.closest(".DLEvent");
+        const allDLEvents = Array.from(settingsDLEventsElement.querySelectorAll(".DLEvent"));
+        const indexOfDLEvent = allDLEvents.indexOf(clickedDLEvent);
+        showDLEventEditPanel(indexOfDLEvent);
+    }
+    
+});
+
+settingsDLEventsElement.addEventListener('click', (btn)=>  {
+    if(btn.target.classList.contains("updateDLEvent")){
+    const id = btn.target.parentElement.parentElement.dataset.id;
+    const clickeDLEvent = btn.target.closest(".DLEvent");
+    const allDLEvents = Array.from(settingsDLEventsElement.querySelectorAll(".DLEvent"));
+    const indexOfDLEvent = allDLEvents.indexOf(clickeDLEvent);
+
+    const title = document.getElementsByClassName("titleInput")[indexOfDLEvent].value;
+    let dueDate = document.getElementsByClassName("dueDateInput")[indexOfDLEvent].value;
+    dueDate = dateToYMD(dueDate);
+
+    editDLEventTitle(id, title);
+    editDLEventDueDate(id, dueDate);
+    displayDLEventsToEdit();
+    }
+});
+
+
+
+export function showDLEventEditPanel(id){
+    const editPanels = document.getElementsByClassName("DLEventEditPanel")
+    if(!editPanels[id].classList.contains("visible")){editPanels[id].classList.add("visible");}
+    else{editPanels[id].classList.remove("visible");}
+
+}
 
 displayHabitsToEdit();
 displayDLEventsToEdit();

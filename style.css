@@ -752,7 +752,7 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
     display: none;
 }
 
-.settingsContainer .habit .habitEditPanel.visible, .settingsDLEvents .DLEvent .DLEventEditPanel .visible{
+.settingsContainer .habit .habitEditPanel.visible, .settingsDLEvents .DLEvent .DLEventEditPanel.visible{
     display: flex;
     
 }

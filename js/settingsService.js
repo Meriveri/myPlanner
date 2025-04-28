@@ -13,7 +13,7 @@ export function deleteHabit(id, index){
     localStorage.setItem("habits", JSON.stringify(habits));
 }
 
-export function editHabitName(id, name, index){
+export function editHabitName(id, name){
     let habits = getHabits();
     let habit = habits.filter(h => h.id == id);
     habit = habit[0];
@@ -55,5 +55,26 @@ export function deleteDLEvent(id, index){
     DLEvents.splice(index, 1);
 
     localStorage.setItem("DLEvents", JSON.stringify(DLEvents));
+
+}
+
+export function editDLEventTitle(id, title){
+    let DLEvents = getDLEvents();
+    let DLEvent = DLEvents.filter(e => e.id == id)[0];
+
+    DLEvent.title = title;
+
+    localStorage.setItem("DLEvents", JSON.stringify(DLEvents));
+
+}
+
+export function editDLEventDueDate(id, dueDate){
+    let DLEvents = getDLEvents();
+    let DLEvent = DLEvents.filter(e => e.id == id)[0];
+
+    DLEvent.dueDate = dueDate;
+
+    localStorage.setItem("DLEvents", JSON.stringify(DLEvents));
+
 
 }
