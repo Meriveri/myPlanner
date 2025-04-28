@@ -11,8 +11,9 @@ DLEventsContainerElement.addEventListener('click', (btn) =>{
     if(btn.target.classList.contains("newTask")){
         const id = btn.target.parentElement.parentElement.dataset.id;
         const taskName = btn.target.closest(".checklist").querySelector(".taskInput").value;
-        addTaskToDLEvent(id, taskName);
-        displayDLEvents();
+        if(taskName.value!=undefined){addTaskToDLEvent(id, taskName); displayDLEvents();}
+        else{btn.target.closest(".checklist").querySelector(".taskInput").classList.add("invalidField");}
+        
     }
 
 });
@@ -35,8 +36,6 @@ DLEventsContainerElement.addEventListener('change', (box) => {
         const checkboxes = checklistDiv.querySelectorAll('input[type="checkbox"]');
         
         const index = Array.from(checkboxes).indexOf(box.target);
-
-        console.log("eventId:", eventId, "checkboxIndex:", index, "checked:", box.target.checked);
 
         updateTask(eventId, index, box.target.checked);
         displayDLEvents();
@@ -101,24 +100,36 @@ export function createDLEvent(){
     const eventName = document.getElementById("DLEventName").value;
     const eventDate = document.getElementById("DLEventDay").value;
 
-    let id = "DL-0";
-    if(DLEvents.length >= 1){
-        const idIndex = DLEvents[DLEvents.length-1].id;
-        id = "DL-"+parseInt(idIndex)+1;
+    if(eventName != "" && dateToYMD(eventDate)!="Invalid Date"){
+        let id = "DL-0";
+        if(DLEvents.length >= 1){
+            const idIndex = DLEvents[DLEvents.length-1].id;
+            id = "DL-"+parseInt(idIndex)+1;
+        }
+
+        const event = {
+            id : "DL-"+DLEvents.length, 
+            title : eventName,
+            createdAt : dateToYMD(new Date()),
+            dueDate : eventDate, 
+            checklist : [],
+            completed : false, 
+            archived : false
+        }
+        addDLEvent(event);
+        displayDLEvents();
+
+        
     }
+    else{
+        document.getElementById("DLEventName").classList.remove("invalidField");
+        document.getElementById("DLEventDay").classList.remove("invalidField");
+        if(eventName == ""){document.getElementById("DLEventName").classList.add("invalidField");}
+        if(dateToYMD(eventDate)=="Invalid Date"){document.getElementById("DLEventDay").classList.add("invalidField");}
 
-    const event = {
-        id : "DL-"+DLEvents.length, 
-        title : eventName,
-        createdAt : dateToYMD(new Date()),
-        dueDate : eventDate, 
-        checklist : [],
-        completed : false, 
-        archived : false
-    };
 
-    addDLEvent(event);
-    displayDLEvents();
+    }
+    
 }
 
 
