@@ -11,8 +11,11 @@ DLEventsContainerElement.addEventListener('click', (btn) =>{
     if(btn.target.classList.contains("newTask")){
         const id = btn.target.parentElement.parentElement.dataset.id;
         const taskName = btn.target.closest(".checklist").querySelector(".taskInput").value;
-        if(taskName.value!=undefined){addTaskToDLEvent(id, taskName); displayDLEvents();}
-        else{btn.target.closest(".checklist").querySelector(".taskInput").classList.add("invalidField");}
+        if(taskName!=""){addTaskToDLEvent(id, taskName); displayDLEvents();}
+        else{
+            btn.target.closest(".checklist").querySelector(".taskInput").classList.remove("invalidField");
+            btn.target.closest(".checklist").querySelector(".taskInput").classList.add("invalidField");
+        }
         
     }
 

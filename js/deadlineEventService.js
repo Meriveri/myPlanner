@@ -56,6 +56,5 @@ export function updateTask(id, index, status){
         checklist[index].checked="";
         checklist[index].completedOn="";
         localStorage.setItem("DLEvents", JSON.stringify(events));
-        console.log(events);
     }
 }
