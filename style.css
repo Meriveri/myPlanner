@@ -628,12 +628,14 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
     max-height: 0px;
     transition: all 0.5s;
     overflow: hidden;
+    opacity: 0;
 }
 
 .dlEvent .checklist.visible{
     display: flex;
     max-height: 600;
     transition: all 0.2s;
+    opacity: 1;
 }
 
 .dlEvent .checklist div{
