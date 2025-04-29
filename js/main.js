@@ -1,12 +1,14 @@
 //fix events highlight for other month 
 //event highlight on event add
 import { getEvents, getEventByMonth} from './eventService.js';
-import { renderPage } from './dayDisplay.js';
+import { dateToYMD } from './utils.js';
 import './eventsHandler.js';
 import './dayDisplay.js';
-import { dateToYMD } from './utils.js';
-import { displayHabits } from './habitHandler.js';
-import { displayDLEvents } from './deadlineEventHandler.js';
+import './habitHandler.js';
+import './deadlineEventHandler.js';
+import './gatchaHandler.js';
+
+
 
 
 const monthYearElement = document.getElementById("monthYear");

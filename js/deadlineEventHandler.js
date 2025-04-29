@@ -1,4 +1,5 @@
 import {getDLEvents, addDLEvent, addTaskToDLEvent, updateTask, completeDLEvent} from './deadlineEventService.js'
+import { calculatePoints } from './gatchaHandler.js';
 import { dateToYMD } from './utils.js';
 
 const DLEventsContainerElement = document.getElementById("DLEventsContainer");
@@ -25,6 +26,7 @@ DLEventsContainerElement.addEventListener('click', (btn) =>{
     if(btn.target.classList.contains("completeEvent")){
         const id = btn.target.parentElement.parentElement.dataset.id;
         completeDLEvent(id);
+        calculatePoints();
         displayDLEvents();
     }
 

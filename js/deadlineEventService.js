@@ -1,4 +1,5 @@
 import { dateToYMD } from "./utils.js";
+import { calculatePoints } from "./gatchaHandler.js";
 
 export function getDLEvents(){
     return JSON.parse(localStorage.getItem("DLEvents")) || [];
@@ -22,7 +23,7 @@ export function completeDLEvent(id){
 
     const index = events.indexOf(event);
 
-    localStorage.setItem("completedDLEvents", JSON.stringify(events));
+    event.completed = true;
 
     events.splice(index, 1);
     localStorage.setItem("DLEvents", JSON.stringify(events));
@@ -50,6 +51,7 @@ export function updateTask(id, index, status){
         checklist[index].checked="checked";
         checklist[index].completedOn=dateToYMD(new Date());
         localStorage.setItem("DLEvents", JSON.stringify(events));
+        calculatePoints();
         
     }
     else{

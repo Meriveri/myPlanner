@@ -101,6 +101,7 @@ delEventsBtn.addEventListener('click', () =>{
     //localStorage.removeItem("completedEvents");
     //localStorage.removeItem("habits");
     //localStorage.removeItem("DLEvents");
+    localStorage.removeItem("points");
     putDaysWithEventsInBold();
     showEvents();
 });
@@ -120,10 +121,10 @@ upcomingEventsElement.addEventListener('click', (btn)=>{
         const id = btn.target.dataset.id;
         events = events.filter(event => event.id == id);
         addCompletedEvent(events[0]);
+        calculatePoints();
         showEvents();
         putDaysWithEventsInBold();
         renderPage(new Date(), getEvents());
-        console.log("archived ", getCompletedEvents())
     }
 })
 

@@ -1,5 +1,6 @@
 import { addHabit, getHabitByID, getHabits, updateHabit, uncheckHabit } from "./habitService.js";
 import { addXDaysToDate, dateToYMD, getDayDifference } from "./utils.js";
+import { calculatePoints } from "./gatchaHandler.js";
 
 const habitsContainerElement = document.getElementById("habitsContainer");
 
@@ -134,6 +135,7 @@ habitsContainerElement.addEventListener('change', btn => {
     if(btn.target.checked){     
         btn.target.parentNode.classList.add("done"); 
         updateHabit(habitID); 
+        calculatePoints();
         displayHabits();
     }
     else{
@@ -147,32 +149,5 @@ habitsContainerElement.addEventListener('change', btn => {
 
 
 displayHabits();
-/*const habit = {
-    id : "habit-0",
-    name : "overdue", 
-    createdAt : dateToYMD(new Date("2025-04-20")),
-    frequency : {type: "everyXDays", value : 1}, 
-    lastDone : "2025-04-22",
-    nextDue : "2025-04-23",
-    log : ["2025-04-21", "2025-04-22"], 
-    streak : {current : 2, longest : 2}, 
-    archived : false
-}
-addHabit(habit);
-    */
-
-/*const habit2 = {
-    id : "habit-1",
-    name : "not due today", 
-    createdAt : dateToYMD(new Date("2025-04-20")),
-    frequency : {type: "everyXDays", value : 60}, 
-    lastDone : "2025-04-01",
-    nextDue : "2025-05-30",
-    log : ["2025-04-01"], 
-    streak : {current : 1, longest : 1}, 
-    archived : false
-}
-addHabit(habit2);
-    */
 
 
