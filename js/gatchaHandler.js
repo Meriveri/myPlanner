@@ -12,18 +12,24 @@ export function calculatePastPoints(){
     let events = getCompletedEvents();
     let checklists = [];
     
-    habits = habits.filter (h => h.lastDone <= today);
+    habits = habits.filter (h => h.lastDone != "");
     events = events.filter( e => e.date <= today);
+
+    let habitsPoints = 0;
+    for(let x = 0; x<habits.length ; x++){
+        habitsPoints += habits[x].log.length;
+    }
+
 
     for(let i = 0; i< DLEvents.length;i++){
         checklists = DLEvents[i].checklist;
-        checklists = checklists.filter(c => c.completedOn <= today);
+        checklists = checklists.filter(c => c.checked == "checked");
         
     }
     
     DLEvents = DLEvents.filter(e => e.completed == true);
 
-    const habitsPoints = 5*habits.length;
+    habitsPoints = 5*habitsPoints;
     const DLEventsPoints = 20*DLEvents.length;
     const checklistsPoints = 5*checklists.length;
     const eventsPoints = 15*events.length;

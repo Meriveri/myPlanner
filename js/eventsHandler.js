@@ -3,6 +3,7 @@ import './main.js';
 import { renderPage } from './dayDisplay.js'
 import { putDaysWithEventsInBold } from './main.js';
 import { dateToYMD, getDayDifference } from './utils.js';
+import { updatePoints } from './gatchaService.js';
 
 const newEventBtn = document.getElementById("newEvent");
 const formElement = document.getElementById("eventForm");
@@ -121,7 +122,7 @@ upcomingEventsElement.addEventListener('click', (btn)=>{
         const id = btn.target.dataset.id;
         events = events.filter(event => event.id == id);
         addCompletedEvent(events[0]);
-        calculatePoints();
+        updatePoints(15);
         showEvents();
         putDaysWithEventsInBold();
         renderPage(new Date(), getEvents());
