@@ -218,9 +218,22 @@ settingsDLEventsElement.addEventListener('click', (btn)=>  {
     let dueDate = document.getElementsByClassName("dueDateInput")[indexOfDLEvent].value;
     dueDate = dateToYMD(dueDate);
 
-    editDLEventTitle(id, title);
-    editDLEventDueDate(id, dueDate);
-    displayDLEventsToEdit();
+    if(title != "" && dueDate != "Invalid Date"){
+        clickeDLEvent.querySelector(".titleInput").classList.remove("invalidField");
+        clickeDLEvent.querySelector(".dueDateInput").classList.remove("invalidField");
+
+        editDLEventTitle(id, title);
+        editDLEventDueDate(id, dueDate);
+        displayDLEventsToEdit();
+    }
+    else{
+        clickeDLEvent.querySelector(".titleInput").classList.remove("invalidField");
+        clickeDLEvent.querySelector(".dueDateInput").classList.remove("invalidField");
+        if(title==""){clickeDLEvent.querySelector(".titleInput").classList.add("invalidField");}
+        if(dueDate == "Invalid Date"){clickeDLEvent.querySelector(".dueDateInput").classList.add("invalidField");}
+    }
+
+    
     }
 });
 
@@ -235,7 +248,7 @@ settingsDLEventsElement.addEventListener('click', (btn) =>{
         
         const name =clickedTaskInEvent.querySelector(".taskTitleInput").value;
 
-        if(name!=""){editDLEventChecklist(DLEventID, indexOfTask, name); displayDLEventsToEdit();}
+        if(name!=""){clickedTaskInEvent.querySelector(".taskTitleInput").classList.remove("invalidField"); editDLEventChecklist(DLEventID, indexOfTask, name); displayDLEventsToEdit();}
         else{
             clickedTaskInEvent.querySelector(".taskTitleInput").classList.remove("invalidField");
             clickedTaskInEvent.querySelector(".taskTitleInput").classList.add("invalidField");
