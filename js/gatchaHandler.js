@@ -1,8 +1,10 @@
 import { getDLEvents } from "./deadlineEventService.js";
 import { getCompletedEvents } from "./eventService.js";
-import { getPoints, initPoints, updatePoints } from "./gatchaService.js";
+import { getPoints, initPoints} from "./gatchaService.js";
 import { getHabits } from "./habitService.js";
 import { dateToYMD } from "./utils.js";
+
+const pointsDisplaylement = document.getElementById("pointsDisplay");
 
 export function calculatePastPoints(){
     const today = dateToYMD(new Date());
@@ -40,4 +42,10 @@ export function calculatePastPoints(){
 
 }
 
+export function displayPoints(){
+    pointsDisplaylement.innerHTML = getPoints().value + " efforts";
+}
+
+
 initPoints();
+displayPoints();
