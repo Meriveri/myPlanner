@@ -299,40 +299,6 @@ export function displayEventsTypeEditor(){
         </div>`;
     }
     settingsDLEventsElement.innerHTML+=`</div>`
-    /*settingsEventsElement.innerHTML=`
-        <div class="eventType">
-            <div class="renameType">
-                <input type="text" data-eventType="1" placeholder="event type two"/><button class="nameEventType okBtn">rename</button>
-            </div>
-            <div class="recolorType">
-                <input type="color" data-eventType="1" placeholder="color code of event type two"/><button class="colorEventType okBtn">set colour</button>
-            </div>
-        </div>
-        <div class="eventType">
-            <div class="renameType">
-                <input type="text" data-eventType="2" placeholder="event type three"/><button class="nameEventType okBtn">rename</button>
-            </div>
-            <div class="recolorType">
-                <input type="color" data-eventType="2" placeholder="color code of event type three"/><button class="colorEventType okBtn">set colour</button>
-            </div>
-        </div>
-        <div class="eventType">
-            <div class="renameType">
-               <input type="text" data-eventType="3" placeholder="event type four"/><button class="nameEventType okBtn">rename</button>
-            </div>
-            <div class="recolorType">
-               <input type="color" data-eventType="3" placeholder="color code of event type four"/><button class="colorEventType okBtn">set colour</button>
-            </div>
-        </div>
-        <div class="eventType">
-            <div class="renameType">
-                <input type="text" data-eventType="4" placeholder="event type five"/><button class="nameEventType okBtn">rename</button>
-            </div>
-            <div class="recolorType">
-                <input type="color" data-eventType="4" placeholder="color code of event type five"/><button class="colorEventType okBtn">set colour</button>
-            </div>
-        </div>
-    </div>`;*/
 
 }
 
