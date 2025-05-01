@@ -1,4 +1,4 @@
-import { deleteEventById, getEvents, addEvent, getCompletedEvents, addCompletedEvent, getEventsTypes } from './eventService.js';  
+import { deleteEventById, getEvents, addEvent, getCompletedEvents, addCompletedEvent, getEventsTypes, initEventTypes } from './eventService.js';  
 import './main.js';
 import { renderPage } from './dayDisplay.js'
 import { putDaysWithEventsInBold } from './main.js';
@@ -47,6 +47,7 @@ export function showEvents() {
         delEventsBtn.classList.add("visible");
         upcomingEventsElement.classList.remove("hidden");     
     }
+    changeEventsBackgroundColor();
     
 }
 
@@ -106,6 +107,7 @@ delEventsBtn.addEventListener('click', () =>{
     //localStorage.removeItem("habits");
     //localStorage.removeItem("DLEvents");
     //localStorage.removeItem("points");
+    //localStorage.removeItem("eventsTypes");
     putDaysWithEventsInBold();
     showEvents();
 });
@@ -134,10 +136,28 @@ upcomingEventsElement.addEventListener('click', (btn)=>{
 
 
 export function displayEventTypes(){
+    initEventTypes();
     const eventsTypes = getEventsTypes();
     for(let i = 0; i<eventsTypes.length;i++){
         eventTypeElement.innerHTML+=`<option value="eventType${i+1}">${eventsTypes[i].name}</option>`
     }
+    
 }
+
+export function changeEventsBackgroundColor(){
+    const eventTypes = getEventsTypes();
+    const allTask1 = Array.from(document.querySelectorAll('#upcomingEvents .eventType1'));
+    for(let i = 0; i < allTask1.length; i++){allTask1[i].style.backgroundColor=eventTypes[0].color;}
+    const allTask2 = Array.from(document.querySelectorAll('#upcomingEvents .eventType2'));
+    for(let i = 0; i < allTask2.length; i++){allTask2[i].style.backgroundColor=eventTypes[1].color;}
+    const allTask3 = Array.from(document.querySelectorAll('#upcomingEvents .eventType3'));
+    for(let i = 0; i < allTask3.length; i++){allTask3[i].style.backgroundColor=eventTypes[2].color;}
+    const allTask4 = Array.from(document.querySelectorAll('#upcomingEvents .eventType4'));
+    for(let i = 0; i < allTask4.length; i++){allTask4[i].style.backgroundColor=eventTypes[3].color;}
+    const allTask5 = Array.from(document.querySelectorAll('#upcomingEvents .eventType5'));
+    for(let i = 0; i < allTask5.length; i++){allTask5[i].style.backgroundColor=eventTypes[4].color;}
+    
+}
+
 
 displayEventTypes();

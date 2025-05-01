@@ -1,5 +1,6 @@
 import { getHabits } from "./habitService.js";
 import { getDLEvents } from "./deadlineEventService.js"
+import { updateEventsTypeName, updateEventsTypeColor } from "./eventService.js";
 
 import { deleteHabit, editHabitName, editHabitFrequency, archiveHabit, deleteDLEvent, editDLEventTitle, editDLEventDueDate, editDLEventChecklist, deleteDLEventChecklist} from "./settingsService.js";
 import { dateToYMD } from "./utils.js";
@@ -286,46 +287,68 @@ export function displayEventsTypeEditor(){
     settingsEventsElement.innerHTML=`<div class="eventsTypeForm" id="eventTypeForm">
         <div class="eventType">
             <div class="renameType">
-                <input type="text" data-eventType="type1" placeholder="name of event type one"/><button class="nameEventType okBtn">rename</button>
+                <input type="text" data-eventType="0" placeholder="name of event type one"/><button class="nameEventType okBtn">rename</button>
             </div>
             <div class="recolorType">
-                <input type="color" data-eventType="type1" placeholder="color code of event type one"/><button class="colorEventType okBtn">set colour</button>
+                <input type="color" data-eventType="0" placeholder="color code of event type one"/><button class="colorEventType okBtn">set colour</button>
             </div>
         </div>
         <div class="eventType">
             <div class="renameType">
-                <input type="text" data-eventType="type2" placeholder="event type two"/><button class="nameEventType okBtn">rename</button>
+                <input type="text" data-eventType="1" placeholder="event type two"/><button class="nameEventType okBtn">rename</button>
             </div>
             <div class="recolorType">
-                <input type="color" data-eventType="type2" placeholder="color code of event type two"/><button class="colorEventType okBtn">set colour</button>
+                <input type="color" data-eventType="1" placeholder="color code of event type two"/><button class="colorEventType okBtn">set colour</button>
             </div>
         </div>
         <div class="eventType">
             <div class="renameType">
-                <input type="text" data-eventType="type3" placeholder="event type three"/><button class="nameEventType okBtn">rename</button>
+                <input type="text" data-eventType="2" placeholder="event type three"/><button class="nameEventType okBtn">rename</button>
             </div>
             <div class="recolorType">
-                <input type="color" data-eventType="type3" placeholder="color code of event type three"/><button class="colorEventType okBtn">set colour</button>
+                <input type="color" data-eventType="2" placeholder="color code of event type three"/><button class="colorEventType okBtn">set colour</button>
             </div>
         </div>
         <div class="eventType">
             <div class="renameType">
-               <input type="text" data-eventType="type4" placeholder="event type four"/><button class="nameEventType okBtn">rename</button>
+               <input type="text" data-eventType="3" placeholder="event type four"/><button class="nameEventType okBtn">rename</button>
             </div>
             <div class="recolorType">
-               <input type="color" data-eventType="type4" placeholder="color code of event type four"/><button class="colorEventType okBtn">set colour</button>
+               <input type="color" data-eventType="3" placeholder="color code of event type four"/><button class="colorEventType okBtn">set colour</button>
             </div>
         </div>
         <div class="eventType">
             <div class="renameType">
-                <input type="text" data-eventType="type5" placeholder="event type five"/><button class="nameEventType okBtn">rename</button>
+                <input type="text" data-eventType="4" placeholder="event type five"/><button class="nameEventType okBtn">rename</button>
             </div>
             <div class="recolorType">
-                <input type="color" data-eventType="type5" placeholder="color code of event type five"/><button class="colorEventType okBtn">set colour</button>
+                <input type="color" data-eventType="4" placeholder="color code of event type five"/><button class="colorEventType okBtn">set colour</button>
             </div>
         </div>
     </div>`;
 
 }
+
+settingsEventsElement.addEventListener('click', (btn) =>{
+    if(btn.target.classList.contains("nameEventType")){
+        const clickedEventType = btn.target.parentElement.querySelector("input");
+        const index = clickedEventType.dataset.eventtype;
+        const name = clickedEventType.value;
+
+        updateEventsTypeName(index, name);
+
+    }
+
+    if(btn.target.classList.contains("colorEventType")){
+        const clickedEventType = btn.target.parentElement.querySelector("input");
+        const index = clickedEventType.dataset.eventtype;
+        const color = clickedEventType.value;
+        console.log(clickedEventType.value);
+
+        updateEventsTypeColor(index, color);
+
+    }
+
+});
 //displayHabitsToEdit();
 //displayDLEventsToEdit();
