@@ -101,7 +101,7 @@ delEventsBtn.addEventListener('click', () =>{
     //localStorage.removeItem("completedEvents");
     //localStorage.removeItem("habits");
     //localStorage.removeItem("DLEvents");
-    localStorage.removeItem("points");
+    //localStorage.removeItem("points");
     putDaysWithEventsInBold();
     showEvents();
 });

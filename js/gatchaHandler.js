@@ -4,7 +4,7 @@ import { getPoints, initPoints, updatePoints } from "./gatchaService.js";
 import { getHabits } from "./habitService.js";
 import { dateToYMD } from "./utils.js";
 
-export function calculatePoints(){
+export function calculatePastPoints(){
     const today = dateToYMD(new Date());
 
     let habits = getHabits();
@@ -12,12 +12,12 @@ export function calculatePoints(){
     let events = getCompletedEvents();
     let checklists = [];
     
-    habits = habits.filter (h => h.lastDone == today);
-    events = events.filter( e => e.date == today);
-    console.log(DLEvents[0]);
+    habits = habits.filter (h => h.lastDone <= today);
+    events = events.filter( e => e.date <= today);
+
     for(let i = 0; i< DLEvents.length;i++){
         checklists = DLEvents[i].checklist;
-        checklists = checklists.filter(c => c.completedOn == today);
+        checklists = checklists.filter(c => c.completedOn <= today);
         
     }
     
@@ -28,10 +28,9 @@ export function calculatePoints(){
     const checklistsPoints = 5*checklists.length;
     const eventsPoints = 15*events.length;
 
-    console.log(getPoints());
-    console.log("habits: "+habitsPoints, "DLEventsPoints : "+DLEventsPoints, "checklists: "+checklistsPoints, "events :"+eventsPoints);
+    console.log("habits points ", habitsPoints, " DLEventsPoits ", DLEventsPoints, " checklistPoinst", checklistsPoints, " eventsPoints", eventsPoints);
     const totalPoints = habitsPoints+DLEventsPoints+eventsPoints+checklistsPoints;
-    updatePoints(totalPoints);
+    return totalPoints;
 
 }
 

@@ -1,6 +1,6 @@
 import {getDLEvents, addDLEvent, addTaskToDLEvent, updateTask, completeDLEvent} from './deadlineEventService.js'
-import { calculatePoints } from './gatchaHandler.js';
 import { dateToYMD } from './utils.js';
+import { updatePoints } from './gatchaService.js';
 
 const DLEventsContainerElement = document.getElementById("DLEventsContainer");
 const addDLEventBtn = document.getElementById("addDLEvent"); 
@@ -26,7 +26,7 @@ DLEventsContainerElement.addEventListener('click', (btn) =>{
     if(btn.target.classList.contains("completeEvent")){
         const id = btn.target.parentElement.parentElement.dataset.id;
         completeDLEvent(id);
-        calculatePoints();
+        updatePoints(20);
         displayDLEvents();
     }
 
@@ -41,6 +41,9 @@ DLEventsContainerElement.addEventListener('change', (box) => {
         const checkboxes = checklistDiv.querySelectorAll('input[type="checkbox"]');
         
         const index = Array.from(checkboxes).indexOf(box.target);
+
+        if(box.target.checked){updatePoints(5);}
+        else{updatePoints(-5);}
 
         updateTask(eventId, index, box.target.checked);
         displayDLEvents();

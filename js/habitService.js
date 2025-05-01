@@ -1,3 +1,4 @@
+import { initPoints } from "./gatchaService.js";
 import { addXDaysToDate, dateToYMD, getDayDifference, nextDueDate } from "./utils.js";
 
 export function getHabits() {
@@ -63,3 +64,6 @@ export function uncheckHabit(id){
 
     localStorage.setItem("habits", JSON.stringify(habits)); 
 }
+
+
+initPoints();
