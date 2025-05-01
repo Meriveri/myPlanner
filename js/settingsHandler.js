@@ -1,6 +1,6 @@
 import { getHabits } from "./habitService.js";
 import { getDLEvents } from "./deadlineEventService.js"
-import { updateEventsTypeName, updateEventsTypeColor } from "./eventService.js";
+import { updateEventsTypeName, updateEventsTypeColor, getEventsTypes } from "./eventService.js";
 
 import { deleteHabit, editHabitName, editHabitFrequency, archiveHabit, deleteDLEvent, editDLEventTitle, editDLEventDueDate, editDLEventChecklist, deleteDLEventChecklist} from "./settingsService.js";
 import { dateToYMD } from "./utils.js";
@@ -284,15 +284,22 @@ export function showDLEventEditPanel(id){
 }
 
 export function displayEventsTypeEditor(){
-    settingsEventsElement.innerHTML=`<div class="eventsTypeForm" id="eventTypeForm">
-        <div class="eventType">
-            <div class="renameType">
-                <input type="text" data-eventType="0" placeholder="name of event type one"/><button class="nameEventType okBtn">rename</button>
-            </div>
-            <div class="recolorType">
-                <input type="color" data-eventType="0" placeholder="color code of event type one"/><button class="colorEventType okBtn">set colour</button>
-            </div>
-        </div>
+    const eventTypes = getEventsTypes();
+    settingsEventsElement.innerHTML=`<div class="eventsTypeForm" id="eventTypeForm">`
+    for(let i = 0; i < eventTypes.length;i++){
+        settingsEventsElement.innerHTML+=`
+        <div class="eventsTypeForm" id="eventTypeForm">
+            <div class="eventType">
+                <div class="renameType">
+                    <input type="text" data-eventType="${i}" value = "${eventTypes[i].name} "placeholder="rename ${eventTypes[i].name}"/><button class="nameEventType okBtn">rename</button>
+                </div>
+                <div class="recolorType">
+                    <input type="color" data-eventType="${i}" value="${eventTypes[i].color}"/><button class="colorEventType okBtn">set colour</button>
+                </div>
+        </div>`;
+    }
+    settingsDLEventsElement.innerHTML+=`</div>`
+    /*settingsEventsElement.innerHTML=`
         <div class="eventType">
             <div class="renameType">
                 <input type="text" data-eventType="1" placeholder="event type two"/><button class="nameEventType okBtn">rename</button>
@@ -325,7 +332,7 @@ export function displayEventsTypeEditor(){
                 <input type="color" data-eventType="4" placeholder="color code of event type five"/><button class="colorEventType okBtn">set colour</button>
             </div>
         </div>
-    </div>`;
+    </div>`;*/
 
 }
 
