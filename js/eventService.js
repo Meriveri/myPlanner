@@ -73,3 +73,12 @@ export function getCompletedEventsThisWeek(date){
   
     return eventsThisWeek;
 }
+
+//custom events
+export function getEventsTypes(){
+    return JSON.parse(localStorage.getItem("eventsTypes ")) || [{name: "appointment", color:"lightcoral"}, {name : "task", color: "yellowgreen"}, {name : "meetup", color:"purple"}, {name : "work", color:"cornflowerblue"}, {name : "other", color:"lightgrey"}];
+}
+
+export function initEventTypes(){
+
+}

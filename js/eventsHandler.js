@@ -1,9 +1,10 @@
-import { deleteEventById, getEvents, addEvent, getCompletedEvents, addCompletedEvent } from './eventService.js';  
+import { deleteEventById, getEvents, addEvent, getCompletedEvents, addCompletedEvent, getEventsTypes } from './eventService.js';  
 import './main.js';
 import { renderPage } from './dayDisplay.js'
 import { putDaysWithEventsInBold } from './main.js';
 import { dateToYMD, getDayDifference } from './utils.js';
 import { updatePoints } from './gatchaService.js';
+
 
 const newEventBtn = document.getElementById("newEvent");
 const formElement = document.getElementById("eventForm");
@@ -12,6 +13,8 @@ const addEventBtn = document.getElementById("addEvent");
 const delEventsBtn = document.getElementById("delEvents");
 
 const upcomingEventsElement = document.getElementById("upcomingEvents");
+
+const eventTypeElement = document.getElementById("eventType");
 
 export function isEventLate(event){
     let eventDate = new Date(event.date);
@@ -130,4 +133,11 @@ upcomingEventsElement.addEventListener('click', (btn)=>{
 })
 
 
+export function displayEventTypes(){
+    const eventsTypes = getEventsTypes();
+    for(let i = 0; i<eventsTypes.length;i++){
+        eventTypeElement.innerHTML+=`<option value="eventType${i+1}">${eventsTypes[i].name}</option>`
+    }
+}
 
+displayEventTypes();

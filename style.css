@@ -463,29 +463,44 @@ input.invalidField{border: 1px solid red!important;}
 }
 
 
-.dayPage .event.apo{
+.dayPage .event.eventType1{
     color:#F8875C;
 }
 
-.dayPage .event.task{
+.dayPage .event.eventType2{
     color:yellowgreen;
 }
 
-.dayPage .event.stream{
+.dayPage .event.eventType3{
     color:purple;
 }
 
+.dayPage .event.eventType4{
+    color: cornflowerblue;
+}
 
-.upcomingEvents .event.apo{
+.dayPage .event.eventType5{
+    color:lightgrey;
+}
+
+.upcomingEvents .event.eventType1{
     background-color:#F8875C;
 }
 
-.upcomingEvents .event.task{
+.upcomingEvents .event.eventType2{
     background-color:yellowgreen;
 }
 
-.upcomingEvents .event.stream{
+.upcomingEvents .event.eventType3{
     background-color:purple;
+}
+
+.upcomingEvents .event.eventType4{
+    background-color:cornflowerblue;
+}
+
+.upcomingEvents .event.eventType5{
+    background-color:lightgrey;
 }
 
 .numberWrapper{
