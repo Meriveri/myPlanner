@@ -1,6 +1,7 @@
 import { addHabit, getHabitByID, getHabits, updateHabit, uncheckHabit } from "./habitService.js";
 import { addXDaysToDate, dateToYMD, getDayDifference } from "./utils.js";
 import { getPoints, updatePoints } from "./gatchaService.js";
+import { displayPoints } from "./gatchaHandler.js";
 
 const habitsContainerElement = document.getElementById("habitsContainer");
 
@@ -138,12 +139,14 @@ habitsContainerElement.addEventListener('change', btn => {
         updateHabit(habitID); 
         updatePoints(5);
         displayHabits();
+        displayPoints();
     }
     else{
         btn.target.parentNode.classList.remove("done"); 
         uncheckHabit(habitID); 
         updatePoints(-5);
         displayHabits();
+        displayPoints();
     }
     
 });

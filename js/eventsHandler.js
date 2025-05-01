@@ -4,6 +4,7 @@ import { renderPage } from './dayDisplay.js'
 import { putDaysWithEventsInBold } from './main.js';
 import { dateToYMD, getDayDifference } from './utils.js';
 import { updatePoints } from './gatchaService.js';
+import { displayPoints } from './gatchaHandler.js';
 
 
 const newEventBtn = document.getElementById("newEvent");
@@ -129,6 +130,7 @@ upcomingEventsElement.addEventListener('click', (btn)=>{
         addCompletedEvent(events[0]);
         updatePoints(15);
         showEvents();
+        displayPoints();
         putDaysWithEventsInBold();
         renderPage(new Date(), getEvents());
     }
