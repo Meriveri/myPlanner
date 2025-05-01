@@ -111,13 +111,31 @@ settingsHabitsElement.addEventListener('click', (btn) =>{
     const indexOfHabit = allHabits.indexOf(clickedHabit);
 
     const name = document.getElementsByClassName("nameInput")[indexOfHabit].value;
-    const frequency = document.getElementsByClassName("frequencyInput")[indexOfHabit].value;
+    const frequency = parseInt(document.getElementsByClassName("frequencyInput")[indexOfHabit].value);
 
-
-    editHabitName(id, name);
-    editHabitFrequency(id, frequency);
-    displayHabitsToEdit();
+    if (Number.isInteger(frequency) && name !=""){
+        clickedHabit.querySelector(".frequencyInput").classList.remove("invalidField");
+        clickedHabit.querySelector(".nameInput").classList.remove("invalidField"); 
+        if(Number.isInteger(frequency)){ 
+        editHabitFrequency(id, frequency); 
+        displayHabitsToEdit();
+        }
+        if(name!=""){
+            editHabitName(id, name); 
+            displayHabitsToEdit(); 
+        }
     }
+    else{
+        clickedHabit.querySelector(".nameInput").classList.remove("invalidField"); 
+        clickedHabit.querySelector(".frequencyInput").classList.remove("invalidField"); 
+        if(name==""){
+            clickedHabit.querySelector(".nameInput").classList.add("invalidField");
+        }
+        if(!Number.isInteger(frequency)){
+            clickedHabit.querySelector(".frequencyInput").classList.add("invalidField");
+        }
+    }
+}
 
     if(btn.target.classList.contains("archiveHabit")){
         const id = btn.target.parentElement.parentElement.parentElement.dataset.id;
