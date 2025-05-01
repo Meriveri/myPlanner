@@ -6,6 +6,8 @@ import { dateToYMD } from "./utils.js";
 
 const settingsHabitsElement = document.getElementById("settingsHabits");
 const settingsDLEventsElement = document.getElementById("settingsDLEvents");
+const settingsEventsElement = document.getElementById("settingsEvents")
+
 const generalTabBtn = document.getElementById("generalSettings");
 const eventsTabBtn = document.getElementById("eventsSettings");
 const habitsTabBtn = document.getElementById("habitsSettings");
@@ -20,6 +22,7 @@ export function showHabitEditPanel(id){
 
 habitsTabBtn.addEventListener('click', () =>{
     settingsDLEventsElement.innerHTML=""; 
+    settingsEventsElement.innerHTML="";
 
     habitsTabBtn.style.backgroundColor="yellowGreen";
 
@@ -30,6 +33,7 @@ habitsTabBtn.addEventListener('click', () =>{
 
 DLEventsTabBtn.addEventListener('click', () =>{
     settingsHabitsElement.innerHTML="";
+    settingsEventsElement.innerHTML="";
 
     DLEventsTabBtn.style.backgroundColor="yellowGreen";
 
@@ -42,6 +46,7 @@ DLEventsTabBtn.addEventListener('click', () =>{
 generalTabBtn.addEventListener('click', () =>{
     settingsHabitsElement.innerHTML="";
     settingsDLEventsElement.innerHTML=""; 
+    settingsEventsElement.innerHTML="";
 
     generalTabBtn.style.backgroundColor="yellowGreen";
 
@@ -59,6 +64,8 @@ eventsTabBtn.addEventListener('click', () =>{
     generalTabBtn.style.backgroundColor="white";
     habitsTabBtn.style.backgroundColor="white";
     DLEventsTabBtn.style.backgroundColor="white";
+
+    displayEventsTypeEditor();
 });
 
 export function displayHabitsToEdit(){
@@ -275,5 +282,50 @@ export function showDLEventEditPanel(id){
 
 }
 
+export function displayEventsTypeEditor(){
+    settingsEventsElement.innerHTML=`<div class="eventsTypeForm" id="eventTypeForm">
+        <div class="eventType">
+            <div class="renameType">
+                <input type="text" data-eventType="type1" placeholder="name of event type one"/><button class="nameEventType okBtn">rename</button>
+            </div>
+            <div class="recolorType">
+                <input type="color" data-eventType="type1" placeholder="color code of event type one"/><button class="colorEventType okBtn">set colour</button>
+            </div>
+        </div>
+        <div class="eventType">
+            <div class="renameType">
+                <input type="text" data-eventType="type2" placeholder="event type two"/><button class="nameEventType okBtn">rename</button>
+            </div>
+            <div class="recolorType">
+                <input type="color" data-eventType="type2" placeholder="color code of event type two"/><button class="colorEventType okBtn">set colour</button>
+            </div>
+        </div>
+        <div class="eventType">
+            <div class="renameType">
+                <input type="text" data-eventType="type3" placeholder="event type three"/><button class="nameEventType okBtn">rename</button>
+            </div>
+            <div class="recolorType">
+                <input type="color" data-eventType="type3" placeholder="color code of event type three"/><button class="colorEventType okBtn">set colour</button>
+            </div>
+        </div>
+        <div class="eventType">
+            <div class="renameType">
+               <input type="text" data-eventType="type4" placeholder="event type four"/><button class="nameEventType okBtn">rename</button>
+            </div>
+            <div class="recolorType">
+               <input type="color" data-eventType="type4" placeholder="color code of event type four"/><button class="colorEventType okBtn">set colour</button>
+            </div>
+        </div>
+        <div class="eventType">
+            <div class="renameType">
+                <input type="text" data-eventType="type5" placeholder="event type five"/><button class="nameEventType okBtn">rename</button>
+            </div>
+            <div class="recolorType">
+                <input type="color" data-eventType="type5" placeholder="color code of event type five"/><button class="colorEventType okBtn">set colour</button>
+            </div>
+        </div>
+    </div>`;
+
+}
 //displayHabitsToEdit();
 //displayDLEventsToEdit();

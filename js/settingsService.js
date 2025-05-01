@@ -1,9 +1,6 @@
 import { getDLEvents } from "./deadlineEventService.js";
 import { getHabits } from "./habitService.js";
 
-
-
-
 export function deleteHabit(id, index){
     let habits = getHabits();
     let habit = habits.filter(h => h.id == id)[0];
