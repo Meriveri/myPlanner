@@ -11,8 +11,8 @@ export function initPoints(){
         localStorage.setItem("points", JSON.stringify(initial));
     }
     else{
-        const past = calculatePastPoints();
-        points.value = past;
+        if(points.value == 0){const past = calculatePastPoints();
+        points.value = past;}
         localStorage.setItem("points", JSON.stringify(points));
     }
 }
