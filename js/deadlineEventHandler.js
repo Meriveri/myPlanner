@@ -1,5 +1,5 @@
 import {getDLEvents, addDLEvent, addTaskToDLEvent, updateTask, completeDLEvent} from './deadlineEventService.js'
-import { dateToYMD } from './utils.js';
+import { addXDaysToDate, dateToYMD, pastXDays } from './utils.js';
 import { updatePoints } from './gatchaService.js';
 import { displayPoints } from './gatchaHandler.js';
 
@@ -90,14 +90,28 @@ export function displayDLEvents(){
 
         const checklistHTML = checklist.map(item => `<div class="task"><input type="checkbox" ${item.checked}/>${item.title} ${item.completedOn}</div>`).join("");
 
-        
+        let dueDateColor = "";
+        let dueDateIndicator = "";
+
+        if(event.dueDate==dateToYMD(new Date())){
+            dueDateColor = "today";
+            dueDateIndicator=`<div class="borderBubble">today</div>`;
+
+        }
+
+        const prevWeek = pastXDays(event.dueDate, 7);
+        if(prevWeek.includes(dateToYMD(new Date()))){
+            dueDateColor = "thisWeek";
+            dueDateIndicator=`<div class="borderBubble">this week</div>`;
+            
+        }
     
         DLEventsContainerElement.innerHTML += `
-            <div class="DLevent" data-id=${event.id}>
+            <div class="DLevent ${dueDateColor}" data-id=${event.id}>
                 <div class="DLEventHead">
                     <div class="infos">
-                        <div class="DLEventTitle">${event.title}</div>
-                        <div class="tasksCompleted">${completedChecklistCount}/${totalChecklistCount}</div>
+                        <div class="DLEventTitle">${event.title} </div> 
+                        <div class="tasksCompleted">${completedChecklistCount}/${totalChecklistCount}</div>${dueDateIndicator}
                     </div>
                     <div class="buttons"><button class="dropdown">▲</button></div>
                 </div>

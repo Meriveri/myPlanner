@@ -599,6 +599,10 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
     margin-bottom: 10px;
 }
 
+.DLEventsWrapper .DLEvent.today{background-color: #F08080;}
+
+.DLEventsWrapper .DLEvent.thisweek{background-color:rgb(239, 198, 93);}
+
 .DLEvent .DLEventHead{
     display: flex;
     justify-content: space-between;
@@ -699,7 +703,7 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
 
 /*settings page*/
 
-.settingsWrapper{
+.settingsWrapper, .statsWrapper{
     display: flex;
     flex-direction: column;
     padding:30px;
@@ -856,3 +860,9 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
     border-radius: 0px;
 }
 
+/*stats page*/
+.statsWrapper h1{
+    display: flex;
+    font-family: "Micro 5", serif ;
+    color:yellowgreen;
+}

@@ -35,3 +35,12 @@ export function nextDueDate(date, days){
     else{date = new Date();}
     return addXDaysToDate(date, days);
 }
+
+export function pastXDays(date, x){
+    let prevDays = [];
+    date = dateToYMD(date);
+    for(let i=1; i<=x; i++){
+        prevDays.push(addXDaysToDate(new Date(date), -i))
+    }
+    return prevDays;
+}

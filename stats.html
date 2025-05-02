@@ -2,19 +2,40 @@
     <head>
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="style.css"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Micro+5&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div class="contentWrapper">
+        <div class="sidebar">
+            <a href="./index.html"><div class="logo head">myPlanner</div></a>
             <div class="actions">
-                <button class="action" id="index" onclick="location.href='./index.html'">back to home</button>
-                <button class="action" id="settings" onclick="location.href='./settings.html'">settings</button>
             </div>
-            <div class="numberWrapper">
-                <h1>Number of completed events</h1>
-                <div class = "numberOfCompletedEvents" id="numberOfCompletedEvents">
+        </div>
+        <div class="contentWrapper">
+                <div class="statsWrapper">
+                    <div class="eventsWrapper" id="eventsWrapper">
+                        <h1>events stats</h1>
+                        <div class="eventsStatsContainer">
+
+                        </div>
+                    </div>
+
+                    <div class="habitsWrapper">
+                        <h1>habits stats</h1>
+                        <div class="habitsStatsContainer" id="habitsStatsContainer">
+                            
+                        </div>
+                    </div>
+
+                    <div class="DLEventsWrapper">
+                        <h1>deadlines stats</h1>
+                        <div class="DLEventsStatsContainer" id="DLEventsStatsContainer">
+                            
+                        </div>
+                    </div>
 
                 </div>
-            </div>
         </div>
         <script type="module" src="./js/stats.js"></script>
     </body>
