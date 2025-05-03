@@ -2,7 +2,7 @@ import { deleteEventById, getEvents, addEvent, getCompletedEvents, addCompletedE
 import './main.js';
 import { renderPage } from './dayDisplay.js'
 import { putDaysWithEventsInBold } from './main.js';
-import { dateToYMD, getDayDifference } from './utils.js';
+import { dateToYMD, getDayDifference, nextXDays, pastXDays } from './utils.js';
 import { updatePoints } from './gatchaService.js';
 import { displayPoints } from './gatchaHandler.js';
 
@@ -17,6 +17,9 @@ const upcomingEventsElement = document.getElementById("upcomingEvents");
 
 const eventTypeElement = document.getElementById("eventType");
 
+
+const eventsFilterElement = document.getElementById("eventsFilter");
+
 export function isEventLate(event){
     let eventDate = new Date(event.date);
     let today = new Date();
@@ -24,10 +27,13 @@ export function isEventLate(event){
     return "";
 }
 
+eventsFilterElement.addEventListener('change', () => {showEvents();})
+
 export function showEvents() {
     upcomingEventsElement.innerHTML = "";
     let events = getEvents();
-    
+    const week = nextXDays(dateToYMD(new Date()), 7);
+    if(eventsFilterElement.checked){events = events.filter(e=>week.includes(e.date));}    
     for(let i = 0; i < events.length;i++){
         upcomingEventsElement.innerHTML += `<div class="event ${events[i].type}"><span class="eventItem"><button class="eventComplete" data-id="${events[i].id}">✔</button></span>
         <div class="eventInfos">

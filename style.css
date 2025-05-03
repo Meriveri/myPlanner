@@ -575,7 +575,7 @@ input[type="checkbox"]::before{
 }
 input[type="checkbox"]:checked::before {transform: scale(1);}
 
-.habitsWrapper .habitsFilter{
+.habitsWrapper .habitsFilter, .eventsFilter{
     display: flex;
     flex-direction: row;
     font-size: 15px;
@@ -584,7 +584,7 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
 
 }
 
-.habitsWrapper .habitsFilter .filterName{
+.habitsWrapper .habitsFilter .filterName, .eventsFilter .filterName{
     padding:0px 5px;
 }
 
