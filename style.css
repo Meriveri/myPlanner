@@ -4,6 +4,8 @@ body{background: #DADADA;}
 
 button{cursor: pointer;}
 
+.sidebar .fa-solid{margin-right: 5px;}
+
 input.invalidField{border: 1px solid red!important;}
 
 .deleteBtn{
@@ -50,8 +52,7 @@ input.invalidField{border: 1px solid red!important;}
 
 }
 
-.switchtoinactiveBtn{display: flex;
-    background-color: lightgray; 
+.switchtoinactiveBtn{background-color: lightgrey; 
     transition: all 0.6s;
     border: none; 
     padding:5px; 

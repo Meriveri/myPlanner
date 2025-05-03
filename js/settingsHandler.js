@@ -76,17 +76,17 @@ export function displayHabitsToEdit(){
     let elementHTML = "";
     for(let i = 0; i<habits.length; i++){
         let isActive = habits[i].archived ? "inactive" : "active";
-        let invertOfArchiveStatus = habits[i].archived ? "unarchive" : "archive";
+        let invertOfArchiveStatus = habits[i].archived ? `<i class="fa-solid fa-lock-open"></i>` : `<i class="fa-solid fa-lock"></i>`;
         
         elementHTML+=`<div class="habit" data-id="${habits[i].id}">
             <div class="habitTitle">
                 <div class="habitName">${habits[i].name}</div>
-                <div class="buttons"><button class="archiveHabit switchto${isActive}Btn">${invertOfArchiveStatus}</button><button class="editHabit editBtn">edit.</button><button class="deleteHabit deleteBtn">x</button></div>
+                <div class="buttons"><button class="archiveHabit switchto${isActive}Btn">${invertOfArchiveStatus}</button><button class="editHabit editBtn"><i class="fa-solid fa-pen-to-square"></i></button><button class="deleteHabit deleteBtn"><i class="fa-solid fa-trash"></i></button></div>
             </div>
             <div class="habitFrequency">every ${habits[i].frequency.value} day(s) | ${isActive}</div>
             <div class="habitEditPanel">
                             <input class="nameInput" placeholder="new habit name"/>
-                            <input class="frequencyInput" type="number" placeholder="every x days"/><button class="okBtn updateHabit">ok</button>
+                            <input class="frequencyInput" type="number" placeholder="every x days"/><button class="okBtn updateHabit"><i class="fa-solid fa-check"></i></button>
             </div>
         </div>`;
     }
@@ -166,21 +166,21 @@ export function displayDLEventsToEdit(){
                 <div class="task" data-index="${i}">
                     <input type="text" placeholder="${event.checklist[i].title}"  class="taskTitleInput"/>
                     <div class="buttons">
-                        <button class="okBtn editChecklist" type="submit">ok</button>
-                        <button class="deleteBtn deleteChecklist">x</button>
+                        <button class="okBtn editChecklist" type="submit"><i class="fa-solid fa-check"></i></button>
+                        <button class="deleteBtn deleteChecklist"><i class="fa-solid fa-trash"></i></button>
                     </div>
                 </div>`;
         }
         DLEventsHTML+=`<div class="DLEvent" data-id="${event.id}">
             <div class="DLEventTitle">
                 <div class="DLEventName">${event.title}</div>
-                <div class="buttons"><button class="editDLEvent editBtn">edit.</button><button class="deleteDLEvent deleteBtn">x</button></div>
+                <div class="buttons"><button class="editDLEvent editBtn"><i class="fa-solid fa-pen-to-square"></i></button><button class="deleteDLEvent deleteBtn"><i class="fa-solid fa-trash"></i></button></div>
             </div>
             <div class="DLEventDueDate">due ${event.dueDate}</div>
             <div class="DLEventEditPanel">
                          <div class="DLInfos">   
                             <input class="titleInput" placeholder="deadline new name"/>
-                            <input class="dueDateInput" type="date" /><button class="okBtn updateDLEvent">ok</button>
+                            <input class="dueDateInput" type="date" /><button class="okBtn updateDLEvent"><i class="fa-solid fa-check"></i></button>
                         </div>
                         <div class="DLEventChecklistInfos">${checklistHTML}</div>
             </div>
