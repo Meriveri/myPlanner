@@ -2,6 +2,7 @@ import { deleteEventById, getEvents, addEvent, getEventsByDate, addCompletedEven
 import { showEvents } from './eventsHandler.js';
 import { putDaysWithEventsInBold } from './main.js';
 import { getEventsTypes } from './eventService.js';
+import { dateToYMD } from './utils.js';
 
 const pageElement = document.getElementById("dayPage");
 const pageDateElement = document.getElementById("pageDate");
@@ -22,12 +23,15 @@ const renderOnSelect = () =>{
 }
 
 const displaySelectedDay = (day) => {
-    const display = day.toLocaleDateString('default', {weekday: 'long', day: 'numeric', month:'long', year: 'numeric'});
-    pageDateElement.innerHTML = `${display}`;
+    if(dateToYMD(day) != "0000-01-01") {
+        const display = day.toLocaleDateString('default', {weekday: 'long', day: 'numeric', month:'long', year: 'numeric'}); 
+        pageDateElement.innerHTML = `${display}`;
+    }
 
 }
 const displayEvents = (events) =>{
     let eventsHTML = ""; 
+    events = events.filter(e => e.date != "0000-01-01");
     if(events.length==0){eventsHTML=`<div class="event">no event today.</div>`;}
     else{
         for(let i=0; i<events.length;i++){
@@ -47,11 +51,11 @@ completeBtn.addEventListener('click', (btn)=>{
     if(btn.target.classList.contains("completeEvent")){
         let events = getEvents();
         const id = btn.target.dataset.id;
-        events = events.filter(event => event.id == id);
-        addCompletedEvent(events[0]);
+        const event = events.filter(event => event.id == id)[0];
+        addCompletedEvent(event);
         showEvents();
         putDaysWithEventsInBold();
-        renderPage(new Date(), getEvents());
+        renderPage(new Date(), events);
         console.log("archived ", getCompletedEvents())
     }
 })

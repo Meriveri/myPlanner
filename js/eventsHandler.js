@@ -9,6 +9,10 @@ import { displayPoints } from './gatchaHandler.js';
 
 const newEventBtn = document.getElementById("newEvent");
 const formElement = document.getElementById("eventForm");
+const eventTimeFieldElement = document.getElementById("eventTimeField"); 
+
+const datedTypeElement = document.getElementById("datedType");
+eventTimeFieldElement.innerHTML=`<input type="date" id="eventDay"/> <input type="time" id="eventTime"/>`;
 
 const addEventBtn = document.getElementById("addEvent");
 const delEventsBtn = document.getElementById("delEvents");
@@ -25,11 +29,16 @@ let alarm = new Audio("/assets/music/alarm.mp3");
 export function isEventLate(event){
     let eventDate = new Date(event.date);
     let today = new Date();
-    if(Math.trunc(getDayDifference(eventDate, today))>0){return `<span class="borderBubble">late</span>`}
+    if(Math.trunc(getDayDifference(eventDate, today))>0 && event.date != "0000-01-01"){return `<span class="borderBubble">late</span>`}
     return "";
 }
 
 eventsFilterElement.addEventListener('change', () => {showEvents();})
+
+datedTypeElement.addEventListener('change', () => {
+    if(datedTypeElement.value=="nonDated"){eventTimeFieldElement.innerHTML="";}
+    else{eventTimeFieldElement.innerHTML=`<input type="date" id="eventDay"/> <input type="time" id="eventTime"/>`;}
+})
 
 export function showEvents() {
     upcomingEventsElement.innerHTML = "";
@@ -37,10 +46,12 @@ export function showEvents() {
     const week = nextXDays(dateToYMD(new Date()), 7);
     if(eventsFilterElement.checked){events = events.filter(e=>week.includes(e.date));}    
     for(let i = 0; i < events.length;i++){
+        let showDueDate = `<div class="eventDate">${events[i].date} ${events[i].time}</div>`;
+        if(events[i].date == "0000-01-01"){showDueDate = "";}
         upcomingEventsElement.innerHTML += `<div class="event ${events[i].type}"><span class="eventItem"><button class="eventComplete" data-id="${events[i].id}">✔</button></span>
         <div class="eventInfos">
             <div class="eventTitle">${events[i].name} ${isEventLate(events[i])}</div><br/>
-            <div class="eventDate">${events[i].date} ${events[i].time}</div>
+            ${showDueDate}
         </div>
         <button class="eventDelete" data-id="${events[i].id}">✘</button></div>`;
     } 
@@ -60,11 +71,8 @@ export function showEvents() {
     
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    showEvents();
-  });
+showEvents();
 
-upcomingEventsElement.addEventListener('onload', ()=>{showEvents();});
 newEventBtn.addEventListener('click', () => {
     formElement.classList.toggle("visible");  
 });
@@ -72,30 +80,44 @@ newEventBtn.addEventListener('click', () => {
 export function createEvent() {
     let eventID = Date.now();
     let eventName = document.getElementById("eventName").value; 
-    let eventDay = dateToYMD(document.getElementById("eventDay").value);
-    let eventTimeElement = document.getElementById("eventTime");
-    let eventTime = eventTimeElement.value;
     let eventTypeElement = document.getElementById("eventType");
     let eventType = eventTypeElement.value;
 
-    console.log(eventDay);
-
-    if(eventName != "" && eventDay != "Invalid Date"){
-        const eventInfo = {
-        id: eventID,
-        name: eventName,
-        date: eventDay,
-        time: eventTime,
-        type: eventType, 
-        completedTime: ""
-        };
-    addEvent(eventInfo);
+    if(eventTimeFieldElement.value=="dated"){
+        let eventDay = dateToYMD(document.getElementById("eventDay").value);
+        let eventTimeElement = document.getElementById("eventTime");
+        let eventTime = eventTimeElement.value;
+        if(eventName != "" && eventDay != "Invalid Date" ){
+            const eventInfo = {
+            id: eventID,
+            name: eventName,
+            date: eventDay,
+            time: eventTime,
+            type: eventType, 
+            completedTime: ""
+            };
+        addEvent(eventInfo);
+        }
+        else{
+            document.getElementById("eventDay").classList.remove("invalidField"); 
+            document.getElementById("eventName").classList.remove("invalidField");
+            
+            if(eventName == ""){ document.getElementById("eventName").classList.add("invalidField");}
+            if(eventDay == "Invalid Date"){document.getElementById("eventDay").classList.add("invalidField");}
+        }
     }
-    else{
-        document.getElementById("eventDay").classList.remove("invalidField"); 
-        document.getElementById("eventName").classList.remove("invalidField");
-        if(eventName == ""){ document.getElementById("eventName").classList.add("invalidField");}
-        if(eventDay == "Invalid Date"){document.getElementById("eventDay").classList.add("invalidField");}
+
+        
+    if(datedTypeElement.value=="nonDated"){
+        const eventInfo = {
+            id: eventID,
+            name: eventName,
+            date: "0000-01-01",
+            time: "00:00",
+            type: eventType, 
+            completedTime: ""
+        };
+        addEvent(eventInfo);
     }
     
     showEvents();
@@ -105,7 +127,7 @@ export function createEvent() {
 
 addEventBtn.addEventListener('click', () =>{
     createEvent(); 
-    let events = getEvents();
+    let events = getEvents().filter(e => e.date != "0000-01-01");
     putDaysWithEventsInBold();
     renderPage(new Date(events[events.length-1].date), events.filter(event => event.date == events[events.length-1].date));
 })
