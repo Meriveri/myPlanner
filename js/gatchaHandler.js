@@ -52,8 +52,6 @@ export function isAllDailyHabitsDone(){
     const habitsDueToday = getHabits().filter(e => e.nextDue == dateToYMD(new Date()));
     const totalHabitsDueToday = habitsDoneToday.length+habitsDueToday.length;
 
-    console.log(habitsDoneToday, totalHabitsDueToday);
-
     if(Number.parseInt(habitsDoneToday.length) == Number.parseInt(totalHabitsDueToday)){updatePoints(50);}
 
 }

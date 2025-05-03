@@ -63,3 +63,18 @@ export function uncheckHabit(id){
 
     localStorage.setItem("habits", JSON.stringify(habits)); 
 }
+
+export function lateCheckIn(id){
+    const habits = getHabits();
+    const habit = habits.filter(h => h.id == id)[0];
+    const yesterday = addXDaysToDate(new Date(), -1);
+    let log = habit.log;
+    if(!log.includes(yesterday)){
+        habit.log.push(yesterday);
+        habit.lastDone = yesterday;
+        habit.nextDue = addXDaysToDate(new Date(), habit.frequency.value);
+    }
+    console.log(habit);
+
+    localStorage.setItem("habits", JSON.stringify(habits)); 
+}

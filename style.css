@@ -550,8 +550,8 @@ input.invalidField{border: 1px solid red!important;}
 }
 
 .habitsWrapper .habit{
-    display: grid; 
-    grid-template-columns: 2em auto; 
+    display: flex; 
+    flex-direction: column; 
     line-height: 15px; 
     margin-top:10px;
     background-color: #D4DBDC;
@@ -567,6 +567,20 @@ input.invalidField{border: 1px solid red!important;}
     color:#797777; 
     text-decoration: line-through;
 }
+
+.habitsWrapper button.lateCheckIn{
+    background-color: transparent;
+    color:white;
+    border: none;
+    box-shadow: none;
+    font-weight: thin!important;
+}
+
+.habitsWrapper .habitName{margin-left: 5px;}
+
+.habitsWrapper .habitHead{display: flex; flex-direction: row; justify-content: space-between;}
+
+.habitsWrapper .habitHead .habitInfo{display: flex; flex-direction: row;}
 
 input[type="checkbox"]{
     display:grid; 

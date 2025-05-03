@@ -1,4 +1,4 @@
-import { addHabit, getHabitByID, getHabits, updateHabit, uncheckHabit } from "./habitService.js";
+import { addHabit, getHabitByID, getHabits, updateHabit, uncheckHabit, lateCheckIn } from "./habitService.js";
 import { addXDaysToDate, dateToYMD, getDayDifference } from "./utils.js";
 import { getPoints, updatePoints } from "./gatchaService.js";
 import { displayPoints, isAllDailyHabitsDone, lastHabitIsUnchecked } from "./gatchaHandler.js";
@@ -118,9 +118,14 @@ export function displayHabits(){
         if(habits[i].log.length==0){nextDue = `<span class="borderBubble">today</span>`;}
 
         let isChecked = isHabitCompletedToday(habits[i].id) ? "checked" : "";
-        habitsHTML+= `<div class = "habit ${isDueColor(habits[i])}" data-id="${habits[i].id}">
-        <input type="checkbox" ${isChecked}> 
-        <span style="font-weight:bold;"> ${habits[i].name} ${isLate}</span> <br/>
+        habitsHTML+= `<div class = "habit ${isDueColor(habits[i])}" data-id="${habits[i].id}">    
+        <div class="habitHead"> 
+            <div class="habitInfo">
+                <input type="checkbox" ${isChecked}>
+                <span class="habitName"> ${habits[i].name} ${isLate}</span>
+            </div>
+            <button class="lateCheckIn"><i class="fa-solid fa-hourglass-end"></i></button>
+        </div>
         <span style="font-size:14px;">last done : ${lastDoneDate} next due : ${nextDue}</span></div>`;
     }
     
@@ -134,7 +139,7 @@ export function isHabitCompletedToday(habitID){
 }
 
 habitsContainerElement.addEventListener('change', btn => {
-    const habitID = btn.target.parentNode.dataset.id;
+    const habitID = btn.target.parentNode.parentNode.parentNode.dataset.id;
     const points = getPoints();
     
     if(btn.target.checked){     
@@ -155,6 +160,17 @@ habitsContainerElement.addEventListener('change', btn => {
     }
     
 });
+
+habitsContainerElement.addEventListener('click', (btn) => {
+    const button = btn.target.parentNode;
+    if(button.classList.contains("lateCheckIn")){
+        const id = button.parentNode.parentNode.dataset.id;
+        lateCheckIn(id);
+        updatePoints(5);
+        displayPoints();
+        displayHabits();
+    }
+})
 
 
 
