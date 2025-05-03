@@ -48,7 +48,7 @@ export function pastXDays(date, x){
 export function nextXDays(date, x){
     let prevDays = [];
     date = dateToYMD(date);
-    for(let i=1; i<=x; i++){
+    for(let i=0; i<=x; i++){
         prevDays.push(addXDaysToDate(new Date(date), i))
     }
     return prevDays;

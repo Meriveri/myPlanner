@@ -20,6 +20,8 @@ const eventTypeElement = document.getElementById("eventType");
 
 const eventsFilterElement = document.getElementById("eventsFilter");
 
+let alarm = new Audio("/assets/music/alarm.mp3");
+
 export function isEventLate(event){
     let eventDate = new Date(event.date);
     let today = new Date();
@@ -166,6 +168,19 @@ export function changeEventsBackgroundColor(){
     for(let i = 0; i < allTask5.length; i++){allTask5[i].style.backgroundColor=eventTypes[4].color;}
     
 }
+
+export function ringAlarms(){
+    const events = getEvents();
+    for(let i=0;i<events.length;i++){
+        const event = events[i];
+        
+        const exactDate = event.date+" "+event.time;
+        const now = dateToYMD(new Date())+" "+String(new Date().getHours()).padStart(2,"0")+":"+String(new Date().getMinutes()).padStart(2,"0");
+        if(exactDate === now){alarm.play();}
+    }
+}
+
+setInterval(ringAlarms,60000);
 
 
 displayEventTypes();

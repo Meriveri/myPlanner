@@ -78,31 +78,10 @@ input.invalidField{border: 1px solid red!important;}
 /*index*/
 .forms{
     display: block;
-    position: fixed;
-    z-index: 0;
-    top:85px;
-    position:absolute;
+    width: 100%;
+    position:fixed;
     z-index: 1;
-    transform: translate(-100%, 0px);
 }
-
-.habitForm{
-    display: flex;
-    flex-direction: row;
-    min-height: auto;
-    margin:auto;
-    align-content: space-around;
-    justify-content: center;
-    visibility: hidden;
-    transform: translate(0%, 0%);
-    transition: all 1s;
-    background-color: white;
-    border-radius: 10px;
-    flex-wrap: wrap;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
-}
-
-.habitForm.visible{visibility: visible; transform:translate(130%, 0px); transition: all 1s;}
 
 .habitForm input, .DLEventForm input{
     display: grid;
@@ -118,22 +97,25 @@ input.invalidField{border: 1px solid red!important;}
     width: 50px;
 }
 
-.eventForm, .DLEventForm{
+.eventForm, .DLEventForm, .habitForm{
     display: flex;
+    position:fixed;
+    top:100px;
+    left:0px;
     flex-direction: row;
     min-height: auto;
     margin:auto;
     align-content: space-around;
     justify-content: center;
     visibility: hidden;
-    transform: translate(0%, 0%);
+    transform: translate(-100%, 0%);
     transition: all 1s;
     background-color: white;
     border-radius: 10px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
 }
-.eventForm.visible, .DLEventForm.visible{visibility: visible; transform:translate(130%, 0px); transition: all 1s;}
+.eventForm.visible, .DLEventForm.visible, .habitForm.visible{visibility: visible; left:50%; transform:translate(-50%, 0px); transition: all 1s;}
 
 .eventForm input, .eventForm select, .eventForm button, .habitForm button, .DLEventForm button{
     display: grid;
