@@ -18,7 +18,7 @@ newHabitBtn.addEventListener('click', () => {
     formElement.classList.toggle("visible");  
 });
 
-addHabitBtn.addEventListener("click", ()=>{createHabit();});
+addHabitBtn.addEventListener("click", ()=>{createHabit(); });
 
 
 export function createHabit(){
@@ -54,6 +54,8 @@ export function createHabit(){
         if(habit.name == "" ){habitNameElement.classList.add("invalidField");} 
         if(habit.frequency.value <= 0){habitFrequencyElement.classList.add("invalidField");}
     }
+    lastHabitIsUnchecked();
+    displayPoints();
     displayHabits();
 
 }
