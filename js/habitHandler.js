@@ -1,7 +1,7 @@
 import { addHabit, getHabitByID, getHabits, updateHabit, uncheckHabit } from "./habitService.js";
 import { addXDaysToDate, dateToYMD, getDayDifference } from "./utils.js";
 import { getPoints, updatePoints } from "./gatchaService.js";
-import { displayPoints } from "./gatchaHandler.js";
+import { displayPoints, isAllDailyHabitsDone, lastHabitIsUnchecked } from "./gatchaHandler.js";
 
 const habitsContainerElement = document.getElementById("habitsContainer");
 
@@ -134,9 +134,11 @@ export function isHabitCompletedToday(habitID){
 habitsContainerElement.addEventListener('change', btn => {
     const habitID = btn.target.parentNode.dataset.id;
     const points = getPoints();
+    
     if(btn.target.checked){     
         btn.target.parentNode.classList.add("done"); 
         updateHabit(habitID); 
+        isAllDailyHabitsDone();
         updatePoints(5);
         displayHabits();
         displayPoints();
@@ -144,6 +146,7 @@ habitsContainerElement.addEventListener('change', btn => {
     else{
         btn.target.parentNode.classList.remove("done"); 
         uncheckHabit(habitID); 
+        lastHabitIsUnchecked();
         updatePoints(-5);
         displayHabits();
         displayPoints();

@@ -1,6 +1,6 @@
 import { getDLEvents } from "./deadlineEventService.js";
 import { getCompletedEvents } from "./eventService.js";
-import { getPoints, initPoints} from "./gatchaService.js";
+import { getPoints, initPoints, updatePoints} from "./gatchaService.js";
 import { getHabits } from "./habitService.js";
 import { dateToYMD } from "./utils.js";
 
@@ -46,6 +46,22 @@ export function displayPoints(){
     pointsDisplaylement.innerHTML = getPoints().value + " efforts";
 }
 
+export function isAllDailyHabitsDone(){
+
+    const habitsDoneToday = getHabits().filter(e => e.lastDone == dateToYMD(new Date()));
+    const habitsDueToday = getHabits().filter(e => e.nextDue == dateToYMD(new Date()));
+    const totalHabitsDueToday = habitsDoneToday.length+habitsDueToday.length;
+
+    console.log(habitsDoneToday, totalHabitsDueToday);
+
+    if(Number.parseInt(habitsDoneToday.length) == Number.parseInt(totalHabitsDueToday)){updatePoints(50);}
+
+}
+
+export function lastHabitIsUnchecked(){
+    const habitsDueToday = getHabits().filter(e => e.nextDue == dateToYMD(new Date()));
+    if(Number.parseInt(habitsDueToday.length)==1){updatePoints(-50);}
+}
 
 initPoints();
 displayPoints();

@@ -190,16 +190,17 @@ input.invalidField{border: 1px solid red!important;}
 }
 .actions{
     display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: left;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    padding:0px 2%;
 }
 
 .action{
     display: flex;
     padding: 10px;
     margin:5px; 
-    background-color: white;
+    background-color: transparent;
     border: none;
     transition: ease-out 0.2s;
 }
