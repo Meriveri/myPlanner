@@ -4,7 +4,20 @@ body{background: #DADADA;}
 
 button{cursor: pointer;}
 
-.sidebar .fa-solid{margin-right: 5px;}
+@media (max-width: 1200px) {
+    .contentWrapper {
+      flex-direction: column;
+      padding:100px 25%!important;
+    }
+    .rightMenus, .leftMenus, .centerMenus{
+        margin:0px!important;
+        min-width: -webkit-fill-available;
+        max-width: -webkit-fill-available;
+        width: -webkit-fill-available;
+    }
+  }
+
+.sidebar .fa-solid{margin-right: 5px;     align-content: center;}
 
 input.invalidField{border: 1px solid red!important;}
 
@@ -148,38 +161,38 @@ input.invalidField{border: 1px solid red!important;}
 }
 
 
-.sidebar{
-    display: block;
-    position:fixed;
-    flex-direction: column;
-    background-color:white;
-    height: 100%;
+.sidebar {
+    display: flex
+;
+    position: fixed;
+    background-color: white;
+    width: 100%;
     z-index: 100;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
-    min-width: 150px;
-
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    flex-direction: row;
+    align-items: center;
+    align-content: end;
 }
 
 .sidebar .logo{
-    display: block;
+    display: flex;
+    padding-left:10%;
     font-family: "Micro 5", serif;
-    color:yellowgreen;
+    color: yellowgreen;
     font-size: 36px;
-    text-align: center;
-    padding:20% 0%;
     cursor: pointer;
+    flex-direction: row;
+    align-items: center;
 }
 
 .sidebar a{
     text-decoration: none!important;
 }
 .actions{
-    display: flex; 
-    flex-direction: column; 
-    justify-content: space-around; 
-    vertical-align: start;
-    align-items: start; 
-    justify-content:left;
+    display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: left;
 }
 
 .action{
@@ -200,44 +213,45 @@ input.invalidField{border: 1px solid red!important;}
 .contentWrapper{
     display: flex;
     flex-direction: row;
-    width: 90%;
-    padding: 0 5%;
+    padding:100px 3%;
     justify-self: end;
     vertical-align: start;
-    padding-top:100px;
     height: 100%;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
 }
 
 .leftMenus{
     display: flex;
-    width: 30%;
-    min-width: 300px;
+    flex-wrap: wrap;
     align-self: baseline;
     flex-direction: column;
+    margin-left: 5%;
+    min-width: 30%;
 }
 
 .centerMenus{
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    width: 40%;
-    min-width: 350px;
     align-self: baseline;
-    justify-self: center;
 
 }
 
 .rightMenus{
     display: flex;
-    width: 30%;
-    min-width: 300px;
+    flex-wrap: wrap;
     align-self: baseline;
     flex-direction: column;
+    margin-right: 5%;
+    max-width: 30%;
 }
 
 
 
-.eventsWrapper{
+.eventsWrapper, .DLEventsWrapper{
     display: flex;
     align-self: baseline;
     flex-direction: column;
@@ -313,6 +327,7 @@ input.invalidField{border: 1px solid red!important;}
     border-radius: 5px;
     padding:1px;
     font-weight: normal;
+    margin-left:5px;
 }
 
 .calendarWrap{
@@ -320,8 +335,6 @@ input.invalidField{border: 1px solid red!important;}
     align-items: center; 
     justify-self: center;  
     justify-content: center; 
-    width: 100%;
-    max-width: 350px;
     margin-bottom: 30px;
     box-sizing: border-box;
 }
@@ -337,6 +350,7 @@ input.invalidField{border: 1px solid red!important;}
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     justify-self: center;
     max-width: 350px;
+    box-sizing: border-box;
 }
 
 .calendar .head, .habitsWrapper .head, .eventsWrapper .head, .DLEventsWrapper .head {
@@ -408,7 +422,6 @@ input.invalidField{border: 1px solid red!important;}
     justify-self: center;  
     justify-content: center; 
     width: 100%;
-    box-sizing: border-box;
 }
 
 .dayPage{
@@ -422,7 +435,7 @@ input.invalidField{border: 1px solid red!important;}
     border-radius: 30px;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     justify-self: center;
-    width: 80%;
+    width: 100%;
 
 }
 
@@ -523,7 +536,7 @@ input.invalidField{border: 1px solid red!important;}
     font-weight: lighter!important;
 }
 
-.habitsWrapper, .DLEventsWrapper{
+.habitsWrapper, .DLEventsWrapper, .eventsWrapper{
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -531,6 +544,8 @@ input.invalidField{border: 1px solid red!important;}
     padding:20px;
     opacity: 100%;
     margin-top: 15px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
 }
 
 .habitsWrapper .habit{
@@ -598,18 +613,20 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
+    color:white;
 }
 
 .DLEventsWrapper .DLEvent.today{background-color: #F08080;}
 
 .DLEventsWrapper .DLEvent.thisweek{background-color:rgb(239, 198, 93);}
 
+.DLEventsWrapper .DLEvent.missed{background-color:lightgrey; color:#797777!important;}
+
 .DLEvent .DLEventHead{
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     border-radius: 10px;
-    color: white;
     width: 100%;
 }
 
@@ -636,14 +653,13 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
     box-shadow: none;
 }
 
-.dlEvent .deadline{color:white; line-height: 14px; font-size:14px;}
+.dlEvent .deadline{line-height: 14px; font-size:14px;}
 .dlEvent .checklist{
     display: flex;
     flex-direction: column;
     padding:5px;
     margin-left:2%;
     width: 98%;
-    color:white;
     font-size: 14px;
     max-height: 0px;
     transition: all 0.5s;
@@ -675,29 +691,38 @@ input[type="checkbox"]:checked::before {transform: scale(1);}
     padding: 5px;
 }
 
+.dlEvent .addTask{    display: flex;
+    justify-content: space-between;}
+
+.dlEvent .checklist button{display: flex; flex-direction:column;}
 .dlEvent .checklist .newTask{
+    display: flex;
     background-color:white;
+    color:yellowgreen;
     margin-bottom: 5px;
+    border-radius: 100%;
+    line-height: 100%;
+    max-width: 40px;
+    max-height: 40px;
+    justify-content: center;
 }
-
-
 
 .dlEvent .checklist .completeEvent{
     background-color: yellowgreen;
     color:white;
 }
-.dlEvent input.taskInput, .dlEvent input.taskInput:focus{background-color: transparent; color:white; border: none; box-shadow: none; outline: none; margin-bottom:5px; padding:5px; border-radius: 5px;}
-.dlEvent input.taskInput::placeholder{color:white;}
+.dlEvent input.taskInput, .dlEvent input.taskInput:focus{width: 85%; background-color: transparent; color:white; border: none; box-shadow: none; outline: none; margin-bottom:5px; padding:5px; border-radius: 5px;}
+.dlEvent input.taskInput::placeholder{color:rgba(0,0,0,0.3)}
 
 
 /*points*/
 .pointsDisplay{
     display: flex;
-    color:yellowgreen;
+    padding-left:5%;
+    color: yellowgreen;
     font-family: "Micro 5", serif;
-    font-size:24px;
+    font-size: 24px;
     text-align: center;
-    justify-content: center;
     width: 100%;
 }
 

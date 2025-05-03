@@ -11,12 +11,14 @@ const formElement = document.getElementById("DLEventForm");
 
 DLEventsContainerElement.addEventListener('click', (btn) =>{
     if(btn.target.classList.contains("newTask")){
-        const id = btn.target.parentElement.parentElement.dataset.id;
-        const taskName = btn.target.closest(".checklist").querySelector(".taskInput").value;
+        const id = btn.target.parentElement.parentElement.parentElement.dataset.id;
+        console.log(id);
+        const taskName = btn.target.parentElement.querySelector(".taskInput").value;
+        
         if(taskName!=""){addTaskToDLEvent(id, taskName); displayDLEvents();}
         else{
-            btn.target.closest(".checklist").querySelector(".taskInput").classList.remove("invalidField");
-            btn.target.closest(".checklist").querySelector(".taskInput").classList.add("invalidField");
+            btn.target.parentElement.querySelector(".taskInput").classList.remove("invalidField");
+            btn.target.parentElement.querySelector(".taskInput").classList.add("invalidField");
         }
         
     }
@@ -105,22 +107,30 @@ export function displayDLEvents(){
             dueDateIndicator=`<div class="borderBubble">this week</div>`;
             
         }
+
+        if(event.dueDate < dateToYMD(new Date())){
+            dueDateColor = "missed";
+            dueDateIndicator=`<div class="borderBubble">missed</div>`;
+        }
     
         DLEventsContainerElement.innerHTML += `
             <div class="DLevent ${dueDateColor}" data-id=${event.id}>
                 <div class="DLEventHead">
                     <div class="infos">
                         <div class="DLEventTitle">${event.title} </div> 
-                        <div class="tasksCompleted">${completedChecklistCount}/${totalChecklistCount}</div>${dueDateIndicator}
+                        <div class="tasksCompleted">${completedChecklistCount}/${totalChecklistCount} </div>${dueDateIndicator}
                     </div>
                     <div class="buttons"><button class="dropdown">▲</button></div>
                 </div>
                 <div class="deadline">by ${event.dueDate}</div>
                 <div class="checklist visible">
                     ${checklistHTML}
-                    <input class="taskInput" placeholder="new task name"/>
-                    <button class="newTask">add task</button>
-                    <button class="completeEvent">mark as complete</button>
+                    <div class="addTask">
+                        <input class="taskInput" placeholder="new task name"/>
+                        <button class="newTask"><i class="fa-solid fa-plus"></i></button>
+                        
+                    </div>
+                    <button class="completeEvent">mark deadline as complete</button>
                 </div>
             </div>`;
     }
