@@ -1,4 +1,4 @@
-import { addXDaysToDate, dateToYMD, getDayDifference, nextDueDate } from "./utils.js";
+import { addXDaysToDate, dateToYMD, getDayDifference, nextDueDate, calculateStreak } from "./utils.js";
 
 export function getHabits() {
     return JSON.parse(localStorage.getItem("habits")) || [];
@@ -23,25 +23,13 @@ export function updateHabit(id){
     habit.lastDone = dateToYMD(new Date());
     let streak = habit.streak.current;
     
-    let logs = habit.log;
-    logs.push(dateToYMD(new Date()));
     
-    let prevLog = new Date(logs[logs.length-2]);
-    let lastLog = new Date(logs[logs.length-1]);
-    const daysDiff = getDayDifference(prevLog, lastLog);
+    habit.log.push(dateToYMD(new Date()));
+    const logs = habit.log;
 
     habit.nextDue = nextDueDate(habit.lastDone, habit.frequency.value);
 
-
-    if (logs.length > 1){
-        if(daysDiff <= parseInt(habit.frequency)){streak =streak+1;}
-        else{streak=1;}
-        
-    }
-    else{
-        streak=1;
-    }
-    habit.streak.current = streak;
+    habit.streak.current = calculateStreak(habit);
 
     if(habit.streak.current > habit.streak.longest){
         habit.streak.longest=habit.streak.current;
@@ -53,13 +41,16 @@ export function uncheckHabit(id){
     const habits = getHabits();
     const habit = habits.find(h => h.id === id);
     habit.log.pop();
-    if(habit.log.length>=1){habit.lastDone = habit.log[habit.log.length-1];}
-    else{habit.lastDone = "";}
 
+    const logs = habit.log;
+    if(logs.length>=1){habit.lastDone = logs[logs.length-1];}
+    else{habit.lastDone = "";}
     
     if(habit.lastDone != ""){habit.nextDue = nextDueDate(habit.lastDone, habit.frequency.value);}
     else{habit.nextDue = dateToYMD(new Date());}
-    habit.streak.current-=1;
+
+    habit.streak.current= calculateStreak(habit);
+    if(habit.streak.current == habit.streak.longest){habit.streak.longest=dayDiffIsOneArray.length;}
 
     localStorage.setItem("habits", JSON.stringify(habits)); 
 }
@@ -72,9 +63,10 @@ export function lateCheckIn(id){
     if(!log.includes(yesterday)){
         habit.log.push(yesterday);
         habit.lastDone = yesterday;
-        habit.nextDue = new Date();
+        habit.nextDue = addXDaysToDate(yesterday, habit.frequency);
+        habit.streak.current+=1;
+        if(habit.streak.current >= habit.streak.longest){habit.streak.longest=habit.streak.current;}
     }
-    console.log(habit);
 
     localStorage.setItem("habits", JSON.stringify(habits)); 
 }

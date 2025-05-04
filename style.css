@@ -210,7 +210,7 @@ input.invalidField{border: 1px solid red!important;}
 .leftMenus{
     display: flex;
     flex-wrap: wrap;
-    align-self: baseline;
+    align-self: start;
     flex-direction: column;
     margin-left: 5%;
     min-width: 30%;
@@ -221,14 +221,14 @@ input.invalidField{border: 1px solid red!important;}
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    align-self: baseline;
+    align-self: start;
 
 }
 
 .rightMenus{
     display: flex;
     flex-wrap: wrap;
-    align-self: baseline;
+    align-self: start;
     flex-direction: column;
     margin-right: 5%;
     max-width: 30%;
@@ -530,9 +530,8 @@ input.invalidField{border: 1px solid red!important;}
     border-radius: 20px;
     padding:20px;
     opacity: 100%;
-    margin-top: 15px;
     box-sizing: border-box;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 .habitsWrapper .habit{

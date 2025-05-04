@@ -53,3 +53,14 @@ export function nextXDays(date, x){
     }
     return prevDays;
 }
+
+export function calculateStreak(habit){
+    let streak = 1;
+    let logs = habit.log;
+    for (let i = logs.length - 1; i > 0; i--) {
+        const diff = parseInt(getDayDifference(new Date(logs[i - 1]), new Date(logs[i])));
+        if (diff <= habit.frequency.value) {streak++;} 
+        else {break;}
+    }   
+    return streak;
+}
