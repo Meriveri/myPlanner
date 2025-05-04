@@ -9,18 +9,20 @@ import { displayPoints } from './gatchaHandler.js';
 
 const newEventBtn = document.getElementById("newEvent");
 const formElement = document.getElementById("eventForm");
-const eventTimeFieldElement = document.getElementById("eventTimeField"); 
+const eventTimeFieldElement = document.getElementById("eventTimeField");
 
 const datedTypeElement = document.getElementById("datedType");
+
+const eventTypeElement = document.getElementById("eventType");
 eventTimeFieldElement.innerHTML=`<input type="date" id="eventDay"/> <input type="time" id="eventTime"/>`;
+
+const eventDayElement = document.getElementById("eventDay");
+const eventTimeElement = document.getElementById("eventTime"); 
 
 const addEventBtn = document.getElementById("addEvent");
 const delEventsBtn = document.getElementById("delEvents");
 
 const upcomingEventsElement = document.getElementById("upcomingEvents");
-
-const eventTypeElement = document.getElementById("eventType");
-
 
 const eventsFilterElement = document.getElementById("eventsFilter");
 
@@ -82,12 +84,10 @@ export function createEvent() {
     let eventName = document.getElementById("eventName").value; 
     let eventTypeElement = document.getElementById("eventType");
     let eventType = eventTypeElement.value;
-
-    if(eventTimeFieldElement.value=="dated"){
-        let eventDay = dateToYMD(document.getElementById("eventDay").value);
-        let eventTimeElement = document.getElementById("eventTime");
+    if(datedTypeElement.value=="dated"){
+        let eventDay = dateToYMD(eventDayElement.value);
         let eventTime = eventTimeElement.value;
-        if(eventName != "" && eventDay != "Invalid Date" ){
+        if(eventName != "" && eventDay != "Invalid Date"){
             const eventInfo = {
             id: eventID,
             name: eventName,
@@ -125,12 +125,6 @@ export function createEvent() {
 
 }
 
-addEventBtn.addEventListener('click', () =>{
-    createEvent(); 
-    let events = getEvents().filter(e => e.date != "0000-01-01");
-    putDaysWithEventsInBold();
-    renderPage(new Date(events[events.length-1].date), events.filter(event => event.date == events[events.length-1].date));
-})
 
 delEventsBtn.addEventListener('click', () =>{
     //localStorage.removeItem("calendarEvents");
@@ -165,6 +159,14 @@ upcomingEventsElement.addEventListener('click', (btn)=>{
         renderPage(new Date(), getEvents());
     }
 })
+
+
+addEventBtn.addEventListener('click', () =>{
+    createEvent();
+    putDaysWithEventsInBold();
+    let events = getEvents().filter(e => e.date != "0000-01-01");
+    renderPage(new Date(events[events.length-1].date), events.filter(event => event.date == events[events.length-1].date));
+});  
 
 
 export function displayEventTypes(){
