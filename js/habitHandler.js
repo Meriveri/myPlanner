@@ -6,7 +6,14 @@ import { displayPoints, isAllDailyHabitsDone, lastHabitIsUnchecked } from "./gat
 const habitsContainerElement = document.getElementById("habitsContainer");
 
 const habitNameElement = document.getElementById("habitName");
-const habitFrequencyElement = document.getElementById("habitFrequency");
+
+const frequencyTypeElement = document.getElementById("frequencyType");
+frequencyTypeElement.value = "everyXDays";
+
+let frequencyFieldsElement = document.getElementById("frequencyFields");
+frequencyFieldsElement.innerHTML=`<input type="number" id ="habitFrequency" placeholder="every x days"/>`;
+
+let habitFrequencyElement = document.getElementById("habitFrequency");
 const addHabitBtn = document.getElementById("addHabit");
 
 const newHabitBtn = document.getElementById("newHabit");
@@ -171,7 +178,18 @@ habitsContainerElement.addEventListener('click', (btn) => {
         displayHabits();
     }
 })
-
+ 
+frequencyTypeElement.addEventListener('change', ()=>{
+    if(frequencyTypeElement.value == "everyXDays"){
+        frequencyFieldsElement.innerHTML=`<input type="number" id ="habitFrequency" placeholder="every x days"/>`;
+    }
+    if(frequencyTypeElement.value == "xTimesPerDay"){
+        frequencyFieldsElement.innerHTML=`<input type="number" id ="habitFrequencyPerDay" placeholder="x times a day"/>`;
+    }
+    if(frequencyTypeElement.value == "xTimesPerPeriod"){
+        frequencyFieldsElement.innerHTML=`<input type="number" id ="habitFrequencyPerPeriodTimes" placeholder="x times"/><input type="number" id ="habitFrequencyPerPeriodPeriod" placeholder="period"/>`;
+    }
+})
 
 
 displayHabits();

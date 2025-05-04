@@ -40,7 +40,14 @@
 
         <div class="habitForm" id="habitForm">
             <input type="text" placeholder="habit name" id="habitName"/>
-            <input type="number" id ="habitFrequency" placeholder="every x days"/>
+            <select name="frequencyType" id="frequencyType">
+                <option value="everyXDays" selected>every x days</option>
+                <option value="xTimesPerDay">x times a day</option>
+                <option value="xTimesPerPeriod">x times every y period</option>
+            </select>
+            <span id="frequencyFields" class="frequencyFields">
+
+            </span>
             <button type="submit" id="addHabit" href="./">+</button>
         </div>
 

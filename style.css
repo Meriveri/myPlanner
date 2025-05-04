@@ -117,7 +117,7 @@ input.invalidField{border: 1px solid red!important;}
 }
 .eventForm.visible, .DLEventForm.visible, .habitForm.visible{visibility: visible; left:50%; transform:translate(-50%, 0px); transition: all 1s;}
 
-.eventForm input, .eventForm select, .eventForm button, .habitForm button, .DLEventForm button{
+.eventForm input, .eventForm select, .eventForm button, .habitForm button, .DLEventForm button, .habitForm select{
     display: grid;
     justify-content: space-around;
     margin:10px;
