@@ -72,7 +72,7 @@ export function lateCheckIn(id){
     if(!log.includes(yesterday)){
         habit.log.push(yesterday);
         habit.lastDone = yesterday;
-        habit.nextDue = addXDaysToDate(new Date(), habit.frequency.value);
+        habit.nextDue = new Date();
     }
     console.log(habit);
 

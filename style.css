@@ -253,10 +253,11 @@ input.invalidField{border: 1px solid red!important;}
 .upcomingEvents .event{
     display:flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-top: 10px;
     border-radius: 10px;
     color:white;
     width: 100%;
+    min-height: 55px;
 }
 
 .upcomingEvents span{
@@ -450,6 +451,7 @@ input.invalidField{border: 1px solid red!important;}
     align-items: baseline;
     line-height: 26px; 
     border-bottom: 1px solid #DADADA;
+    
 }
 
 .reset{

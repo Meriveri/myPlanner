@@ -44,7 +44,7 @@ export function showEvents() {
     upcomingEventsElement.innerHTML = "";
     let events = getEvents();
     const week = nextXDays(dateToYMD(new Date()), 7);
-    if(eventsFilterElement.checked){events = events.filter(e=>week.includes(e.date));}    
+    if(eventsFilterElement.checked){events = events.filter(e=>week.includes(e.date) || e.date=="0000-01-01");}    
     for(let i = 0; i < events.length;i++){
         let showDueDate = `<div class="eventDate">${events[i].date} ${events[i].time}</div>`;
         if(events[i].date == "0000-01-01"){showDueDate = "";}
