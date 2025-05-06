@@ -63,7 +63,7 @@ export function lateCheckIn(id){
     if(!log.includes(yesterday)){
         habit.log.push(yesterday);
         habit.lastDone = yesterday;
-        habit.nextDue = addXDaysToDate(yesterday, habit.frequency);
+        habit.nextDue = addXDaysToDate(new Date(yesterday), parseInt(habit.frequency.value));
         habit.streak.current+=1;
         if(habit.streak.current >= habit.streak.longest){habit.streak.longest=habit.streak.current;}
     }
