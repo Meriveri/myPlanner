@@ -27,7 +27,7 @@ export function updateHabit(id){
     habit.log.push(dateToYMD(new Date()));
     const logs = habit.log;
 
-    habit.nextDue = nextDueDate(habit.lastDone, habit.frequency.value);
+    habit.nextDue = nextDueDate(habit.lastDone, habit.frequency.period);
 
     habit.streak.current = calculateStreak(habit);
 
@@ -46,7 +46,7 @@ export function uncheckHabit(id){
     if(logs.length>=1){habit.lastDone = logs[logs.length-1];}
     else{habit.lastDone = "";}
     
-    if(habit.lastDone != ""){habit.nextDue = nextDueDate(habit.lastDone, habit.frequency.value);}
+    if(habit.lastDone != ""){habit.nextDue = nextDueDate(habit.lastDone, habit.frequency.period);}
     else{habit.nextDue = dateToYMD(new Date());}
 
     habit.streak.current= calculateStreak(habit);
@@ -63,7 +63,7 @@ export function lateCheckIn(id){
     if(!log.includes(yesterday)){
         habit.log.push(yesterday);
         habit.lastDone = yesterday;
-        habit.nextDue = addXDaysToDate(new Date(yesterday), parseInt(habit.frequency.value));
+        habit.nextDue = addXDaysToDate(new Date(yesterday), parseInt(habit.frequency.period));
         habit.streak.current+=1;
         if(habit.streak.current >= habit.streak.longest){habit.streak.longest=habit.streak.current;}
     }

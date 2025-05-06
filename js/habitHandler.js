@@ -11,9 +11,9 @@ const frequencyTypeElement = document.getElementById("frequencyType");
 frequencyTypeElement.value = "everyXDays";
 
 let frequencyFieldsElement = document.getElementById("frequencyFields");
-frequencyFieldsElement.innerHTML=`<input type="number" id ="habitFrequency" placeholder="every x days"/>`;
+frequencyFieldsElement.innerHTML=`<input type="number" id ="period" placeholder="every x days"/>`;
 
-let habitFrequencyElement = document.getElementById("habitFrequency");
+let periodElement = document.getElementById("period");
 const addHabitBtn = document.getElementById("addHabit");
 
 const newHabitBtn = document.getElementById("newHabit");
@@ -32,34 +32,52 @@ export function createHabit(){
     const habits = getHabits();
     let habitID = "habit-0";
     
+    //find ID
     if(habits.length>=1){
         const prevID = habits[habits.length-1].id;
         const newIDIndex = parseInt(prevID.split("-")[1])+1;
         habitID = "habit-"+newIDIndex;
     }
+
+    //build habit
+    const timesElement = document.getElementById("times");
+    
     let habitName = habitNameElement.value;
-    let habitFreq = habitFrequencyElement.value;
+    let frequencyType = frequencyTypeElement.value;
+    let frequency = 1;
+    
+    if(frequencyType==""){freqeuncy = timesElement.value;}
+
+    let period = periodElement.value;
+
+    let startingDay = new Date().getDay();
+
+
     const habit = {
         id : habitID,
         name : habitName, 
         createdAt : dateToYMD(new Date()),
-        frequency : {type:"everyXDays", value: habitFreq}, 
+        frequency : {type: frequencyType, frequency: frequency, period: period, from: startingDay}, 
         lastDone : "",
         nextDue : dateToYMD(new Date()),
         log : [], 
         streak : {current : 0, longest : 0}, 
         archived : false
     }
-    if(habit.name != "" && habit.frequency.value > 0){
+    console.log(habit);
+
+    //create habit if fields not empty
+    if(habit.name != "" && habit.frequency.period > 0){
         habitNameElement.classList.remove("invalidField"); 
-        habitFrequencyElement.classList.remove("invalidField");  
+        periodElement.classList.remove("invalidField");  
         addHabit(habit);
     }
+    //error message if fields are empty
     else{
         habitNameElement.classList.remove("invalidField"); 
-        habitFrequencyElement.classList.remove("invalidField");  
+        periodElement.classList.remove("invalidField");  
         if(habit.name == "" ){habitNameElement.classList.add("invalidField");} 
-        if(habit.frequency.value <= 0){habitFrequencyElement.classList.add("invalidField");}
+        if(habit.frequency.period <= 0){periodElement.classList.add("invalidField");}
     }
     lastHabitIsUnchecked();
     displayPoints();
@@ -67,22 +85,26 @@ export function createHabit(){
 
 }
 
+//display never for habits never done
 export function logEmpty(habit){
     return habit.lastDone == "" ? "never" : habit.lastDone;
 }
 
+//calculate next due date
 export function nextDueDate(date, days){
     if(date != ""){date = new Date(date);}
     else{date = new Date();}
     return addXDaysToDate(date, days);
 }
 
+//bubble for habits due today
 export function isTodayOrDate(date){
     if(date == dateToYMD(new Date())){return `<span class="borderBubble">today</span>`;}
     
     return date;
 }
 
+//change card color 
 export function isDueColor(habit) {
     const todayStr = dateToYMD(new Date());
     const dueStr = dateToYMD(new Date(habit.nextDue));
@@ -92,6 +114,7 @@ export function isDueColor(habit) {
     return "";
 }
 
+//bubble for late habits
 export function isHabitLate(habit){
     let habitDueDate = new Date(habit.nextDue);
     let today = new Date();
@@ -100,11 +123,12 @@ export function isHabitLate(habit){
     return "";
 }
 
-
+//filter for hiding habits not due
 habitsFilterElement.addEventListener('change', () =>{
     displayHabits();
 });
 
+//display habits
 export function displayHabits(){
     let habits = getHabits();
     habits = habits.filter(h => h.archived == false);
@@ -139,18 +163,20 @@ export function displayHabits(){
     habitsContainerElement.innerHTML=habitsHTML;
 }
 
+//mark habits as done and attribute points
 export function isHabitCompletedToday(habitID){
     let habit = getHabitByID(habitID)[0];
     return habit.lastDone == dateToYMD(new Date()); 
 
 }
 
-habitsContainerElement.addEventListener('change', btn => {
-    const habitID = btn.target.parentNode.parentNode.parentNode.dataset.id;
+//check/uncheck listener
+habitsContainerElement.addEventListener('change', checkedHabit => {
+    const habitID = checkedHabit.target.parentNode.parentNode.parentNode.dataset.id;
     const points = getPoints();
     
-    if(btn.target.checked){     
-        btn.target.parentNode.classList.add("done"); 
+    if(checkedHabit.target.checked){     
+        checkedHabit.target.parentNode.classList.add("done"); 
         updateHabit(habitID); 
         isAllDailyHabitsDone();
         updatePoints(5);
@@ -158,7 +184,7 @@ habitsContainerElement.addEventListener('change', btn => {
         displayPoints();
     }
     else{
-        btn.target.parentNode.classList.remove("done"); 
+        checkedHabit.target.parentNode.classList.remove("done"); 
         uncheckHabit(habitID); 
         lastHabitIsUnchecked();
         updatePoints(-5);
@@ -168,8 +194,9 @@ habitsContainerElement.addEventListener('change', btn => {
     
 });
 
-habitsContainerElement.addEventListener('click', (btn) => {
-    const button = btn.target.parentNode;
+//late check in listener
+habitsContainerElement.addEventListener('click', (lateCheckInBtn) => {
+    const button = lateCheckInBtn.target.parentNode;
     if(button.classList.contains("lateCheckIn")){
         const id = button.parentNode.parentNode.dataset.id;
         lateCheckIn(id);
@@ -178,20 +205,19 @@ habitsContainerElement.addEventListener('click', (btn) => {
         displayHabits();
     }
 })
- 
+
+//display form based on event type
 frequencyTypeElement.addEventListener('change', ()=>{
     if(frequencyTypeElement.value == "everyXDays"){
-        frequencyFieldsElement.innerHTML=`<input type="number" id ="habitFrequency" placeholder="every x days"/>`;
+        frequencyFieldsElement.innerHTML=`<input type="number" id ="period" placeholder="every x days"/>`;
     }
     if(frequencyTypeElement.value == "xTimesPerDay"){
-        frequencyFieldsElement.innerHTML=`<input type="number" id ="habitFrequencyPerDay" placeholder="x times a day"/>`;
+        frequencyFieldsElement.innerHTML=`<input type="number" id ="times" placeholder="x times a day"/>`;
     }
     if(frequencyTypeElement.value == "xTimesPerPeriod"){
-        frequencyFieldsElement.innerHTML=`<input type="number" id ="habitFrequencyPerPeriodTimes" placeholder="x times"/><input type="number" id ="habitFrequencyPerPeriodPeriod" placeholder="period"/>`;
+        frequencyFieldsElement.innerHTML=`<input type="number" id ="times" placeholder="x times"/><input type="number" id ="period" placeholder="period"/>`;
     }
 })
 
 
 displayHabits();
-
-

@@ -83,10 +83,10 @@ export function displayHabitsToEdit(){
                 <div class="habitName">${habits[i].name}</div>
                 <div class="buttons"><button class="archiveHabit switchto${isActive}Btn">${invertOfArchiveStatus}</button><button class="editHabit editBtn"><i class="fa-solid fa-pen-to-square"></i></button><button class="deleteHabit deleteBtn"><i class="fa-solid fa-trash"></i></button></div>
             </div>
-            <div class="habitFrequency">every ${habits[i].frequency.value} day(s) | ${isActive}</div>
+            <div class="habitFrequency">every ${habits[i].frequency.period} day(s) | ${isActive}</div>
             <div class="habitEditPanel">
                             <input class="nameInput" placeholder="new habit name"/>
-                            <input class="frequencyInput" type="number" placeholder="every x days"/><button class="okBtn updateHabit"><i class="fa-solid fa-check"></i></button>
+                            <input class="periodInput" type="number" placeholder="every x days"/><button class="okBtn updateHabit"><i class="fa-solid fa-check"></i></button>
             </div>
         </div>`;
     }
@@ -119,10 +119,10 @@ settingsHabitsElement.addEventListener('click', (btn) =>{
     const indexOfHabit = allHabits.indexOf(clickedHabit);
 
     const name = document.getElementsByClassName("nameInput")[indexOfHabit].value;
-    const frequency = parseInt(document.getElementsByClassName("frequencyInput")[indexOfHabit].value);
+    const frequency = parseInt(document.getElementsByClassName("periodInput")[indexOfHabit].value);
 
     if (Number.isInteger(frequency) && name !=""){
-        clickedHabit.querySelector(".frequencyInput").classList.remove("invalidField");
+        clickedHabit.querySelector(".periodInput").classList.remove("invalidField");
         clickedHabit.querySelector(".nameInput").classList.remove("invalidField"); 
         if(Number.isInteger(frequency)){ 
         editHabitFrequency(id, frequency); 
@@ -135,12 +135,12 @@ settingsHabitsElement.addEventListener('click', (btn) =>{
     }
     else{
         clickedHabit.querySelector(".nameInput").classList.remove("invalidField"); 
-        clickedHabit.querySelector(".frequencyInput").classList.remove("invalidField"); 
+        clickedHabit.querySelector(".periodInput").classList.remove("invalidField"); 
         if(name==""){
             clickedHabit.querySelector(".nameInput").classList.add("invalidField");
         }
         if(!Number.isInteger(frequency)){
-            clickedHabit.querySelector(".frequencyInput").classList.add("invalidField");
+            clickedHabit.querySelector(".periodInput").classList.add("invalidField");
         }
     }
 }

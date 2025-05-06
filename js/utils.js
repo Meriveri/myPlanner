@@ -60,7 +60,7 @@ export function calculateStreak(habit){
     let logs = habit.log;
     for (let i = logs.length - 1; i > 0; i--) {
         const diff = parseInt(getDayDifference(new Date(logs[i - 1]), new Date(logs[i])));
-        if (diff <= habit.frequency.value) {streak++;} 
+        if (diff <= habit.frequency.period) {streak++;} 
         else {break;}
     }   
     return streak;
