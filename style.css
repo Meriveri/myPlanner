@@ -398,6 +398,9 @@ input.invalidField{border: 1px solid red!important;}
     font-weight: bold;
     cursor:pointer;
     transition: all 0.3s;
+    box-sizing: content-box;
+    min-width: 18px;
+    aspect-ratio: 1 / 1;
 }
 .calendar .active:hover{color:white!important; box-shadow: 0px 0px 5px rgba(0,0,0,0.5); transition: all 0.3s;}
 .calendar .inactive{color:darkgrey!important;}
@@ -544,6 +547,28 @@ input.invalidField{border: 1px solid red!important;}
     border-radius: 15px;
     color:white;
 }
+
+.habitsWrapper .habit input[type="number"]{
+    background-color: transparent;
+    border:none;
+    box-shadow: none;
+    color:rgba(0, 0, 0, 0.3);
+    width: 15px;
+    font-size: 14px;
+    align-items: baseline;
+    display: flex;
+}
+
+.habitsWrapper .habit input[type="number"]::-webkit-inner-spin-button, .habitsWrapper .habit input[type="number"]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+}
+
+.habitsWrapper .habit .timesDone{
+    font-size: 14px; 
+    color:rgba(0, 0, 0, 0.3); 
+    display: flex;
+    align-items: baseline;}
 
 .habitsWrapper .habit.late{background-color:#F8875C;}
 .habitsWrapper .habit.today{background-color: rgb(182, 203, 241);}

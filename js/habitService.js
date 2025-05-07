@@ -70,3 +70,36 @@ export function lateCheckIn(id){
 
     localStorage.setItem("habits", JSON.stringify(habits)); 
 }
+
+export function getHabitsLog(){
+    return JSON.parse(localStorage.getItem("habitsLog")) || [];
+}
+
+export function addToHabitsLog(id, time) {
+    const logs = getHabitsLog();
+    const doneOn = dateToYMD(new Date());
+
+    // Filter logs matching this id and date
+    const sameDayLogs = logs.filter(entry => entry.id === id && entry.doneOn === doneOn);
+    const otherLogs = logs.filter(entry => !(entry.id === id && entry.doneOn === doneOn));
+
+    // Get highest 'times' already recorded for today
+    const maxLoggedTime = sameDayLogs.reduce((max, entry) => Math.max(max, entry.times), 0);
+
+    // Case 1: time is less than or equal to current max → replace all
+    if (time <= maxLoggedTime) {
+        for (let t = 1; t <= time; t++) {
+            const newLog = { id, doneOn, times: t };
+            otherLogs.push(newLog);
+    }
+    }
+
+    // Case 2: time > max → append all missing times
+    else {
+        for (let t = 1; t <= time; t++) {
+            otherLogs.push({ id, doneOn, times: t });
+        }
+    }
+
+    localStorage.setItem("habitsLog", JSON.stringify(otherLogs));
+}
